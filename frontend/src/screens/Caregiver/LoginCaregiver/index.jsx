@@ -2,9 +2,9 @@ import { View , Text , Image,style,TouchableOpacity,TextInput } from "react-nati
 import{primary} from '../../constants/colors'
 import{white} from '../../constants/colors'
 import{second} from '../../constants/colors'
-import{styles} from './style'
+import{styles} from './styles'
 
-export default function LoginUser(){
+export default function LoginCaregiver(){
     return(
         <View style={{ backgroundColor:primary , width:"100%",height:"100%"}}>
         <View style={{alignContent:'center',alignItems:'center',marginTop:60}}>
@@ -25,7 +25,7 @@ export default function LoginUser(){
 
         <TouchableOpacity style={styles.blocksLogin}>
 
-        <Image source={require('../../../assets/senha.png')} style={{marginTop:13,width:25,height:33,marginLeft:24}}/>
+        <Image source={require('../../../assets/password.png')} style={{marginTop:13,width:25,height:33,marginLeft:24}}/>
 
         <TextInput style={{marginTop:5,marginLeft:25,fontSize:20}}>Digite sua senha</TextInput>
 

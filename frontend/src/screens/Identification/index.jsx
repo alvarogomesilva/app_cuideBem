@@ -30,7 +30,7 @@ export default function Identification() {
 
         </View>
 
-        <Image source={require('../../../assets/Logo.png')} style={Style.logo} />
+        <Image source={require('../../../assets/logo.png')} style={Style.logo} />
 
       </ImageBackground>
 

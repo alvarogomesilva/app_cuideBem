@@ -1,19 +1,19 @@
 import { View , Text , Image,style,TouchableOpacity,TextInput } from "react-native";
-import{Background} from '../../components/Background'
-import{white} from '../../constants/colors'
-import{second} from '../../constants/colors'
-import{styles} from './style'
+// import{Background} from '../../components/Background'
+import{white , primary} from '../../../constants/colors'
+import{second} from '../../../constants/colors'
+import{styles} from './styles'
 export default function LoginDoctor(){
     return(
-        <View style={Background.format}>
+        <View style={{backgroundColor:primary,width:"100%",height:"100%"}}>
    
-           <Image source={require("../../../assets/Logo.png") } style={styles.imageLogo}/>
+           <Image source={require("../../../../assets/logo.png") } style={styles.imageLogo}/>
            <Text style={styles.textLogo}>Acessar</Text> 
          
         <TouchableOpacity style={styles.blocksLogin}>
            
            
-        <Image source={require('../../../assets/email.png')} style={styles.images}/>
+        <Image source={require('../../../../../assets/people.png')} style={styles.images}/>
 
 
         <TextInput style={styles.textLogin}>Digite seu email</TextInput>
@@ -24,7 +24,7 @@ export default function LoginDoctor(){
 
         <TouchableOpacity style={styles.blocksLogin}>
 
-        <Image source={require('../../../assets/senha.png')} style={styles.images}/>
+        <Image source={require('../../../../assets/password.png')} style={styles.images}/>
 
         <TextInput style={styles.textLogin}>Digite sua senha</TextInput>
 
@@ -32,7 +32,7 @@ export default function LoginDoctor(){
         
         <TouchableOpacity style={styles.blockCMR}>
         
-        <Image source={require('../../../assets/people.png')}  style={styles.images}/>
+        <Image source={require('../../../../assets/people.png')}  style={styles.images}/>
 
         <TextInput style={styles.textCRM}>Digite seu CRM</TextInput>
 
