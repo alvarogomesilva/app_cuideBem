@@ -11,7 +11,13 @@ export default function AuthRoutes() {
     return (
 
         <Stack.Navigator>
-            <Stack.Screen name='LoginDoctor' component={LoginDoctor} />
+            <Stack.Screen 
+                name='LoginDoctor' 
+                component={LoginDoctor} 
+                options={{
+                    headerShown: false
+                }}    
+            />
             {/* <Stack.Screen name='Splash' component={Splash}  /> */}
             <Stack.Screen name='Identification' component={Identification} />
         </Stack.Navigator>

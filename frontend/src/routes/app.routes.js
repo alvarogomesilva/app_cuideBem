@@ -18,6 +18,8 @@ export default function AppRoutes() {
                     headerShown: false
                 }}
                 />
+
+                
                 
             <Stack.Screen name='HomeGuardian' component={HomeGuardian} />
         </Stack.Navigator>

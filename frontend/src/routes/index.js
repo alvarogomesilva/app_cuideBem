@@ -3,7 +3,7 @@ import AppRoutes from "./app.routes"
 
 export default function Routes(){
     const loading = false
-    const signed = true
+    const signed = false
     
     return signed ? <AppRoutes /> : <AuthRoutes />
 
