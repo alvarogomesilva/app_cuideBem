@@ -13,7 +13,6 @@ export default function LoginDoctor(){
         <TouchableOpacity style={styles.blocksLogin}>
            
            
-        <Image source={require('../../../../../assets/people.png')} style={styles.images}/>
 
 
         <TextInput style={styles.textLogin}>Digite seu email</TextInput>
@@ -24,7 +23,7 @@ export default function LoginDoctor(){
 
         <TouchableOpacity style={styles.blocksLogin}>
 
-        <Image source={require('../../../../assets/password.png')} style={styles.images}/>
+
 
         <TextInput style={styles.textLogin}>Digite sua senha</TextInput>
 
@@ -32,7 +31,6 @@ export default function LoginDoctor(){
         
         <TouchableOpacity style={styles.blockCMR}>
         
-        <Image source={require('../../../../assets/people.png')}  style={styles.images}/>
 
         <TextInput style={styles.textCRM}>Digite seu CRM</TextInput>
 
