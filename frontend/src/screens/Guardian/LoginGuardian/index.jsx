@@ -1,47 +1,38 @@
-import { View , Text , Image,style,TouchableOpacity,TextInput } from "react-native";
-import{primary} from '../../../constants/colors'
-import{white} from '../../../constants/colors'
-import{second} from '../../../constants/colors'
-import{styles} from './styles'
+import { KeyboardAvoidingView, SafeAreaView, Text } from "react-native";
+import Logo from '../../../components/Logo'
+import { styles } from './styles'
+import Input from "../../../components/Input";
+import { Feather } from '@expo/vector-icons';
+import Submit from "../../../components/Submit";
+import { LinearGradient } from 'expo-linear-gradient';
 
-export default function LoginGuardian(){
-    return(
-        <View style={{ backgroundColor:primary , width:"100%",height:"100%"}}>
-        <View style={{alignContent:'center',alignItems:'center',marginTop:60}}>
-           <Image source={require("../../../assets/logo.png") } style={{width:200,height:200,}}/>
-           <Text style={{marginBottom:90,fontSize:30}}>Acessar</Text> 
-        
-    
-        
-        <TouchableOpacity style={styles.blocksLogin}>
+export default function LoginGuardian() {
+    return (
+        <SafeAreaView style={styles.container}>
+            <LinearGradient
+                style={styles.container}
+                start={[0.2, 1]}
+                end={[0.8, 0.1]}
+                colors={['#607C99', '#C4E1FF', '#FFF']}
+            >
+                <Logo />
 
-        <Image source={require('../../../assets/email.png')} style={{marginTop:18,width:33,height:25,marginLeft:20}}/>
+                <Text style={styles.title}>Acessar</Text>
 
-           <TextInput style={{marginLeft:20,fontSize:20,marginTop:5}}>Digite seu email</TextInput>
-           
-            
-            
-        </TouchableOpacity>
+                <KeyboardAvoidingView style={styles.content} behavior="padding">
 
-        <TouchableOpacity style={styles.blocksLogin}>
+                    <Input placeholder='Digite seu email' autoCapitalize='none'>
+                        <Feather name="mail" style={styles.icon} />
+                    </Input>
 
-        <Image source={require('../../../assets/password.png')} style={{marginTop:13,width:25,height:33,marginLeft:24}}/>
+                    <Input placeholder='Digite sua senha'>
+                        <Feather name="lock" style={styles.icon} />
+                    </Input>
 
-        <TextInput style={{marginTop:5,marginLeft:25,fontSize:20}}>Digite sua senha</TextInput>
+                    <Submit />
+                </KeyboardAvoidingView>
+            </LinearGradient>
+        </SafeAreaView>
 
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{backgroundColor:second,width:340,height:60,borderRadius:6,marginTop:130}}>
-        <Text style={{marginTop:15,marginLeft:130,fontSize:30,color:"white"}}>Enviar</Text>
-        </TouchableOpacity>
-
-
-      
-
-        </View>
-        </View> 
-
-      
-      
     )
 }

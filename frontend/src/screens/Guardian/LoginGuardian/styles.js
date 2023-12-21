@@ -1,12 +1,27 @@
 import { StyleSheet } from "react-native";
-
+import { neutral } from '../../../constants/colors'
 
 export const styles = StyleSheet.create({
-blocksLogin:{
-    backgroundColor:"white",
-    width:340,
-    height:60,
-    marginBottom:30,
-    borderRadius:6,
-    flexDirection:'row'   
-}})
+    container: {
+        flex: 1,
+    },
+
+    title: {
+        textAlign: 'center',
+        fontSize: 25,
+        marginVertical: 10
+    },
+
+    content: {
+        marginHorizontal: 15,
+    },
+
+    icon: {
+        position: 'absolute',
+        color: neutral,
+        fontSize: 25,
+        top: 15,
+        left: 15,
+        zIndex: 2
+    }
+})

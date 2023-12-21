@@ -1,14 +1,27 @@
 import { StyleSheet } from "react-native";
-import { primary } from "../../../constants/colors";
+import { neutral } from '../../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: primary
     },
 
     title: {
         textAlign: 'center',
-        fontSize: 22
+        fontSize: 25,
+        marginVertical: 10
+    },
+
+    content: {
+        marginHorizontal: 15,
+    },
+
+    icon: {
+        position: 'absolute',
+        color: neutral,
+        fontSize: 25,
+        top: 15,
+        left: 15,
+        zIndex: 2
     }
 })
