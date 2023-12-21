@@ -7,6 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Tabela de Tipo de Usuário
+// ==========================
 model Role {
   id   Int    @id @default(autoincrement())
   name String
@@ -16,6 +18,8 @@ model Role {
   @@map("roles")
 }
 
+// Tabela de Usuário
+// ==================
 model User {
   id           String    @id @default(uuid())
   name         String
@@ -28,7 +32,92 @@ model User {
   created_at   DateTime? @default(now())
   updated_at   DateTime? @default(now())
 
-  role Role @relation(fields: [role_id], references: [id])
+  role    Role      @relation(fields: [role_id], references: [id])
+  patient Patient[]
 
   @@map("users")
+}
+
+// Tabela de Pacientes
+// ====================
+model Patient {
+  id         String    @id @default(uuid())
+  name       String
+  photo      String?
+  birth      DateTime  @db.Date
+  user_id    String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  user   User?   @relation(fields: [user_id], references: [id])
+  report Report?
+  recipe Recipe?
+  daily  Daily[]
+  event  Event[]
+
+  @@index([user_id])
+  @@map("patients")
+}
+
+// Tabela de Prontuários
+// ======================
+model Report {
+  id          String    @id @default(uuid())
+  title       String
+  inital_date DateTime  @db.Date
+  final_date  DateTime  @db.Date
+  description String    @db.Text
+  patient_id  String    @unique
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  patient Patient @relation(fields: [patient_id], references: [id])
+
+  @@map("reports")
+}
+
+// Tabela de Receitas
+// ===================
+model Recipe {
+  id          String    @id @default(uuid())
+  description String    @db.Text
+  patient_id  String    @unique
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  patient Patient @relation(fields: [patient_id], references: [id])
+
+  @@map("recipes")
+}
+
+// Tabela de Rotina Diária
+// ========================
+model Daily {
+  id          String   @id @default(uuid())
+  title       String
+  hour        DateTime
+  description String   @db.Text
+  done        Boolean
+  patient_id  String   @unique
+
+  patient    Patient   @relation(fields: [patient_id], references: [id])
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("dailys")
+}
+
+// Tabela de Eventos
+// ==================
+model Event {
+  id          String   @id @default(uuid())
+  description String   @db.Text
+  date        DateTime
+  patient_id  String   @unique
+
+  patient    Patient   @relation(fields: [patient_id], references: [id])
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("events")
 }

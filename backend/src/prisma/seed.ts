@@ -17,6 +17,7 @@ async function main() {
       name: 'Ronaldo da Silva',
       email: 'ronaldo@gmail.com',
       password: hashSync('123', 8),
+      crm: 123456,
       role_id: 1
     }
   })
@@ -24,7 +25,6 @@ async function main() {
     data: {
       name: 'Julia Rodrigues',
       email: 'julia@gmail.com',
-      crm: 123456,
       password: hashSync('123', 8),
       role_id: 2
     }
