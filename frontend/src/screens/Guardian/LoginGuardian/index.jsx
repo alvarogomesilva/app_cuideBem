@@ -1,10 +1,12 @@
+import { styles } from './styles';
+
 import { KeyboardAvoidingView, SafeAreaView, Text } from "react-native";
-import Logo from '../../../components/Logo'
-import { styles } from './styles'
-import Input from "../../../components/Input";
 import { Feather } from '@expo/vector-icons';
-import Submit from "../../../components/Submit";
 import { LinearGradient } from 'expo-linear-gradient';
+import Logo from '../../../components/Logo';
+
+import Input from "../../../components/Input";
+import Submit from "../../../components/Submit";
 
 export default function LoginGuardian() {
     return (

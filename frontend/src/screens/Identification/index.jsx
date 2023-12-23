@@ -1,5 +1,5 @@
-import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { styles } from './styles'
+import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
 export default function Identification({ navigation }) {
   return (
