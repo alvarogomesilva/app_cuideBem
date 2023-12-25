@@ -18,12 +18,12 @@ export default function HomeDoctor() {
                 <View style={styles.boxCards}>
                     <View style={styles.card}>
                         <MaterialCommunityIcons name="file-document-edit" style={styles.icon} />
-                        <Text style={styles.textCard}>Adicionar receitas</Text>
+                        <Text style={styles.textCard}>Receitas</Text>
                     </View>
 
                     <View style={styles.card}>
                         <Entypo name="text-document" style={styles.icon} />
-                        <Text style={styles.textCard}>Prontuário</Text>
+                        <Text style={styles.textCard}>Prontuários</Text>
                     </View>
                 </View>
 
