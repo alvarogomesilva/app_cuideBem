@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
         backgroundColor: primary
     },
 
-    content: {
-        flex: 1,
+    top: {
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -36,29 +36,19 @@ export const styles = StyleSheet.create({
         fontSize: 25
     },
 
-    boxCards: {
+    bottom: {
+        flex: 4,
+        marginTop: 50,
         flexDirection: 'row',
-        marginHorizontal: 15,
-        marginTop: 150
-    },
-
-    card: {
+        flexWrap: 'wrap',
+        gap: 10,
         alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 20,
-        borderRadius: 20,
-        width: 180,
-        height: 180,
-        backgroundColor: white,
-    },
-
-    icon: {
-        fontSize: 80,
+        justifyContent: 'center'
+      },
+    
+      cardIcon: {
+        fontSize: 100,
         color: neutral
-    },
+      }
 
-    textCard: {
-        marginTop: 15,
-        fontSize: 20
-    }
 })
