@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeDoctor from '../screens/Doctor/HomeDoctor'
 import HomeGuardian from '../screens/Guardian/HomeGuardian'
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
+import ReportsRecipes from '../screens/Guardian/ReportsRecipes'
+import { neutral, primary, white } from '../constants/colors'
 
 export default function AppRoutes({ role_id }) {
 
@@ -23,7 +25,7 @@ export default function AppRoutes({ role_id }) {
         )
     } else if (role_id === 2) {
         return (
-            <Stack.Navigator>
+            <Stack.Navigator >
 
                 <Stack.Screen
                     name='HomeGuardian'
@@ -32,6 +34,20 @@ export default function AppRoutes({ role_id }) {
                         headerShown: false
                     }}
                 />
+                   <Stack.Screen
+                    name='ReportsRecipes'
+                    component={ReportsRecipes}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                
+                />
+
             </Stack.Navigator>
         )
     } else {

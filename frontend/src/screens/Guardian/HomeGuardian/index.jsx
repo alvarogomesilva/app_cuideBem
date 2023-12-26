@@ -1,4 +1,5 @@
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native'
 
 import { SafeAreaView, Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -9,7 +10,7 @@ import { Fontisto } from '@expo/vector-icons';
 import Card from "../../../components/Card";
 
 export default function HomeGuardian() {
-
+    const navigation = useNavigation()
     return (
         <SafeAreaView style={styles.background}>
             <View style={styles.top}>
@@ -27,15 +28,15 @@ export default function HomeGuardian() {
                     <FontAwesome5 name="user-friends" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Rotina Diária/CheckList">
+                <Card title="Rotina Diária">
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Prontuário/Receita">
+                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ReportsRecipes')}>
                     <Fontisto name="doctor" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Agenda/Consultas">
+                <Card title="Agenda/Consultas" >
                     <AntDesign name="calendar" style={styles.cardIcon} />
                 </Card>
 
