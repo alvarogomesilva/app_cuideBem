@@ -4,6 +4,7 @@ import HomeDoctor from '../screens/Doctor/HomeDoctor'
 import HomeGuardian from '../screens/Guardian/HomeGuardian'
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
 import ReportsRecipes from '../screens/Guardian/ReportsRecipes'
+import ReportsRecipesC from '../screens/Caregiver/ReportsRecipesC'
 import { neutral, primary, white } from '../constants/colors'
 
 export default function AppRoutes({ role_id }) {
@@ -34,7 +35,7 @@ export default function AppRoutes({ role_id }) {
                         headerShown: false
                     }}
                 />
-                   <Stack.Screen
+                <Stack.Screen
                     name='ReportsRecipes'
                     component={ReportsRecipes}
                     options={{
@@ -45,7 +46,7 @@ export default function AppRoutes({ role_id }) {
                             backgroundColor: primary
                         },
                     }}
-                
+
                 />
 
             </Stack.Navigator>
@@ -59,6 +60,19 @@ export default function AppRoutes({ role_id }) {
                     component={HomeCaregiver}
                     options={{
                         headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ReportsRecipesC'
+                    component={ReportsRecipesC}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
                     }}
                 />
 

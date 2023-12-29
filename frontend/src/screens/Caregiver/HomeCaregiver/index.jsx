@@ -1,4 +1,5 @@
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 import { SafeAreaView, Text, View } from "react-native";
 
@@ -8,6 +9,7 @@ import Card from "../../../components/Card";
 
 
 export default function HomeCaregiver() {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.background}>
       <View style={styles.top}>
@@ -20,14 +22,14 @@ export default function HomeCaregiver() {
 
       <View style={styles.bottom}>
 
-        <Card title="Rotina Diária/CheckList">
+        <Card title="Rotina Diária">
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
 
-        <Card title="Prontuário/Receita">
+        <Card title="Prontuários/Receitas"  onPress={() => navigation.navigate('ReportsRecipesC')}>
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
-        <Card title="Agenda/Consultas">
+        <Card title="Agenda">
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
 
