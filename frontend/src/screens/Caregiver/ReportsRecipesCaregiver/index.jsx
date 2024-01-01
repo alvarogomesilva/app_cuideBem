@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Card from "../../../components/Card";
 
 
-export default function ReportsRecipes() {
+export default function ReportsRecipesCaregiver() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.boxCards}>
