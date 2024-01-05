@@ -32,7 +32,7 @@ export default function HomeGuardian() {
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ReportsRecipes')}>
+                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ReportsRecipesGuardian')}>
                     <Fontisto name="doctor" style={styles.cardIcon} />
                 </Card>
 
