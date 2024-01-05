@@ -1,9 +1,11 @@
 import { TextInput, View } from "react-native"
 import { styles } from "./styles"
 import { neutral } from "../../constants/colors"
+import { useState } from "react"
 
 
-const Input = ({ placeholder, autoCapitalize, children }) => {
+const Input = ({ placeholder, autoCapitalize, children, value, onChangeText, secureTextEntry }) => {
+    
     return (
         <View style={styles.box}>
             {children}
@@ -13,6 +15,9 @@ const Input = ({ placeholder, autoCapitalize, children }) => {
                 style={styles.input} 
                 placeholderTextColor={neutral}
                 autoCapitalize={autoCapitalize}
+                value={value}
+                onChangeText={(text) => onChangeText(text)}
+                secureTextEntry={secureTextEntry}
             />
         </View>
 

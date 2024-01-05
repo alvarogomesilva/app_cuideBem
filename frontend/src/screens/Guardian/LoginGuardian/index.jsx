@@ -7,8 +7,15 @@ import Logo from '../../../components/Logo';
 
 import Input from "../../../components/Input";
 import Submit from "../../../components/Submit";
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function LoginGuardian() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { handleLogin } = useContext(AuthContext)
+
+
     return (
         <SafeAreaView style={styles.container}>
             <LinearGradient
@@ -23,18 +30,27 @@ export default function LoginGuardian() {
 
                 <KeyboardAvoidingView style={styles.content} behavior="padding">
 
-                    <Input placeholder='Digite seu email' autoCapitalize='none'>
+                    <Input 
+                        placeholder='Digite seu email' 
+                        autoCapitalize='none'
+                        value={email}
+                        onChangeText={setEmail}
+                        >
                         <Feather name="mail" style={styles.icon} />
                     </Input>
 
-                    <Input placeholder='Digite sua senha'>
+                    <Input 
+                        placeholder='Digite sua senha'
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry={true}
+                        >
                         <Feather name="lock" style={styles.icon} />
                     </Input>
 
-                    <Submit />
+                    <Submit onPress={() => handleLogin(email, password)} />
                 </KeyboardAvoidingView>
             </LinearGradient>
         </SafeAreaView>
-
     )
 }
