@@ -25,7 +25,7 @@ const AuthUserService = async ({ email, password, crm }: User) => {
         expiresIn: '30d'
     })
 
-    return{ id: user.id, name: user.name, token: token, photo: user.photo}
+    return{ id: user.id, name: user.name, token: token, photo: user.photo, role_id: user.role_id}
 }
 
 export default AuthUserService;

@@ -13,7 +13,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 export default function LoginGuardian() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { handleLogin } = useContext(AuthContext)
+    const { signIn, loadingAuth } = useContext(AuthContext)
 
 
     return (
@@ -22,8 +22,8 @@ export default function LoginGuardian() {
                 style={styles.container}
                 start={[0.2, 1]}
                 end={[0.8, 0.1]}
-                colors={['#607C99', '#C4E1FF', '#FFF']}
-            >
+                colors={['#607C99', '#C4E1FF', '#FFF']}>
+                    
                 <Logo />
 
                 <Text style={styles.title}>Acessar</Text>
@@ -48,7 +48,10 @@ export default function LoginGuardian() {
                         <Feather name="lock" style={styles.icon} />
                     </Input>
 
-                    <Submit onPress={() => handleLogin(email, password)} />
+                    <Submit 
+                        loadingAuth={loadingAuth}
+                        onPress={() => signIn(email, password)} 
+                    />
                 </KeyboardAvoidingView>
             </LinearGradient>
         </SafeAreaView>

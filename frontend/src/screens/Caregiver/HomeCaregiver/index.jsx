@@ -1,15 +1,17 @@
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
-import { SafeAreaView, Text, View } from "react-native";
+import { Button, SafeAreaView, Text, View } from "react-native";
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Card from "../../../components/Card";
 
 
+
 export default function HomeCaregiver() {
   const navigation = useNavigation()
+
   return (
     <SafeAreaView style={styles.background}>
       <View style={styles.top}>

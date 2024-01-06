@@ -1,8 +1,10 @@
 import { styles } from './styles';
-import { SafeAreaView, Text, View } from 'react-native';
+import { Button, SafeAreaView, Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Card from '../../../components/Card';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function HomeDoctor() {
 
@@ -26,6 +28,7 @@ export default function HomeDoctor() {
                 <Card title='Receita'>
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
+
             </View>
 
 

@@ -1,13 +1,14 @@
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native'
 
-import { SafeAreaView, Text, View } from 'react-native';
+import { Button, SafeAreaView, Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
 import Card from "../../../components/Card";
+
 
 export default function HomeGuardian() {
     const navigation = useNavigation()

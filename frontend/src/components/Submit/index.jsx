@@ -1,16 +1,21 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 
 
-const Submit = ({ onPress }) => {
+const Submit = ({ onPress, loadingAuth }) => {
 
 
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             style={styles.submit}
             onPress={onPress}
         >
-            <Text style={styles.text}>Login</Text>
+            {loadingAuth ? (
+                <ActivityIndicator size={25} color="white" />
+            ) : (
+                <Text style={styles.text}>Login</Text>
+            )}
+
         </TouchableOpacity>
     )
 }

@@ -25,7 +25,7 @@ export default function AppRoutes({ role_id }) {
 
     if (role_id === 1) {
         return (
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName='HomeDoctor'>
                 <Stack.Screen
                     name='HomeDoctor'
                     component={HomeDoctor}
@@ -52,7 +52,7 @@ export default function AppRoutes({ role_id }) {
         )
     } else if (role_id === 2) {
         return (
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName='HomeGuardian'>
 
                 <Stack.Screen
                     name='HomeGuardian'
@@ -88,7 +88,7 @@ export default function AppRoutes({ role_id }) {
         )
     } else {
         return (
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName='HomeCaregiver'>
 
                 <Stack.Screen
                     name='HomeCaregiver'
