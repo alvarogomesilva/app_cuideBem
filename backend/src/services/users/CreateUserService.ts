@@ -16,9 +16,14 @@ const CreateUserService = async ({ name, email, password, photo, phone_number, c
     if (!email) return { messageError: 'Email is required!' }
     if (!password) return { messageError: 'Password is required!' }
     if (!role_id) return { messageError: 'User invalid!' }
-    
 
-    const passwordHash = hashSync(password, 8)
+    const userAlready = await Prisma.user.findFirst({
+        where: { email: email },
+    })
+
+    if (userAlready) return { messageError: "This email already exists" }
+    
+    const passwordHash = hashSync(password, 8);
 
     const user = await Prisma.user.create({
         data: { name, email, password: passwordHash, photo, phone_number, crm, role_id: +role_id }
