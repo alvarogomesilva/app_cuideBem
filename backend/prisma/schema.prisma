@@ -44,7 +44,7 @@ model Patient {
   id         String    @id @default(uuid())
   name       String
   photo      String?
-  birth      DateTime  @db.Date
+  birth      String
   user_id    String
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
