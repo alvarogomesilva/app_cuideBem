@@ -25,7 +25,7 @@ export default function HomeGuardian() {
 
             <View style={styles.bottom}>
 
-                <Card title="Pacientes">
+                <Card title="Pacientes" onPress={() => navigation.navigate("ListPatientsGuardian")}>
                     <FontAwesome5 name="user-friends" style={styles.cardIcon} />
                 </Card>
 

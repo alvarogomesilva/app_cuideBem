@@ -7,7 +7,7 @@ import { primary } from "../constants/colors"
 
 export default function Routes(){
 
-    // const { signed, loadingUser, user } = useContext(AuthContext)
+    //const { signed, loadingUser, user } = useContext(AuthContext)
 
     // if (loadingUser) {
     //     return (
@@ -27,7 +27,7 @@ export default function Routes(){
     // return signed ? <AppRoutes role_id={user.role_id}/> : <AuthRoutes />
     // ======================================================================
     const signed = true
-    const role_id = 3
+    const role_id = 2
 
     return signed ? <AppRoutes role_id={role_id}/> : <AuthRoutes />
 

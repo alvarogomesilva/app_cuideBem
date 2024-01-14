@@ -7,6 +7,7 @@ import CreateReceiveController from "../controllers/doctors/CreateReceiveControl
 import CreatePatientController from "../controllers/patients/CreatePatientController";
 
 import upload from "../config/multer";
+import ListPatientByUserController from "../controllers/patients/ListPatientByUserController";
 
 const Route = Router();
 
@@ -23,5 +24,6 @@ Route.post("/doctors", CreateReceiveController);
 // Rotas do paciente
 // ==================
 Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
+Route.get("/my", authenticate, ListPatientByUserController)
 
 export default Route;
