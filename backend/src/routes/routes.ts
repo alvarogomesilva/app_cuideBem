@@ -12,7 +12,7 @@ import DetailUserController from "../controllers/users/DetailUserController";
 
 // Pacientes
 // ==========
-import ListPatientByUserController from "../controllers/patients/ListPatientByUserController";
+import ListPatientController from "../controllers/patients/ListPatientController";
 import CreatePatientController from "../controllers/patients/CreatePatientController";
 
 import authenticate from "../middlewares/autenticate";
@@ -36,6 +36,6 @@ Route.post("/recipes", CreateRecipesController);
 // Rotas do paciente
 // ==================
 Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
-Route.get("/my", authenticate, ListPatientByUserController)
+Route.get("/patient", authenticate, ListPatientController)
 
 export default Route;
