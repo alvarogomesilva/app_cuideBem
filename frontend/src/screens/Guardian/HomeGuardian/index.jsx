@@ -1,19 +1,24 @@
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native'
 
-import { Button, SafeAreaView, Text, View } from 'react-native';
+import { Button, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
 import Card from "../../../components/Card";
-
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext'
+import { white } from '../../../constants/colors';
+import SignOut from '../../../components/SignOut';
 
 export default function HomeGuardian() {
     const navigation = useNavigation()
+
     return (
         <SafeAreaView style={styles.background}>
+            <SignOut />
             <View style={styles.top}>
                 <View style={styles.boxUser}>
                     <FontAwesome5 name="user-alt" style={styles.iconUser} />
@@ -41,7 +46,9 @@ export default function HomeGuardian() {
                     <AntDesign name="calendar" style={styles.cardIcon} />
                 </Card>
 
+
             </View>
+
 
         </SafeAreaView>
     )

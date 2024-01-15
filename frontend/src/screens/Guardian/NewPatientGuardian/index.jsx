@@ -1,12 +1,13 @@
-import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { FontAwesome5 } from '@expo/vector-icons';
-import { neutral } from '../../../constants/colors';
+import { neutral, white } from '../../../constants/colors';
 import Input from '../../../components/Input'
 import * as ImagePicker from 'expo-image-picker';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext'
 import api from '../../../api';
+import { Masks } from 'react-native-mask-input';
 
 export default function NewPatientGuardian() {
     const { user } = useContext(AuthContext)
@@ -18,7 +19,8 @@ export default function NewPatientGuardian() {
         birth: "",
         user_id: user.id
     })
-
+    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState('')
     const pickImage = async () => {
 
         const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -45,17 +47,21 @@ export default function NewPatientGuardian() {
     };
 
     const handlePatient = async () => {
+        setLoading(true)
         try {
             const formData = new FormData()
             formData.append('name', inputs.name)
             formData.append('birth', inputs.birth)
             formData.append('user_id', inputs.user_id)
-            const extend = image.split('.')[1]
-            formData.append('avatar', JSON.parse(JSON.stringify({
-                name: image,
-                uri: uri,
-                type: `image/${extend}`
-            })))
+
+            if (image) {
+                const extend = image.split('.')[1]
+                formData.append('avatar', JSON.parse(JSON.stringify({
+                    name: image,
+                    uri: uri,
+                    type: `image/${extend}`
+                })))
+            }
 
             const response = await api.post('/patient', formData, {
                 headers: { 'Accept': 'application/json', "content-type": 'multipart/form-data' }
@@ -71,6 +77,8 @@ export default function NewPatientGuardian() {
             Alert.alert('Salvo com sucesso!')
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -78,37 +86,48 @@ export default function NewPatientGuardian() {
         <SafeAreaView style={styles.container}>
 
             <View style={styles.content}>
-                <View style={styles.avatar}>
-                    {image ? (
-                        <Image source={{ uri: uri }} width={80} height={80} borderRadius={40} />
-                    ) : (
-                        <FontAwesome5 name="user-alt" size={40} color={neutral} />
-                    )}
-                </View>
 
-                <TouchableOpacity style={styles.button} onPress={pickImage}>
-                    <Text>Adicionar foto</Text>
+                <TouchableOpacity style={styles.avatar} onPress={pickImage}>
+                    {image ? (
+                        <Image source={{ uri: uri }} width={100} height={100} borderRadius={50} />
+                    ) : (
+                        <FontAwesome5 name="user-alt" size={50} color={neutral} />
+                    )}
                 </TouchableOpacity>
 
                 <Input
                     placeholder="Nome do paciente"
                     value={inputs.name}
                     onChangeText={(text) => setInputs({ ...inputs, name: text })}
-                />
+                >
+                    <FontAwesome5 name="user-injured" style={styles.icon} />
+                </Input>
+
                 <Input
                     placeholder="Data de nascimento"
                     value={inputs.birth}
+                    mask={Masks.DATE_DDMMYYYY}
                     onChangeText={(text) => setInputs({ ...inputs, birth: text })}
-                />
+                    keyboardType="numeric"
+                >
+                    <FontAwesome5 name="birthday-cake" style={styles.icon} />
+                </Input>
+               
+
                 <Input
                     placeholder="Nome do guardião"
                     value={user.name}
-                />
+                >
+                    <FontAwesome5 name="user-shield" style={styles.icon} />
+                </Input>
 
                 <TouchableOpacity style={styles.submit} onPress={handlePatient}>
-                    <Text style={styles.submitText}>Cadastrar</Text>
+                    {loading ? (
+                        <ActivityIndicator size={25} color={white}/>
+                    ) : (
+                        <Text style={styles.submitText}>Cadastrar</Text>
+                    )}
                 </TouchableOpacity>
-
             </View>
 
         </SafeAreaView>

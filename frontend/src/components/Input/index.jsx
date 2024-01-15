@@ -1,21 +1,33 @@
 import { TextInput, View } from "react-native"
 import { styles } from "./styles"
 import { neutral } from "../../constants/colors"
+import MaskInput from 'react-native-mask-input';
 
-const Input = ({ placeholder, autoCapitalize, children, value, onChangeText, secureTextEntry }) => {
-    
+const Input = ({
+    placeholder,
+    autoCapitalize,
+    children,
+    value,
+    onChangeText,
+    secureTextEntry,
+    mask,
+    keyboardType
+}) => {
+
     return (
         <View style={styles.box}>
             {children}
-            
-            <TextInput 
-                placeholder={placeholder} 
-                style={styles.input} 
+
+            <MaskInput
+                placeholder={placeholder}
+                style={styles.input}
                 placeholderTextColor={neutral}
                 autoCapitalize={autoCapitalize}
                 value={value}
                 onChangeText={(text) => onChangeText(text)}
                 secureTextEntry={secureTextEntry}
+                mask={mask}
+                keyboardType={keyboardType}
             />
         </View>
 

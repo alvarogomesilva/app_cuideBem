@@ -8,6 +8,12 @@ export const styles = StyleSheet.create({
     backgroundColor: primary
   },
 
+  signOut: {
+    position: 'absolute',
+    right: 20,
+    marginVertical: 40
+  },
+
   top: {
     flex: 2,
     alignItems: 'center',

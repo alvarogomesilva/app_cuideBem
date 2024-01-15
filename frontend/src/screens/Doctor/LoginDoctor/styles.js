@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         color: neutral,
-        fontSize: 25,
+        fontSize: 20,
         top: 15,
         left: 15,
         zIndex: 2

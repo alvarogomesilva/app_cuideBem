@@ -13,13 +13,22 @@ export const styles = StyleSheet.create({
     },
 
     avatar: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
         backgroundColor: white,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'
+    },
+
+    icon: {
+        position: 'absolute',
+        color: neutral,
+        fontSize: 20,
+        top: 15,
+        left: 15,
+        zIndex: 2
     },
 
     button: {

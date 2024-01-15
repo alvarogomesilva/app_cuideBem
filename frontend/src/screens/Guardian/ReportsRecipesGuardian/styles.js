@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { white, primary, neutral } from '../../../constants/colors'
+import { primary, neutral } from '../../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: primary
+        backgroundColor: primary,
     },
 
     boxCards: {

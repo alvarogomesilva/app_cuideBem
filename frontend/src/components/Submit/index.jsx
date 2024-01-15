@@ -9,6 +9,7 @@ const Submit = ({ onPress, loadingAuth }) => {
         <TouchableOpacity
             style={styles.submit}
             onPress={onPress}
+            activeOpacity={0.7}
         >
             {loadingAuth ? (
                 <ActivityIndicator size={25} color="white" />

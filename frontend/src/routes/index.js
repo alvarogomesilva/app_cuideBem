@@ -7,28 +7,28 @@ import { primary } from "../constants/colors"
 
 export default function Routes(){
 
-    //const { signed, loadingUser, user } = useContext(AuthContext)
+    const { signed, loadingUser, user } = useContext(AuthContext)
 
-    // if (loadingUser) {
-    //     return (
-    //         <View style={{ 
-    //                 flex: 1, 
-    //                 justifyContent: 'center', 
-    //                 alignItems: 'center', 
-    //                 backgroundColor: primary
-    //              }}>
+    if (loadingUser) {
+        return (
+            <View style={{ 
+                    flex: 1, 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    backgroundColor: primary
+                 }}>
 
-    //             <ActivityIndicator size="large" color="white"/>
-    //         </View>
-    //     )
-    // }
+                <ActivityIndicator size="large" color="white"/>
+            </View>
+        )
+    }
 
     
-    // return signed ? <AppRoutes role_id={user.role_id}/> : <AuthRoutes />
+    return signed ? <AppRoutes role_id={user.role_id}/> : <AuthRoutes />
     // ======================================================================
-    const signed = true
-    const role_id = 2
+    // const signed = true
+    // const role_id = 2
 
-    return signed ? <AppRoutes role_id={role_id}/> : <AuthRoutes />
+    //return signed ? <AppRoutes role_id={role_id}/> : <AuthRoutes />
 
 }

@@ -1,15 +1,17 @@
 import { styles } from './styles';
-import { Button, SafeAreaView, Text, View } from 'react-native';
+import { Button, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Card from '../../../components/Card';
-import { useContext } from 'react';
-import { AuthContext } from '../../../contexts/AuthContext';
+
+import SignOut from '../../../components/SignOut'
 
 export default function HomeDoctor() {
 
+
     return (
         <SafeAreaView style={styles.container}>
+            <SignOut />
             <View style={styles.top}>
                 <View style={styles.boxUser}>
                     <FontAwesome5 name="user-alt" style={styles.iconUser} />
@@ -18,7 +20,6 @@ export default function HomeDoctor() {
                 <Text style={styles.crmDoctor}>CRM: 10116</Text>
 
             </View>
-
             <View style={styles.bottom}>
 
                 <Card title='Prontuário'>
@@ -28,7 +29,6 @@ export default function HomeDoctor() {
                 <Card title='Receita'>
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
-
             </View>
 
 

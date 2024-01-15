@@ -13,6 +13,12 @@ export const styles = StyleSheet.create({
         fontSize: 30
     },
 
+    flatList: {
+        flex: 1,
+        marginTop: 20,
+        marginHorizontal: 15
+    },
+
     button: {
         position: 'absolute',
         bottom: 0,

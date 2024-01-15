@@ -1,15 +1,24 @@
 import { Router } from "express";
+
+// Médicos
+// ========
+import CreateRecipesController from "../controllers/doctors/CreateRecipesController";
+
+// Usuários
+// =========
 import CreateUserController from "../controllers/users/CreateUserController";
 import AuthUserController from "../controllers/users/AuthUserController";
-import authenticate from "../middlewares/autenticate";
 import DetailUserController from "../controllers/users/DetailUserController";
-import CreateReceiveController from "../controllers/doctors/CreateReceiveController";
+
+// Pacientes
+// ==========
+import ListPatientByUserController from "../controllers/patients/ListPatientByUserController";
 import CreatePatientController from "../controllers/patients/CreatePatientController";
 
-
+import authenticate from "../middlewares/autenticate";
 import upload from "../config/multer";
-import ListPatientByUserController from "../controllers/patients/ListPatientByUserController";
-import CreateRecipesController from "../controllers/recipes/CreateRecipesController";
+
+// ==============================================================================================
 
 const Route = Router();
 
@@ -21,14 +30,12 @@ Route.get("/me", authenticate, DetailUserController);
 
 // Rotas do Médico
 // ==================
-Route.post("/doctors", CreateReceiveController);
+Route.post("/recipes", CreateRecipesController);
+
 
 // Rotas do paciente
 // ==================
 Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
 Route.get("/my", authenticate, ListPatientByUserController)
 
-// Rotas Receitas
-// ==================
-Route.post("/recipes", CreateRecipesController);
 export default Route;

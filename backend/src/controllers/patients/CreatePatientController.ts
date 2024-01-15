@@ -7,17 +7,17 @@ const CreatePatientController = async (req: Request, res: Response) => {
 
     const { name, birth } = req.body
     const user_id = req.user_id
-    let avatar: string | null;
+    let avatar: string | null = null;
 
     if (req.file) {
         const extension = req.file.mimetype.substring(6)
         let randomName = Math.floor(Math.random() * 999999999) + Date.now()
         await sharp(req.file.path)
+            .resize(300)
             .toFile(`./uploads/${randomName}.${extension}`)
 
         avatar = `${randomName}.${extension}`
-        //await unlink(req.file.path)
-        console.log(req.file.path)
+        await unlink(req.file.path)
     }  
 
     const patient = await CreatePatientService({ name, photo: avatar, birth, user_id })
