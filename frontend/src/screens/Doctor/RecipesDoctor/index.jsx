@@ -1,11 +1,12 @@
 import { FlatList, SafeAreaView, Text, View } from "react-native";
-import {styles} from "./styles";
+import styles from "./styles";
+
 import Search from "../../../components/Search";
 import { useEffect, useState } from "react";
-import api from "../../../api";
 import MyPatient from "../../../components/MyPatient";
+import api from "../../../api";
 
-export default function RecordDoctor() {
+export default function RecipesDoctor() {
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
@@ -24,13 +25,13 @@ export default function RecordDoctor() {
     return (
         <SafeAreaView style={styles.background}>
             <View style={styles.container}>
-            <Text style={styles.title}>Prontuários</Text>
-            <Search />
+                <Text style={styles.title}>Receitas</Text>
+                <Search />
 
-            <FlatList 
+                <FlatList 
                 data={patients}
-                renderItem={({item}) => <MyPatient data={item} />}
-            />
+                renderItem={({ item }) => <MyPatient  data={item}/>}
+                />
 
             </View>
 

@@ -4,7 +4,7 @@ import { neutral, primary } from '../constants/colors'
 // Telas do médico
 // ================
 import HomeDoctor from '../screens/Doctor/HomeDoctor'
-import RevenuesDoctor from '../screens/Doctor/RevenuesDoctor'
+import RecipesDoctor from '../screens/Doctor/RecipesDoctor'
 import RecordGuardian from '../screens/Guardian/RecordGuardian'
 import RecordDoctor from '../screens/Doctor/RecordDoctor'
 
@@ -43,8 +43,8 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='RevenuesDoctor'
-                    component={RevenuesDoctor}
+                    name='RecipesDoctor'
+                    component={RecipesDoctor}
                     options={{
                         headerShown: false
                     }}

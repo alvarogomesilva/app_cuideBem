@@ -13,7 +13,7 @@ export default function ListPatientsGuardian() {
     useEffect(() => {
         async function loadPatients() {
             try {
-                const patients = await api.get('/my')
+                const patients = await api.get('/patients')
                 setListPatients(patients.data)
             } catch (error) {
                 console.log(error)

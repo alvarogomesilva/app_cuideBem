@@ -36,6 +36,6 @@ Route.post("/recipes", CreateRecipesController);
 // Rotas do paciente
 // ==================
 Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
-Route.get("/patient", authenticate, ListPatientController)
+Route.get("/patients", authenticate, ListPatientController)
 
 export default Route;

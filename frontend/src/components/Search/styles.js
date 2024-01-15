@@ -15,12 +15,12 @@ export const styles = StyleSheet.create({
         height: '100%',
         paddingLeft: 15,
         fontSize: 20,
-        backgroundColor: '#EEE',
+        backgroundColor: neutral,
         borderRadius: 10,
     },
 
     icon: {
-        color: neutral,
+        color: white,
         fontSize: 25,
         right: 15,
         position: 'absolute'
