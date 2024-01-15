@@ -22,7 +22,7 @@ const CreateUserService = async ({ name, email, password, photo, phone_number, c
     })
 
     if (userAlready) return { messageError: "This email already exists" }
-    
+
     const passwordHash = hashSync(password, 8);
 
     const user = await Prisma.user.create({

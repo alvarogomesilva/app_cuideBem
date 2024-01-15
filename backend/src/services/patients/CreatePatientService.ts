@@ -16,7 +16,7 @@ const CreatePatientService = async ({ name, photo, birth, user_id }: Patient) =>
         data: { name, photo, birth, user_id }
     })
 
-    return patient 
+    return patient
 }
 
 export default CreatePatientService;
