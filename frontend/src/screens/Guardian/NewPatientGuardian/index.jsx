@@ -21,6 +21,7 @@ export default function NewPatientGuardian() {
     })
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState('')
+    
     const pickImage = async () => {
 
         const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();

@@ -22,15 +22,11 @@ export default function HomeDoctor() {
             </View>
             <View style={styles.bottom}>
 
-                <Card title='Prontuário'
-                    onPress={() => navigation.navigate('RecordDoctor')}
-                >
+                <Card title='Prontuário' onPress={() => navigation.navigate('RecordDoctor')}>
                     <Entypo name="text-document-inverted" style={styles.cardIcon} />
                 </Card>
 
-                <Card title='Receita' 
-                    onPress={() => navigation.navigate('RevenuesDoctor')}
-                >
+                <Card title='Receita' onPress={() => navigation.navigate('RecipesDoctor')}>
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
             </View>

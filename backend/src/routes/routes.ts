@@ -3,6 +3,7 @@ import { Router } from "express";
 // Médicos
 // ========
 import CreateRecipesController from "../controllers/doctors/CreateRecipesController";
+import CreateReportController from "../controllers/doctors/CreateReportController";
 
 // Usuários
 // =========
@@ -30,12 +31,13 @@ Route.get("/me", authenticate, DetailUserController);
 
 // Rotas do Médico
 // ==================
-Route.post("/recipes", CreateRecipesController);
+Route.post("/recipes", authenticate, CreateRecipesController);
+Route.post("/reports", authenticate, CreateReportController)
 
 
 // Rotas do paciente
 // ==================
 Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
-Route.get("/patient", authenticate, ListPatientController)
+Route.get("/patients", authenticate, ListPatientController)
 
 export default Route;

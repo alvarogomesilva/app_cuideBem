@@ -1,10 +1,8 @@
 import Prisma from "../../prisma";
 
 interface Recipe {
-
     description: string,
     patient_id: string
-
 }
 
 const CreateRecipesService = async ({ description, patient_id }: Recipe) => {
@@ -15,7 +13,7 @@ const CreateRecipesService = async ({ description, patient_id }: Recipe) => {
         where: { id: patient_id }
     })
 
-    if (!existingPatient) return ({ messageError: "Patient with the provided ID does not exist!" })
+    if (!existingPatient) return { messageError: "Patient with the provided ID does not exist!" }
 
     const recipes = await Prisma.recipe.create({
         data: { description, patient_id: existingPatient.id }

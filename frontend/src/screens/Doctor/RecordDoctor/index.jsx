@@ -1,4 +1,5 @@
 import { FlatList, SafeAreaView, Text, View } from "react-native";
+
 import { styles } from "./styles";
 import Search from "../../../components/Search";
 import { useEffect, useState } from "react";
@@ -13,8 +14,9 @@ export default function RecordDoctor() {
     useEffect(() => {
         async function loadPatients() {
             try {
-                const patients = await api.get('/patient')
+                const patients = await api.get('/patients')
                 setListPatients(patients.data)
+
             } catch (error) {
                 console.log(error)
             }
@@ -22,6 +24,7 @@ export default function RecordDoctor() {
 
         loadPatients()
     }, [])
+
     return (
         <SafeAreaView style={styles.background}>
             <View style={styles.container}>
@@ -36,8 +39,10 @@ export default function RecordDoctor() {
                     />}
                 />
 
+
             </View>
 
         </SafeAreaView>
     );
+
 }

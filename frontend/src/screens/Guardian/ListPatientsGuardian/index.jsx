@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback, memo } from 'react';
-import { ActivityIndicator, FlatList, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import api from '../../../api';
-import { primary, white } from '../../../constants/colors';
+import { primary } from '../../../constants/colors';
 
 const MemoizedPatients = memo(Patients);
 
@@ -16,12 +16,12 @@ const ListPatientsGuardian = () => {
 
     const loadPatients = useCallback(async () => {
         try {
-            const patients = await api.get('/patient');
+            const patients = await api.get('/patients');
             setListPatients(patients.data);
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }, []);
 
@@ -30,14 +30,15 @@ const ListPatientsGuardian = () => {
     }, [loadPatients]);
 
     useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => loadPatients())
+        const unsubscribe = navigation.addListener('focus', () => loadPatients());
         return unsubscribe;
     }, [navigation, loadPatients]);
 
+    
     if (loading) {
         return (
             <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: primary }}>
-                <ActivityIndicator size="large" color={white} />
+                <ActivityIndicator size="large" color="#FFF" />
             </SafeAreaView>
         );
     }
@@ -46,14 +47,12 @@ const ListPatientsGuardian = () => {
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Pacientes</Text>
 
-            
-                <FlatList
-                    style={styles.flatList}
-                    data={listPatients}
-                    renderItem={({ item }) => <MemoizedPatients data={item} />}
-                    keyExtractor={(item) => item.id.toString()}
-                />
-            
+            <FlatList
+                style={styles.flatList}
+                data={listPatients}
+                renderItem={({ item }) => <MemoizedPatients data={item} />}
+                keyExtractor={(item) => item.id.toString()}
+            />
 
             <TouchableOpacity
                 style={styles.button}

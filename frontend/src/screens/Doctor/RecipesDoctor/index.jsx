@@ -1,22 +1,21 @@
 import { FlatList, SafeAreaView, Text, View } from "react-native";
 import styles from "./styles";
-import ListItem from "../../../components/ListItem";
+
 import Search from "../../../components/Search";
 import { useEffect, useState } from "react";
 import Patients from "../../../components/Patients";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 
-export default function RecordDoctor() {
-
-    const [listPatients, setListPatients] = useState([])
+export default function RecipesDoctor() {
+    const [patients, setPatients] = useState([])
     const navigation = useNavigation()
 
     useEffect(() => {
         async function loadPatients() {
             try {
-                const patients = await api.get('/patient')
-                setListPatients(patients.data)
+                const patients = await api.get('/patients')
+                setPatients(patients.data)
             } catch (error) {
                 console.log(error)
             }
@@ -32,10 +31,10 @@ export default function RecordDoctor() {
                 <Search />
 
                 <FlatList
-                    data={listPatients}
+                    data={patients}
                     renderItem={({ item }) => <Patients
                         data={item}
-                        onPress={() => navigation.navigate('NewRevenues')}
+                        onPress={() => navigation.navigate('NewRecipes')}
                     />}
                 />
 

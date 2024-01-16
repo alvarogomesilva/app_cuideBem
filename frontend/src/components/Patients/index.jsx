@@ -9,6 +9,7 @@ import { useState } from "react";
 const Patients = ({ data, onPress }) => {
     const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`)
 
+
     return (
         <TouchableOpacity style={styles.container} activeOpacity={0.7} onPress={onPress}>
 

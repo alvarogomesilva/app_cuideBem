@@ -4,10 +4,10 @@ import { neutral, primary } from '../constants/colors'
 // Telas do médico
 // ================
 import HomeDoctor from '../screens/Doctor/HomeDoctor'
-import RevenuesDoctor from '../screens/Doctor/RevenuesDoctor'
+import RecipesDoctor from '../screens/Doctor/RecipesDoctor'
 import RecordGuardian from '../screens/Guardian/RecordGuardian'
 import RecordDoctor from '../screens/Doctor/RecordDoctor'
-import NewRevenues from '../screens/Doctor/NewRevenues'
+import NewRecipes from '../screens/Doctor/NewRecipes'
 import NewRecord from '../screens/Doctor/NewRecord'
 
 // Telas do guardião
@@ -50,8 +50,8 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='RevenuesDoctor'
-                    component={RevenuesDoctor}
+                    name='RecipesDoctor'
+                    component={RecipesDoctor}
                     options={{
                         title: null,
                         headerShadowVisible: false,
@@ -62,8 +62,8 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='NewRevenues'
-                    component={NewRevenues}
+                    name='NewRecipes'
+                    component={NewRecipes}
                     options={{
                         title: null,
                         headerShadowVisible: false,

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 
-export default function NewRevenues() {
+export default function NewRecipes() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
