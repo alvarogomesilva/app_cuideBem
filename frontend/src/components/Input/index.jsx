@@ -11,11 +11,11 @@ const Input = ({
     onChangeText,
     secureTextEntry,
     mask,
-    keyboardType
+    keyboardType,
 }) => {
 
     return (
-        <View style={styles.box}>
+        <View style={styles.box} >
             {children}
 
             <MaskInput

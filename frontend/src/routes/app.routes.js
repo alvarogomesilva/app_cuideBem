@@ -7,6 +7,8 @@ import HomeDoctor from '../screens/Doctor/HomeDoctor'
 import RevenuesDoctor from '../screens/Doctor/RevenuesDoctor'
 import RecordGuardian from '../screens/Guardian/RecordGuardian'
 import RecordDoctor from '../screens/Doctor/RecordDoctor'
+import NewRevenues from '../screens/Doctor/NewRevenues'
+import NewRecord from '../screens/Doctor/NewRecord'
 
 // Telas do guardião
 // ==================
@@ -39,14 +41,48 @@ export default function AppRoutes({ role_id }) {
                     name='RecordDoctor'
                     component={RecordDoctor}
                     options={{
-                        headerShown: false
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
                     }}
                 />
                 <Stack.Screen
                     name='RevenuesDoctor'
                     component={RevenuesDoctor}
                     options={{
-                        headerShown: false
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='NewRevenues'
+                    component={NewRevenues}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='NewRecord'
+                    component={NewRecord}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
                     }}
                 />
 

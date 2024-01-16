@@ -47,13 +47,17 @@ export default function AuthRoutes() {
             <Stack.Screen
                 name='LoginCaregiver'
                 component={LoginCaregiver}
+                // options={{
+                //     title: null,
+                //     headerShadowVisible: false,
+                //     headerTintColor: neutral,
+                //     headerStyle: {
+                //         backgroundColor: white
+                //     },
+                // }}
+
                 options={{
-                    title: null,
-                    headerShadowVisible: false,
-                    headerTintColor: neutral,
-                    headerStyle: {
-                        backgroundColor: white
-                    },
+                    headerShown: false
                 }}
             />
 

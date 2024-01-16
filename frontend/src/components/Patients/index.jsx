@@ -6,11 +6,11 @@ import { neutral } from "../../constants/colors";
 import { useState } from "react";
 
 
-const MyPatient = ({ data }) => {
+const Patients = ({ data, onPress }) => {
     const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`)
 
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.7} onPress={onPress}>
 
             <View style={styles.box}>
                 {avatar && data?.photo ? (
@@ -37,4 +37,4 @@ const MyPatient = ({ data }) => {
     )
 }
 
-export default MyPatient;
+export default Patients;
