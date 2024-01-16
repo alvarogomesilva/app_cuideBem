@@ -24,6 +24,15 @@ export const styles = StyleSheet.create({
         padding: 15,
         height: '80%'
     },
+
+    icon: {
+        position: 'absolute',
+        color: neutral,
+        fontSize: 20,
+        top: 15,
+        left: 15,
+        zIndex: 2
+    }
   
 });
 

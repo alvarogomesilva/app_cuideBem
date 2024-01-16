@@ -4,11 +4,8 @@ import { neutral, primary } from '../constants/colors'
 // Telas do médico
 // ================
 import HomeDoctor from '../screens/Doctor/HomeDoctor'
-import RecipesDoctor from '../screens/Doctor/RecipesDoctor'
-import RecordGuardian from '../screens/Guardian/RecordGuardian'
-import RecordDoctor from '../screens/Doctor/RecordDoctor'
-import NewRecipes from '../screens/Doctor/NewRecipes'
-import NewRecord from '../screens/Doctor/NewRecord'
+import RecipesRecordDoctor from '../screens/Doctor/RecipesRecordDoctor'
+import NewRecipesRecord from '../screens/Doctor/NewRecipesRecord'
 
 // Telas do guardião
 // ==================
@@ -16,7 +13,7 @@ import HomeGuardian from '../screens/Guardian/HomeGuardian'
 import ReportsRecipesGuardian from '../screens/Guardian/ReportsRecipesGuardian'
 import ListPatientsGuardian from '../screens/Guardian/ListPatientsGuardian'
 import NewPatientGuardian from '../screens/Guardian/NewPatientGuardian'
-
+import RecordGuardian from '../screens/Guardian/RecordGuardian'
 // Telas do cuidador
 // ==================
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
@@ -37,9 +34,10 @@ export default function AppRoutes({ role_id }) {
                         headerShown: false
                     }}
                 />
+             
                 <Stack.Screen
-                    name='RecordDoctor'
-                    component={RecordDoctor}
+                    name='RecipesRecordDoctor'
+                    component={RecipesRecordDoctor}
                     options={{
                         title: null,
                         headerShadowVisible: false,
@@ -50,8 +48,8 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='RecipesDoctor'
-                    component={RecipesDoctor}
+                    name='NewRecipesRecord'
+                    component={NewRecipesRecord}
                     options={{
                         title: null,
                         headerShadowVisible: false,
@@ -61,31 +59,7 @@ export default function AppRoutes({ role_id }) {
                         },
                     }}
                 />
-                <Stack.Screen
-                    name='NewRecipes'
-                    component={NewRecipes}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
-                />
-                <Stack.Screen
-                    name='NewRecord'
-                    component={NewRecord}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
-                />
-
+            
             </Stack.Navigator>
         )
     } else if (role_id === 2) {
