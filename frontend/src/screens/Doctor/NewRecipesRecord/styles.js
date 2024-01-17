@@ -11,6 +11,11 @@ export const styles = StyleSheet.create({
         marginHorizontal: 20
     },
 
+    dates: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
     title: {
         fontSize: 25,
         textAlign: 'center',

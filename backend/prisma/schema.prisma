@@ -41,53 +41,25 @@ model User {
 // Tabela de Pacientes
 // ====================
 model Patient {
-  id         String    @id @default(uuid())
-  name       String
-  photo      String?
-  birth      String
-  user_id    String
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  id          String    @id @default(uuid())
+  name        String
+  photo       String?
+  birth       String
+  title       String?
+  inital_date String?
+  final_date  String?
+  description String?    @db.Text
+  recipe      String?    @db.Text
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+  user_id     String
 
-  user   User?   @relation(fields: [user_id], references: [id])
-  report Report?
-  recipe Recipe?
-  daily  Daily[]
-  event  Event[]
+  user  User?   @relation(fields: [user_id], references: [id])
+  daily Daily[]
+  event Event[]
 
   @@index([user_id])
   @@map("patients")
-}
-
-// Tabela de Prontuários
-// ======================
-model Report {
-  id          String    @id @default(uuid())
-  title       String
-  inital_date DateTime  @db.Date
-  final_date  DateTime  @db.Date
-  description String    @db.Text
-  patient_id  String    @unique
-  created_at  DateTime? @default(now())
-  updated_at  DateTime? @default(now())
-
-  patient Patient @relation(fields: [patient_id], references: [id])
-
-  @@map("reports")
-}
-
-// Tabela de Receitas
-// ===================
-model Recipe {
-  id          String    @id @default(uuid())
-  description String    @db.Text
-  patient_id  String    @unique
-  created_at  DateTime? @default(now())
-  updated_at  DateTime? @default(now())
-
-  patient Patient @relation(fields: [patient_id], references: [id])
-
-  @@map("recipes")
 }
 
 // Tabela de Rotina Diária

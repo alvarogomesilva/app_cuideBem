@@ -25,19 +25,18 @@ const Route = Router();
 
 // Rotas de Usuario
 // ==================
-Route.post("/user", CreateUserController);
+Route.post("/users", CreateUserController);
 Route.post("/login", AuthUserController);
 Route.get("/me", authenticate, DetailUserController);
 
 // Rotas do Médico
 // ==================
-Route.post("/recipes", authenticate, CreateRecipesController);
-Route.post("/reports", authenticate, CreateReportController)
+Route.put("/reports", authenticate, CreateReportController)
 
 
 // Rotas do paciente
 // ==================
-Route.post("/patient", authenticate, upload.single("avatar"), CreatePatientController)
+Route.post("/patients", authenticate, upload.single("avatar"), CreatePatientController)
 Route.get("/patients", authenticate, ListPatientController)
 
 export default Route;

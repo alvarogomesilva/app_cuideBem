@@ -1,25 +1,21 @@
 import Prisma from "../../prisma";
 
 interface Recipe {
-    description: string,
+    recipe: string,
     patient_id: string
 }
 
-const CreateRecipesService = async ({ description, patient_id }: Recipe) => {
-    if (!description) return { messageError: "Description is required!" }
-    if (!patient_id) return { messageError: "Patient ID is required!" }
+const CreateRecipesService = async ({ recipe, patient_id }: Recipe) => {
+    if (!recipe) return { messageError: 'Recipe is required' }
+    if (!patient_id) return { messageError: 'Patient inválid' }
 
-    const existingPatient = await Prisma.patient.findUnique({
+    const patient = await Prisma.patient.update({
+        data: { recipe },
         where: { id: patient_id }
     })
 
-    if (!existingPatient) return { messageError: "Patient with the provided ID does not exist!" }
-
-    const recipes = await Prisma.recipe.create({
-        data: { description, patient_id: existingPatient.id }
-    })
-
-    return recipes
+    
+    return patient
 }
 
 export default CreateRecipesService;

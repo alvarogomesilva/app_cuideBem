@@ -5,6 +5,7 @@ interface Report {
     inital_date: string;
     final_date: string;
     description: string;
+    recipe: string;
     patient_id: string;
 }
 
@@ -13,27 +14,15 @@ const CreateReportService = async ({
     inital_date,
     final_date,
     description,
+    recipe,
     patient_id }: Report) => {
 
-    if (!title) return { messageError: 'Title is required!' }
-    if (!inital_date) return { messageError: 'Initial date is required' }
-    if (!final_date) return { messageError: 'Final date is required' }
-    if (!description) return { messageError: 'Description is required' }
-    if (!patient_id) return { messageError: 'Patient is required' }
+        const patient = await Prisma.patient.update({
+            data: { title, inital_date, final_date, description, recipe },
+            where: { id: patient_id }
+        })
 
-    const reports = await Prisma.report.create({
-        data: {
-            title,
-            inital_date,
-            final_date,
-            description,
-            patient_id
-        }
-    })
-
-    return reports
-
-
+        return patient
 }
 
 export default CreateReportService;

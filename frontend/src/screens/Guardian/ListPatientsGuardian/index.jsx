@@ -34,15 +34,6 @@ const ListPatientsGuardian = () => {
         return unsubscribe;
     }, [navigation, loadPatients]);
 
-    
-    if (loading) {
-        return (
-            <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: primary }}>
-                <ActivityIndicator size="large" color="#FFF" />
-            </SafeAreaView>
-        );
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Pacientes</Text>

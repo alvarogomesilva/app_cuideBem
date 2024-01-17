@@ -3,9 +3,9 @@ import CreateRecipesService from "../../services/doctors/CreateRecipesService";
 
 const CreateRecipesController = async (req: Request, res: Response) => {
 
-    const { description, patient_id } = req.body
+    const { recipe, patient_id } = req.body
 
-    const recipes = await CreateRecipesService({ description, patient_id })
+    const recipes = await CreateRecipesService({ recipe, patient_id })
     return res.json(recipes)
 }
 
