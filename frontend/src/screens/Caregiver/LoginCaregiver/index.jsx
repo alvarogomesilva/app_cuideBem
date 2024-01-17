@@ -1,6 +1,6 @@
 import { styles } from './styles'
 
-import { KeyboardAvoidingView, SafeAreaView, Text } from "react-native";
+import { KeyboardAvoidingView, SafeAreaView, Text, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 
@@ -16,16 +16,13 @@ export default function LoginCaregiver() {
     const { signIn, loadingAuth } = useContext(AuthContext)
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <LinearGradient
                 style={styles.container}
                 start={[0.2, 1]}
                 end={[0.8, 0.1]}
-                colors={['#607C99', '#C4E1FF', '#FFF']}>
+                colors={[ '#C4E1FF','#C4E1FF', '#FFF']}>
                 <Logo />
-
-                <Text style={styles.title}>Acessar</Text>
-
                 <KeyboardAvoidingView style={styles.content} behavior="padding">
 
                     <Input 
@@ -52,7 +49,7 @@ export default function LoginCaregiver() {
                     />
                 </KeyboardAvoidingView>
             </LinearGradient>
-        </SafeAreaView>
+        </View>
 
     )
 }

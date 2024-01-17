@@ -35,27 +35,13 @@ export default function AuthRoutes() {
                 name='LoginDoctor'
                 component={LoginDoctor}
                 options={{
-                    title: null,
-                    headerShadowVisible: false,
-                    headerTintColor: neutral,
-                    headerStyle: {
-                        backgroundColor: white
-                    },
+                    headerShown: false
                 }}
             />
 
             <Stack.Screen
                 name='LoginCaregiver'
                 component={LoginCaregiver}
-                // options={{
-                //     title: null,
-                //     headerShadowVisible: false,
-                //     headerTintColor: neutral,
-                //     headerStyle: {
-                //         backgroundColor: white
-                //     },
-                // }}
-
                 options={{
                     headerShown: false
                 }}
@@ -65,12 +51,7 @@ export default function AuthRoutes() {
                 name='LoginGuardian'
                 component={LoginGuardian}
                 options={{
-                    title: null,
-                    headerShadowVisible: false,
-                    headerTintColor: neutral,
-                    headerStyle: {
-                        backgroundColor: white
-                    },
+                    headerShown: false
                 }}
             />
 
