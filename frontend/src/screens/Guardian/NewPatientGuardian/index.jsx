@@ -64,7 +64,7 @@ export default function NewPatientGuardian() {
                 })))
             }
 
-            const response = await api.post('/patient', formData, {
+            const response = await api.post('/patients', formData, {
                 headers: { 'Accept': 'application/json', "content-type": 'multipart/form-data' }
             })
             setImage(null)

@@ -15,10 +15,11 @@ export default function RecipesRecordDoctor({ route }) {
 
     const navigation = useNavigation();
     const [listPatients, setListPatients] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
     const loadPatients = useCallback(async () => {
+        setLoading(true)
         try {
             const patients = await api.get('/patients', { params: { search: searchTerm } });
             setListPatients(patients.data);
@@ -40,20 +41,20 @@ export default function RecipesRecordDoctor({ route }) {
 
     const handleSearch = useCallback(
         (text) => {
-          setSearchTerm(text);
-          // Atualiza a lista de pacientes sempre que o usuário digita no campo de busca
-          loadPatients();
+            setSearchTerm(text);
+            // Atualiza a lista de pacientes sempre que o usuário digita no campo de busca
+            loadPatients();
         },
         [loadPatients]
-      );
+    );
 
-    if (loading) {
-        return (
-            <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: primary }}>
-                <ActivityIndicator size="large" color="#FFF" />
-            </SafeAreaView>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: primary }}>
+    //             <ActivityIndicator size="large" color="#FFF" />
+    //         </SafeAreaView>
+    //     );
+    // }
 
     if (route.params.paramKey === 'Record') {
         return (
@@ -62,15 +63,13 @@ export default function RecipesRecordDoctor({ route }) {
                     <Text style={styles.title}>Prontuários</Text>
                     <Search value={searchTerm} onChangeText={handleSearch} />
 
-                    <FlatList
-                        data={listPatients}
-                        renderItem={({ item }) => <MemoizedPatients
-                            data={item}
-                            onPress={() => navigation.navigate('NewRecipesRecord', { paramKey: 'NewRecord', patientKey: item })}
-                        />}
-                    />
-
-
+                        <FlatList
+                            data={listPatients}
+                            renderItem={({ item }) => <MemoizedPatients
+                                data={item}
+                                onPress={() => navigation.navigate('NewRecipesRecord', { paramKey: 'NewRecord', patientKey: item })}
+                            />}
+                        />
                 </View>
 
             </SafeAreaView>
@@ -86,7 +85,7 @@ export default function RecipesRecordDoctor({ route }) {
                         data={listPatients}
                         renderItem={({ item }) => <Patients
                             data={item}
-                            onPress={() => navigation.navigate('NewRecipesRecord' , { paramKey: 'NewRecipes', patientKey: item })}
+                            onPress={() => navigation.navigate('NewRecipesRecord', { paramKey: 'NewRecipes', patientKey: item })}
                         />}
                     />
 

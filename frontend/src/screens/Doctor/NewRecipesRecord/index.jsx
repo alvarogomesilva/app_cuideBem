@@ -28,7 +28,7 @@ export default function NewRecipesRecord({ route }) {
 
   const updatePatient = useCallback(async () => {
     try {
-      await api.put('/reports', {
+      await api.put('/prescriptions', {
         name: inputs.name,
         title: inputs.title,
         inital_date: inputs.inital_date,

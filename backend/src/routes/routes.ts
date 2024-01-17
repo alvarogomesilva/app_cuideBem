@@ -2,8 +2,7 @@ import { Router } from "express";
 
 // Médicos
 // ========
-import CreateRecipesController from "../controllers/doctors/CreateRecipesController";
-import CreateReportController from "../controllers/doctors/CreateReportController";
+import PrescriptionPatientController from "../controllers/doctors/PrescriptionPatientController";
 
 // Usuários
 // =========
@@ -31,7 +30,7 @@ Route.get("/me", authenticate, DetailUserController);
 
 // Rotas do Médico
 // ==================
-Route.put("/reports", authenticate, CreateReportController)
+Route.put("/prescriptions", authenticate, PrescriptionPatientController)
 
 
 // Rotas do paciente

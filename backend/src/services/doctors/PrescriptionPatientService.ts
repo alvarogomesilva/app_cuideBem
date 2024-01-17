@@ -9,7 +9,7 @@ interface Report {
     patient_id: string;
 }
 
-const CreateReportService = async ({
+const PrescriptionPatientService = async ({
     title,
     inital_date,
     final_date,
@@ -25,4 +25,4 @@ const CreateReportService = async ({
         return patient
 }
 
-export default CreateReportService;
+export default PrescriptionPatientService;
