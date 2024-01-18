@@ -1,6 +1,6 @@
 import { styles } from './styles';
 
-import { KeyboardAvoidingView, SafeAreaView, Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView, Text, View } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Fontisto } from '@expo/vector-icons';
@@ -25,7 +25,7 @@ export default function LoginDoctor() {
                 colors={['#C4E1FF', '#C4E1FF', '#FFF']}>
 
                 <Logo />
-                <KeyboardAvoidingView style={styles.content} behavior="padding">
+                <KeyboardAvoidingView style={styles.content} behavior={Platform.OS === 'ios' ? 'padding': ''}>
 
                     <Input
                         placeholder='Digite seu email'

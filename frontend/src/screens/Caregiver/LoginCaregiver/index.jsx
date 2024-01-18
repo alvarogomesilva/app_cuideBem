@@ -1,6 +1,6 @@
 import { styles } from './styles'
 
-import { KeyboardAvoidingView, SafeAreaView, Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView, Text, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 
@@ -23,7 +23,7 @@ export default function LoginCaregiver() {
                 end={[0.8, 0.1]}
                 colors={[ '#C4E1FF','#C4E1FF', '#FFF']}>
                 <Logo />
-                <KeyboardAvoidingView style={styles.content} behavior="padding">
+                <KeyboardAvoidingView style={styles.content} behavior={Platform.OS === 'ios' ? 'padding': ''}>
 
                     <Input 
                         placeholder='Digite seu email' 
