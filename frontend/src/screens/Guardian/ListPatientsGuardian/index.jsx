@@ -34,6 +34,8 @@ const ListPatientsGuardian = ({ route }) => {
         return unsubscribe;
     }, [navigation, loadPatients]);
 
+    const paramKey = route.params?.paramKey ?? '';
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Pacientes</Text>
@@ -44,7 +46,7 @@ const ListPatientsGuardian = ({ route }) => {
                 renderItem={({ item }) => <MemoizedPatients
                     data={item}
                     onPress={() => navigation.navigate('ShowPatientGuardian',
-                        { paramKey: route.params.paramKey ? route.params.paramKey : 'Editar' })} />}
+                        { paramKey, patient: item })} />}
 
                 keyExtractor={(item) => item.id.toString()}
             />

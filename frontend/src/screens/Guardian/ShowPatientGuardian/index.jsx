@@ -7,14 +7,15 @@ import TextArea from "../../../components/TextArea";
 
 
 export default function ShowPatientGuardian({ route }) {
+  const { id, name, title, inital_date, final_date, description, recipe } = route.params.patient;
 
   const [inputs, setInputs] = useState({
-    name: "",
-    title: "",
-    inital_date: "",
-    final_date: "",
-    description: "",
-    recipe: "",
+    name,
+    title,
+    inital_date,
+    final_date,
+    description,
+    recipe,
   });
 
 
@@ -89,9 +90,7 @@ export default function ShowPatientGuardian({ route }) {
     )
   } else {
     return (
-      <Text>Tela de edição do paciente</Text>
+      <Text>tela de Edição do paciente</Text>
     )
   }
-
-
 }

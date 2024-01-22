@@ -2,16 +2,15 @@ import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from "react-nat
 import styles from "./styles";
 
 import Search from "../../../components/Search";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import Patients from "../../../components/Patients";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
-import { primary } from "../../../constants/colors";
+
 
 const MemoizedPatients = memo(Patients);
 
-
-export default function RecipesRecordDoctor({ route }) {
+export default function ConditionalCardsDoctor({ route }) {
 
     const navigation = useNavigation();
     const [listPatients, setListPatients] = useState([]);
@@ -55,19 +54,35 @@ export default function RecipesRecordDoctor({ route }) {
     //         </SafeAreaView>
     //     );
     // }
+    
+    useLayoutEffect(() => {
+        navigation.setOptions({
+          title: getTitleBasedOnParamKey(route.params.paramKey),
+        });
+      }, [navigation, route.params.paramKey]);
+    
+      const getTitleBasedOnParamKey = (paramKey) => {
+        if (paramKey === 'Record') {
+          return 'Prontuários';
+        } else {
+          return 'Receitas';
+        }
+      };
+
 
     if (route.params.paramKey === 'Record') {
+        
         return (
             <SafeAreaView style={styles.background}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>Prontuários</Text>
                     <Search value={searchTerm} onChangeText={handleSearch} />
 
                         <FlatList
                             data={listPatients}
                             renderItem={({ item }) => <MemoizedPatients
                                 data={item}
-                                onPress={() => navigation.navigate('NewRecipesRecord', { paramKey: 'NewRecord', patientKey: item })}
+                                onPress={() => navigation.navigate('ConditionalPrescriptionsDoctor', 
+                                { paramKey: 'NewRecord', patientKey: item })}
                             />}
                         />
                 </View>
@@ -78,14 +93,14 @@ export default function RecipesRecordDoctor({ route }) {
         return (
             <SafeAreaView style={styles.background}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>Receitas</Text>
                     <Search value={searchTerm} onChangeText={handleSearch} />
 
                     <FlatList
                         data={listPatients}
                         renderItem={({ item }) => <Patients
                             data={item}
-                            onPress={() => navigation.navigate('NewRecipesRecord', { paramKey: 'NewRecipes', patientKey: item })}
+                            onPress={() => navigation.navigate('ConditionalPrescriptionsDoctor', 
+                            { paramKey: 'NewRecipes', patientKey: item })}
                         />}
                     />
 
@@ -94,4 +109,5 @@ export default function RecipesRecordDoctor({ route }) {
             </SafeAreaView>
         )
     }
+
 }
