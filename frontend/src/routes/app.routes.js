@@ -14,11 +14,14 @@ import ReportsRecipesGuardian from '../screens/Guardian/ReportsRecipesGuardian'
 import ListPatientsGuardian from '../screens/Guardian/ListPatientsGuardian'
 import NewPatientGuardian from '../screens/Guardian/NewPatientGuardian'
 import RecordGuardian from '../screens/Guardian/RecordGuardian'
+import ShowPrescriptionGuardian from '../screens/Guardian/ShowPrescriptionGuardian'
+
 // Telas do cuidador
 // ==================
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
 import RecordCaregiver from '../screens/Caregiver/RecordCaregiver'
 import ReportsRecipesCaregiver from '../screens/Caregiver/ReportsRecipesCaregiver'
+import ShowPatientGuardian from '../screens/Guardian/ShowPatientGuardian'
 
 export default function AppRoutes({ role_id }) {
 
@@ -113,6 +116,20 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='NewPatientGuardian'
                     component={NewPatientGuardian}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+
+                <Stack.Screen
+                    name='ShowPatientGuardian'
+                    component={ShowPatientGuardian}
                     options={{
                         title: null,
                         headerShadowVisible: false,

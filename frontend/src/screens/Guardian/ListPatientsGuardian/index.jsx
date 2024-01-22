@@ -5,11 +5,11 @@ import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import api from '../../../api';
-import { primary } from '../../../constants/colors';
 
 const MemoizedPatients = memo(Patients);
 
-const ListPatientsGuardian = () => {
+const ListPatientsGuardian = ({ route }) => {
+
     const navigation = useNavigation();
     const [listPatients, setListPatients] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,7 +41,11 @@ const ListPatientsGuardian = () => {
             <FlatList
                 style={styles.flatList}
                 data={listPatients}
-                renderItem={({ item }) => <MemoizedPatients data={item} />}
+                renderItem={({ item }) => <MemoizedPatients
+                    data={item}
+                    onPress={() => navigation.navigate('ShowPatientGuardian',
+                        { paramKey: route.params.paramKey ? route.params.paramKey : 'Editar' })} />}
+
                 keyExtractor={(item) => item.id.toString()}
             />
 

@@ -54,8 +54,6 @@ export default function AuthRoutes() {
                     headerShown: false
                 }}
             />
-
-            {/* <Stack.Screen name='Splash' component={Splash}  /> */}
         </Stack.Navigator>
     )
 }
