@@ -38,6 +38,6 @@ Route.put("/prescriptions", authenticate, PrescriptionPatientController)
 // ==================
 Route.post("/patients", authenticate, upload.single("avatar"), CreatePatientController)
 Route.get("/patients", authenticate, ListPatientController)
-Route.post("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientController)
+Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientController)
 
 export default Route;

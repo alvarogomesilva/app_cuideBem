@@ -19,6 +19,7 @@ const UpdatePatientController = async (req: Request, res: Response) => {
 
         avatar = `${randomName}.${extension}`
         await unlink(req.file.path)
+        console.log(req.file.path)
     }  
 
 

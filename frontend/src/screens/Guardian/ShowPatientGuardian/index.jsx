@@ -15,7 +15,7 @@ import api from "../../../api";
 export default function ShowPatientGuardian({ route }) {
   const { id, name, birth, photo, title, inital_date, final_date, description, recipe } = route.params.patient;
   const [image, setImage] = useState(photo)
-  const [uri, setUri] = useState(`http://192.168.0.100:3000/files/${photo}`)
+  const [uri, setUri] = useState(`http://10.3.18.71:3000/files/${photo}`)
 
   const [loading, setLoading] = useState(false)
 
@@ -76,11 +76,9 @@ export default function ShowPatientGuardian({ route }) {
         })))
     }
 
-      const data = await api.post(`/patients/${inputs.id}`, formData, { 
+      const response = await api.put(`/patients/${inputs.id}`, formData, { 
         headers: { 'Accept': 'application/json', "content-type": 'multipart/form-data' }
         })
-
-      
 
       Alert.alert('Atualizado com sucesso!')
     } catch (error) {
