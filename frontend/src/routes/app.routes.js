@@ -13,7 +13,7 @@ import HomeGuardian from '../screens/Guardian/HomeGuardian'
 import ConditionalPrescriptionsGuardian from '../screens/Guardian/ConditionalPrescriptionsGuardian'
 import ListMyPatientsGuardian from '../screens/Guardian/ListMyPatientsGuardian'
 import NewPatientGuardian from '../screens/Guardian/NewPatientGuardian'
-import ShowPatientGuardian from '../screens/Guardian/ShowPatientGuardian'
+import ConditionalUpdatePatientGuardian from '../screens/Guardian/ConditionalUpdatePatientGuardian'
 
 // Telas do cuidador
 // ==================
@@ -117,8 +117,8 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
-                    name='ShowPatientGuardian'
-                    component={ShowPatientGuardian}
+                    name='ConditionalUpdatePatientGuardian'
+                    component={ConditionalUpdatePatientGuardian}
                     options={{
                         title: null,
                         headerShadowVisible: false,

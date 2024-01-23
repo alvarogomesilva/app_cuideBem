@@ -21,7 +21,7 @@ export default function HomeGuardian() {
             <SignOut />
             <View style={styles.top}>
                 <View style={styles.boxUser}>
-                    <FontAwesome5 name="user-alt" style={styles.iconUser} />
+                    <FontAwesome5 name="user-shield" style={styles.iconUser} />
                 </View>
 
                 <Text style={styles.namePatient}>Ulda Zabel Reis</Text>

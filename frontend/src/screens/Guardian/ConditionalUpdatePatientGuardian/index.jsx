@@ -12,7 +12,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import api from "../../../api";
 
 
-export default function ShowPatientGuardian({ route }) {
+export default function ConditionalUpdatePatientGuardian({ route }) {
   const { id, name, birth, photo, title, inital_date, final_date, description, recipe } = route.params.patient;
   const [image, setImage] = useState(photo)
   const [uri, setUri] = useState(`http://10.3.18.71:3000/files/${photo}`)
@@ -198,7 +198,7 @@ export default function ShowPatientGuardian({ route }) {
             <FontAwesome5 name="user-shield" style={styles.icon} />
           </Input>
 
-          <TouchableOpacity style={styles.submit} onPress={handlePatient}>
+          <TouchableOpacity style={styles.submit} onPress={handlePatient} activeOpacity={0.8}>
             {loading ? (
               <ActivityIndicator size={25} color={white} />
             ) : (
