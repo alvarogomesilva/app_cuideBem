@@ -29,6 +29,15 @@ export const styles = StyleSheet.create({
         padding: 15,
         height: '80%'
     },
+    avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
 
     icon: {
         position: 'absolute',
@@ -37,6 +46,27 @@ export const styles = StyleSheet.create({
         top: 15,
         left: 15,
         zIndex: 2
+    },
+
+    button: {
+        marginVertical: 10,
+        backgroundColor: neutral,
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center'
+    },
+
+    submit: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: second,
+        height: 50,
+        borderRadius: 10
+    },
+
+    submitText: {
+        color: white,
+        fontSize: 20
     }
   
 });

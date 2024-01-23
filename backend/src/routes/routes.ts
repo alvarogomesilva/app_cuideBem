@@ -14,6 +14,7 @@ import DetailUserController from "../controllers/users/DetailUserController";
 // ==========
 import ListPatientController from "../controllers/patients/ListPatientController";
 import CreatePatientController from "../controllers/patients/CreatePatientController";
+import UpdatePatientController from "../controllers/patients/UpdatePatientController";
 
 import authenticate from "../middlewares/autenticate";
 import upload from "../config/multer";
@@ -37,5 +38,6 @@ Route.put("/prescriptions", authenticate, PrescriptionPatientController)
 // ==================
 Route.post("/patients", authenticate, upload.single("avatar"), CreatePatientController)
 Route.get("/patients", authenticate, ListPatientController)
+Route.post("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientController)
 
 export default Route;
