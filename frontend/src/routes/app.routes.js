@@ -10,8 +10,8 @@ import ConditionalPrescriptionsDoctor from '../screens/Doctor/ConditionalPrescri
 // Telas do guardião
 // ==================
 import HomeGuardian from '../screens/Guardian/HomeGuardian'
-import ReportsRecipesGuardian from '../screens/Guardian/ReportsRecipesGuardian'
-import ListPatientsGuardian from '../screens/Guardian/ListPatientsGuardian'
+import ConditionalPrescriptionsGuardian from '../screens/Guardian/ConditionalPrescriptionsGuardian'
+import ListMyPatientsGuardian from '../screens/Guardian/ListMyPatientsGuardian'
 import NewPatientGuardian from '../screens/Guardian/NewPatientGuardian'
 import ShowPatientGuardian from '../screens/Guardian/ShowPatientGuardian'
 
@@ -75,8 +75,8 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='ReportsRecipesGuardian'
-                    component={ReportsRecipesGuardian}
+                    name='ConditionalPrescriptionsGuardian'
+                    component={ConditionalPrescriptionsGuardian}
                     options={{
                         title: null,
                         headerShadowVisible: false,
@@ -89,10 +89,10 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
-                    name='ListPatientsGuardian'
-                    component={ListPatientsGuardian}
+                    name='ListMyPatientsGuardian'
+                    component={ListMyPatientsGuardian}
                     options={{
-                        title: null,
+                        title: 'Meus pacientes',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {

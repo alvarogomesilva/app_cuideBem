@@ -8,7 +8,7 @@ import api from '../../../api';
 
 const MemoizedPatients = memo(Patients);
 
-const ListPatientsGuardian = ({ route }) => {
+const ListMyPatientsGuardian = ({ route }) => {
 
     const navigation = useNavigation();
     const [listPatients, setListPatients] = useState([]);
@@ -35,31 +35,34 @@ const ListPatientsGuardian = ({ route }) => {
     }, [navigation, loadPatients]);
 
     const paramKey = route.params?.paramKey ?? '';
+    const newPatient = route.params.newPatient ?? '';
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Pacientes</Text>
-
             <FlatList
                 style={styles.flatList}
                 data={listPatients}
                 renderItem={({ item }) => <MemoizedPatients
-                    data={item}
+                    data={item} newPatient={newPatient}
                     onPress={() => navigation.navigate('ShowPatientGuardian',
                         { paramKey, patient: item })} />}
 
                 keyExtractor={(item) => item.id.toString()}
             />
 
-            <TouchableOpacity
+            {newPatient && (
+                <TouchableOpacity
                 style={styles.button}
                 activeOpacity={0.7}
                 onPress={() => navigation.navigate('NewPatientGuardian')}
             >
                 <Entypo name="plus" size={30} color="#FFF" />
             </TouchableOpacity>
+            )}
+
+            
         </SafeAreaView>
     );
 };
 
-export default ListPatientsGuardian;
+export default ListMyPatientsGuardian;

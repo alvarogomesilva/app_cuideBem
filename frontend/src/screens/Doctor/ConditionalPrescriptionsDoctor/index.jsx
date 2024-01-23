@@ -63,8 +63,8 @@ export default function ConditionalPrescriptionsDoctor({ route }) {
         />
         <Input
           placeholder="Nome do paciente"
-          defaultValue={name}
-          editable={false}
+          value={inputs.name}
+          onChangeText={(text) => setInputs({ ...inputs, name: text })}
         />
         <Input placeholder="Responsável" />
 

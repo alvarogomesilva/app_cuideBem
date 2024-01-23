@@ -1,12 +1,13 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./styles";
+import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { neutral } from "../../constants/colors";
 import { useState } from "react";
 
 
-const Patients = ({ data, onPress }) => {
+const Patients = ({ data, onPress, newPatient }) => {
     const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`)
 
 
@@ -22,7 +23,7 @@ const Patients = ({ data, onPress }) => {
                         borderRadius={25}
                     />
                 ) : (
-
+                    
                     <FontAwesome5 name="user-alt" size={40} color={neutral} />
                 )}
                 <View style={styles.credentials}>
@@ -31,8 +32,12 @@ const Patients = ({ data, onPress }) => {
                 </View>
             </View>
 
-
-            <AntDesign name="right" size={20} color={neutral} />
+            {newPatient ? (
+                <Feather name="edit" size={20} color={neutral} />
+            ) : (
+                
+                <AntDesign name="right" size={20} color={neutral} />
+            ) }
 
         </TouchableOpacity>
     )

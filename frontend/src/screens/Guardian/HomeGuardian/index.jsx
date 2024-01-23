@@ -30,7 +30,7 @@ export default function HomeGuardian() {
 
             <View style={styles.bottom}>
 
-                <Card title="Pacientes" onPress={() => navigation.navigate("ListPatientsGuardian")}>
+                <Card title="Pacientes" onPress={() => navigation.navigate("ListMyPatientsGuardian", { newPatient: true })}>
                     <FontAwesome5 name="user-friends" style={styles.cardIcon} />
                 </Card>
 
@@ -38,7 +38,7 @@ export default function HomeGuardian() {
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ReportsRecipesGuardian')}>
+                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ConditionalPrescriptionsGuardian')}>
                     <Fontisto name="doctor" style={styles.cardIcon} />
                 </Card>
 
