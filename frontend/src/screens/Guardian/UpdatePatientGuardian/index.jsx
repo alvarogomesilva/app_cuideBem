@@ -12,7 +12,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import api from "../../../api";
 
 
-export default function ConditionalUpdatePatientGuardian({ route }) {
+export default function UpdatePatientGuardian({ route }) {
   const { id, name, birth, photo, title, inital_date, final_date, description, recipe } = route.params.patient;
   const [image, setImage] = useState(photo)
   const [uri, setUri] = useState(`http://10.3.18.71:3000/files/${photo}`)

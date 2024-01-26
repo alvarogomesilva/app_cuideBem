@@ -10,10 +10,12 @@ import ConditionalPrescriptionsDoctor from '../screens/Doctor/ConditionalPrescri
 // Telas do guardião
 // ==================
 import HomeGuardian from '../screens/Guardian/HomeGuardian'
-import ConditionalPrescriptionsGuardian from '../screens/Guardian/ConditionalPrescriptionsGuardian'
 import ListMyPatientsGuardian from '../screens/Guardian/ListMyPatientsGuardian'
 import NewPatientGuardian from '../screens/Guardian/NewPatientGuardian'
-import ConditionalUpdatePatientGuardian from '../screens/Guardian/ConditionalUpdatePatientGuardian'
+import ConditionalCardsGuardian from '../screens/Guardian/ConditionalCardsGuardian'
+import ListMyPrescriptionsPatientGuardian from '../screens/Guardian/ListMyPrescriptionsPatientGuardian'
+import ListMyRecordsPatientGuardian from '../screens/Guardian/ListMyRecordsPatientGuardian'
+import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
 
 // Telas do cuidador
 // ==================
@@ -35,7 +37,7 @@ export default function AppRoutes({ role_id }) {
                         headerShown: false
                     }}
                 />
-             
+
                 <Stack.Screen
                     name='ConditionalCardsDoctor'
                     component={ConditionalCardsDoctor}
@@ -60,7 +62,7 @@ export default function AppRoutes({ role_id }) {
                         },
                     }}
                 />
-            
+
             </Stack.Navigator>
         )
     } else if (role_id === 2) {
@@ -75,20 +77,6 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='ConditionalPrescriptionsGuardian'
-                    component={ConditionalPrescriptionsGuardian}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
-
-                />
-
-                <Stack.Screen
                     name='ListMyPatientsGuardian'
                     component={ListMyPatientsGuardian}
                     options={{
@@ -101,7 +89,6 @@ export default function AppRoutes({ role_id }) {
                     }}
 
                 />
-
                 <Stack.Screen
                     name='NewPatientGuardian'
                     component={NewPatientGuardian}
@@ -117,8 +104,49 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
-                    name='ConditionalUpdatePatientGuardian'
-                    component={ConditionalUpdatePatientGuardian}
+                    name='ConditionalCardsGuardian'
+                    component={ConditionalCardsGuardian}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+
+                <Stack.Screen
+                    name='ListMyPrescriptionsPatientGuardian'
+                    component={ListMyPrescriptionsPatientGuardian}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='ListMyRecordsPatientGuardian'
+                    component={ListMyRecordsPatientGuardian}
+                    options={{
+                        title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+
+                <Stack.Screen
+                    name='UpdatePatientGuardian'
+                    component={UpdatePatientGuardian}
                     options={{
                         title: null,
                         headerShadowVisible: false,

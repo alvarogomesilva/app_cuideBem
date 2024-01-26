@@ -38,15 +38,13 @@ export default function HomeGuardian() {
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ConditionalPrescriptionsGuardian')}>
+                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ConditionalCardsGuardian')}>
                     <Fontisto name="doctor" style={styles.cardIcon} />
                 </Card>
 
                 <Card title="Agenda/Consultas" >
                     <AntDesign name="calendar" style={styles.cardIcon} />
                 </Card>
-
-
             </View>
 
 

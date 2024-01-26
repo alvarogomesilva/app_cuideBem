@@ -44,23 +44,21 @@ const ListMyPatientsGuardian = ({ route }) => {
                 data={listPatients}
                 renderItem={({ item }) => <MemoizedPatients
                     data={item} newPatient={newPatient}
-                    onPress={() => navigation.navigate('ShowPatientGuardian',
-                        { paramKey, patient: item })} />}
-
+                />}
                 keyExtractor={(item) => item.id.toString()}
             />
 
             {newPatient && (
                 <TouchableOpacity
-                style={styles.button}
-                activeOpacity={0.7}
-                onPress={() => navigation.navigate('NewPatientGuardian')}
-            >
-                <Entypo name="plus" size={30} color="#FFF" />
-            </TouchableOpacity>
+                    style={styles.button}
+                    activeOpacity={0.7}
+                    onPress={() => navigation.navigate('NewPatientGuardian')}
+                >
+                    <Entypo name="plus" size={30} color="#FFF" />
+                </TouchableOpacity>
             )}
 
-            
+
         </SafeAreaView>
     );
 };
