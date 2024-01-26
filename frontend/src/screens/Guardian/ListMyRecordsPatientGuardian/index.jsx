@@ -24,6 +24,7 @@ export default function ListMyRecordsPatientGuardian() {
                 data={listPatients}
                 renderItem={({ item }) => <MemoizedPatients
                     data={item}
+                    onPress={() => navigation.navigate('ShowRecordPatientGuardian', { patient: item })}
                 />}
 
                 keyExtractor={(item) => item.id.toString()}

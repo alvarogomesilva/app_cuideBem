@@ -16,6 +16,10 @@ import ConditionalCardsGuardian from '../screens/Guardian/ConditionalCardsGuardi
 import ListMyPrescriptionsPatientGuardian from '../screens/Guardian/ListMyPrescriptionsPatientGuardian'
 import ListMyRecordsPatientGuardian from '../screens/Guardian/ListMyRecordsPatientGuardian'
 import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
+import ShowRecordPatientGuardian from '../screens/Guardian/ShowRecordPatientGuardian'
+import ShowPrescriptionPatientGuardian from '../screens/Guardian/ShowPrescriptionPatientGuardian'
+
+
 
 // Telas do cuidador
 // ==================
@@ -149,6 +153,32 @@ export default function AppRoutes({ role_id }) {
                     component={UpdatePatientGuardian}
                     options={{
                         title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='ShowRecordPatientGuardian'
+                    component={ShowRecordPatientGuardian}
+                    options={{
+                        title: 'Prontuário',
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='ShowPrescriptionPatientGuardian'
+                    component={ShowPrescriptionPatientGuardian}
+                    options={{
+                        title: 'Receita',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
