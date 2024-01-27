@@ -19,7 +19,8 @@ import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
 import ShowRecordPatientGuardian from '../screens/Guardian/ShowRecordPatientGuardian'
 import ShowPrescriptionPatientGuardian from '../screens/Guardian/ShowPrescriptionPatientGuardian'
 import DailyRoutinePatientGuardian from '../screens/Guardian/DailyRoutinePatientGuardian'
-
+import DiaryPatientGuardian from '../screens/Guardian/DiaryPatientGuardian'
+import NewDiaryPatientGuardian from '../screens/Guardian/NewDiaryPatientGuardian'
 
 
 // Telas do cuidador
@@ -193,6 +194,32 @@ export default function AppRoutes({ role_id }) {
                     component={DailyRoutinePatientGuardian}
                     options={{
                         title: 'Rotina de Hoje',
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='DiaryPatientGuardian'
+                    component={DiaryPatientGuardian}
+                    options={{
+                        title: 'Agenda',
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='NewDiaryPatientGuardian'
+                    component={NewDiaryPatientGuardian}
+                    options={{
+                        title: 'Novo evento',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
