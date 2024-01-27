@@ -18,6 +18,7 @@ import ListMyRecordsPatientGuardian from '../screens/Guardian/ListMyRecordsPatie
 import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
 import ShowRecordPatientGuardian from '../screens/Guardian/ShowRecordPatientGuardian'
 import ShowPrescriptionPatientGuardian from '../screens/Guardian/ShowPrescriptionPatientGuardian'
+import DailyRoutinePatientGuardian from '../screens/Guardian/DailyRoutinePatientGuardian'
 
 
 
@@ -179,6 +180,19 @@ export default function AppRoutes({ role_id }) {
                     component={ShowPrescriptionPatientGuardian}
                     options={{
                         title: 'Receita',
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='DailyRoutinePatientGuardian'
+                    component={DailyRoutinePatientGuardian}
+                    options={{
+                        title: 'Rotina de Hoje',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
