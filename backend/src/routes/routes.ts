@@ -41,4 +41,8 @@ Route.post("/patients", authenticate, upload.single("avatar"), CreatePatientCont
 Route.get("/patients", authenticate, ListPatientController)
 Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientController)
 
+// Rotas Novo Evento
+// ==================
+Route.post("/events", CreateNewEventController)
+
 export default Route;
