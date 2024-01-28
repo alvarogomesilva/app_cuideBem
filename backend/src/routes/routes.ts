@@ -18,6 +18,7 @@ import UpdatePatientController from "../controllers/patients/UpdatePatientContro
 
 import authenticate from "../middlewares/autenticate";
 import upload from "../config/multer";
+import CreateNewEventController from "../controllers/newevent/CreateNewEventController";
 
 // ==============================================================================================
 

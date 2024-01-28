@@ -18,4 +18,4 @@ const CreateNewEventService = async ({ description, date, patient_id }: Events) 
     return events
 }
 
-export default CreateNewEventService
+export default CreateNewEventService;
