@@ -43,6 +43,6 @@ Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientC
 
 // Rotas Novo Evento
 // ==================
-Route.post("/events", CreateNewEventController)
+Route.post("/events", authenticate, CreateNewEventController)
 
 export default Route;

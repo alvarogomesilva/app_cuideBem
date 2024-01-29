@@ -34,7 +34,7 @@ export default function HomeGuardian() {
                     <FontAwesome5 name="user-friends" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Rotina Diária" onPress={() => navigation.navigate('DailyRoutinePatientGuardian')}>
+                <Card title="Rotina Diária" onPress={() => navigation.navigate('ListMyDailyRoutinePatientGuardian')}>
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
 
