@@ -42,7 +42,7 @@ export default function HomeGuardian() {
                     <Fontisto name="doctor" style={styles.cardIcon} />
                 </Card>
 
-                <Card title="Agenda/Consultas" onPress={() => navigation.navigate('DiaryPatientGuardian')}>
+                <Card title="Agenda/Consultas" onPress={() => navigation.navigate('ListMyDiaryPatientGuardian')}>
                     <AntDesign name="calendar" style={styles.cardIcon} />
                 </Card>
             </View>

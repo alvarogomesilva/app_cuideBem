@@ -1,110 +1,82 @@
-import { Text, View } from 'react-native'
-import ButtonBottom from '../../../components/ButtonBottom'
-import { styles } from './styles'
+import LocaleConfig from './util'
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
+import ButtonBottom from '../../../components/ButtonBottom';
+import { styles } from './styles';
+import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native'
-import { AgendaList, Calendar, CalendarProvider, ExpandableCalendar, LocaleConfig, WeekCalendar } from 'react-native-calendars';
-import { useRef, useState } from 'react';
+import dateFns from 'date-fns';
 
-export const agendaItems = [
-    {
-        title: '2024-03-30',
-        data: [
-            { id: '1', title: 'Reunião de Equipe', description: 'Discussão de projetos futuros', location: 'Sala 101' },
-        ],
-    },
-    {
-        title: '2024-02-01',
-        data: [
-            { id: '3', title: 'Entrega do Projeto', description: 'Entregar projeto finalizado ao cliente', location: 'Escritório do Cliente' },
-            { id: '4', title: 'Treinamento Interno', description: 'Treinamento sobre novas tecnologias', location: 'Sala de Treinamento' },
-        ],
-    },
-    // Adicione mais itens conforme necessário
+const classes = [
+  {
+    startTime: '09:00',
+    endTime: '10:30',
+    title: 'History of Physics',
+    bgColor: '#E0FFFF',
+
+  },
+  {
+    startTime: '10:30',
+    endTime: '11:00',
+    title: 'History of Physics',
+    bgColor: '#E6E6FA',
+
+  }
 ];
 
-// Função para gerar datas marcadas para teste
-export const getMarkedDates = () => {
-    const currentDate = new Date().toISOString().split('T')[0]; // Obtém a data atual no formato YYYY-MM-DD
+const renderClassItem = ({ item }) => (
+    <View style={styles.classItem}>
+      <View style={styles.timelineContainer}>
+        <View style={styles.timelineDot} />
+        <View style={styles.timelineLine} />
+      </View>
 
-    return {
-        [currentDate]: { selected: true, selectedColor: 'blue' }, // Marca a data atual como selecionada (pode ajustar as propriedades conforme necessário)
-        '2024-01-30': { marked: true, dotColor: 'red' }, // Exemplo de outra data marcada
-        // Adicione mais datas marcadas conforme necessário
-    };
-};
-const testIDs = {
-    weekCalendar: {
-        CONTAINER: 'weekCalendarContainer',
-    },
-    expandableCalendar: {
-        CONTAINER: 'expandableCalendarContainer',
-    },
-    agendaList: 'agendaListContainer',
-    todayButton: 'todayButton',
-    eventItem: (eventId) => `eventItem-${eventId}`, // Use um ID único para cada item de evento
-    // Adicione mais testIDs conforme necessário
-};
+      <View style={styles.classContent}>
+        <View style={styles.classHours}>
+          <Text style={styles.startTime}>Horário</Text>
+          <Text style={styles.endTime}>{item.endTime}</Text>
+        </View>
 
+        <View style={[styles.card, { backgroundColor: item.bgColor }]}>
+          <View>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardDate}>24 March, 18pm - 19pm</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 
-LocaleConfig.locales['pt'] = {
-    monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-    monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-    dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
-    dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
-    today: "Hoje"
-};
-LocaleConfig.defaultLocale = 'pt';
-
-export default function DiaryPatientGuardian() {
+export default function DiaryPatientGuardian({ route }) {
+    
     const navigation = useNavigation()
-    const [selected, setSelected] = useState('');
-    const weekView = false
-    const marked = useRef(getMarkedDates());
+    const baseDate = new Date(2019, 6, 15)
     return (
         <View style={styles.container}>
-            <CalendarProvider
-                style={styles.content}
-                date='2023-03-31'
-                showTodayButton={true}
-            >
-                {weekView ? (
-                    <WeekCalendar testID={testIDs.weekCalendar.CONTAINER} firstDay={1} markedDates={marked.current} />
-                ) : (
-                    <ExpandableCalendar
-                        testID={testIDs.expandableCalendar.CONTAINER}
-                        // horizontal={false}
-                        // hideArrows
-                        // disablePan
-                        // hideKnob
-                        // initialPosition={ExpandableCalendar.positions.OPEN}
-                        calendarStyle={styles.calendar}
-                        // headerStyle={styles.header} // for horizontal only
-                        // disableWeekScroll
-                        // disableAllTouchEventsForDisabledDays
-                        firstDay={1}
-                        markedDates={marked.current}
+            <Calendar
+                style={styles.calendar}
+                markedDates={{
+                    '2024-01-16': {selected: true, marked: true, selectedColor: 'blue'},
+                    '2024-01-17': {marked: true},
+                    '2024-01-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+                    '2024-01-19': {disabled: true, disableTouchEvent: true}
+                  }}
 
-                    // animateScroll
-                    // closeOnDayPress={false}
-                    />
-                )}
-
-                <View>
-                    <AgendaList
-                        sections={agendaItems}
-                        sectionStyle={styles.section}
-                        renderItem={({ item }) => {
-                            return (
-                                <View>
-                                    <Text>{item.title}</Text>
-                                </View>
-                            )
-                        }}
-                    />
-                </View>
-            </CalendarProvider>
-
-            <ButtonBottom onPress={() => navigation.navigate('NewDiaryPatientGuardian')} />
+                  theme={{
+                    selectedDayBackgroundColor: '#FF00FF'
+                  }}
+            />
+                <FlatList
+                    contentContainerStyle={{ paddingHorizontal: 16 }}
+                    data={classes}
+                
+                    renderItem={renderClassItem}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+        
+            <ButtonBottom onPress={() => navigation.navigate('NewDiaryPatientGuardian', {
+              patient: route.params.patient
+            })} />
         </View>
-    )
+    );
 }
