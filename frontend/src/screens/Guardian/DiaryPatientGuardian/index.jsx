@@ -35,6 +35,7 @@ const renderClassItem = ({ item }) => (
 export default function DiaryPatientGuardian({ route }) {
   const [patient_id, setPatient_id] = useState(route.params.patient.id)
   const [events, setEvents] = useState([])
+  const [daySelected, setDaySelected] = useState('')
   const [loading, setLoading] = useState(false)
   const navigation = useNavigation()
 
@@ -42,7 +43,7 @@ export default function DiaryPatientGuardian({ route }) {
     async function loadEvents() {
       setLoading(true)
       try {
-        const events = await api.get(`/events/${patient_id}`)
+        const events = await api.get(`/events/${patient_id}/${daySelected}`)
         setEvents(events.data)
       } catch (error) {
         console.log(error)
@@ -51,33 +52,40 @@ export default function DiaryPatientGuardian({ route }) {
       }
     }
     loadEvents()
-  }, [])
+  }, [daySelected])
 
   const markedDates = {};
 
-  events.forEach((event) => {
-    const formattedDate = event.date; 
+  if (events.length > 0) {
+    events.forEach((event) => {
+      const formattedDate = event.date;
 
-    if (markedDates[formattedDate]) {
-      markedDates[formattedDate].dots.push({ key: event.id, color: event.color });
-    } else {
-      markedDates[formattedDate] = {
-        marked: true,
-        dots: [{ key: event.id, color: event.color }],
-      };
-    }
-  });
-  
+      if (markedDates[formattedDate]) {
+        markedDates[formattedDate].dots.push({ key: event.id, color: event.color });
+      } else {
+        markedDates[formattedDate] = {
+          marked: true,
+          dots: [{ key: event.id, color: event.color }],
+        };
+      }
+    });
+  }
 
   return (
     <View style={styles.container}>
       <Calendar
         style={styles.calendar}
         markedDates={markedDates}
+        markingType='multi-dot'
+        onDayPress={day => setDaySelected(day.dateString)}
         theme={{
-          selectedDayBackgroundColor: '#FF00FF'
+          selectedDotColor: '#29b6f6',
+          backgroundColor: '#29b6f6'
         }}
+
       />
+
+
       {loading ? (
         <ActivityIndicator color={white} size="large" />
       ) : (

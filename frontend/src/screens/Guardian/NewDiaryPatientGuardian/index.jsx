@@ -43,7 +43,7 @@ export default function NewDiaryPatientGuardian({ route }) {
     description: "",
     date: "",
     hour: "",
-    color: ""
+    color: "#90caf9"
   })
 
   const handleEvent = async () => {
@@ -53,7 +53,7 @@ export default function NewDiaryPatientGuardian({ route }) {
       description: "",
       date: "",
       hour: "",
-      color: ""
+      color: "#90caf9"
     })
   }
 
@@ -89,14 +89,14 @@ export default function NewDiaryPatientGuardian({ route }) {
         </Input>
 
 
-        <BouncyCheckboxGroup
+        {/* <BouncyCheckboxGroup
           style={styles.boxCheckbox}
           data={staticData}
           onChange={(selectedItem) => setInputs({ ...inputs, color: selectedItem.color })}
           checkboxProps={{
             size: 50,
           }}
-        />
+        /> */}
 
 
         <TouchableOpacity
