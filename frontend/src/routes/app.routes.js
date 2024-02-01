@@ -22,6 +22,7 @@ import DailyRoutinePatientGuardian from '../screens/Guardian/DailyRoutinePatient
 import DiaryPatientGuardian from '../screens/Guardian/DiaryPatientGuardian'
 import NewDiaryPatientGuardian from '../screens/Guardian/NewDiaryPatientGuardian'
 import ListMyDailyRoutinePatientGuardian from '../screens/Guardian/ListMyDailyRoutinePatientGuardian'
+import ListMyDiaryPatientGuardian from '../screens/Guardian/ListMyDiaryPatientGuardian'
 
 
 // Telas do cuidador
@@ -140,6 +141,21 @@ export default function AppRoutes({ role_id }) {
                     }}
 
                 />
+
+                <Stack.Screen
+                    name='ListMyDiaryPatientGuardian'
+                    component={ListMyDiaryPatientGuardian}
+                    options={{
+                        title: 'Agendas e Consultas',
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+
                 <Stack.Screen
                     name='ListMyRecordsPatientGuardian'
                     component={ListMyRecordsPatientGuardian}

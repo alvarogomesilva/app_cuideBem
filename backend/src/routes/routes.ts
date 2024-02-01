@@ -18,7 +18,8 @@ import UpdatePatientController from "../controllers/patients/UpdatePatientContro
 
 import authenticate from "../middlewares/autenticate";
 import upload from "../config/multer";
-import CreateNewEventController from "../controllers/newevent/CreateNewEventController";
+import CreateNewEventController from "../controllers/events/CreateNewEventController";
+import ListEventsController from "../controllers/events/ListEventsController";
 
 // ==============================================================================================
 
@@ -44,5 +45,6 @@ Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientC
 // Rotas Novo Evento
 // ==================
 Route.post("/events", authenticate, CreateNewEventController)
+Route.get("/events/:patient", authenticate, ListEventsController)
 
 export default Route;

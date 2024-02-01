@@ -27,7 +27,7 @@ export default function NewEventCaregiver() {
                 <Input placeholder={"Cor"}>
                 </Input>
                 </View>
-                <Submit />
+                <Submit text={'Adicionar'}/>
             </View>
         </SafeAreaView>
 

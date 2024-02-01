@@ -7,10 +7,17 @@ import { neutral } from "../../constants/colors";
 import { useEffect, useState } from "react";
 
 const Patients = ({ data, onPress, newPatient }) => {
+<<<<<<< HEAD
   const [avatar, setAvatar] = useState(`http://10.3.19.4:3000/files/${data?.photo}`);
 
   useEffect(() => {
     setAvatar(`http://10.3.19.4:3000/files/${data?.photo}`);
+=======
+  const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`);
+
+  useEffect(() => {
+    setAvatar(`http://192.168.0.100:3000/files/${data?.photo}`);
+>>>>>>> 6e2747c468ebfe03b1e0287fe2ca5cfcb2d69330
   }, [data?.photo]);
 
   return (
