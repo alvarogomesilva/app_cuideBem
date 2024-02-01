@@ -7,6 +7,7 @@ import { neutral } from "../../constants/colors";
 import { useEffect, useState } from "react";
 
 const Patients = ({ data, onPress, newPatient }) => {
+
   const [avatar, setAvatar] = useState(`http://10.3.18.71:3000/files/${data?.photo}`);
 
   useEffect(() => {
