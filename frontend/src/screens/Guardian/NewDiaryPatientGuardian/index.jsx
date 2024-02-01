@@ -8,6 +8,8 @@ import BouncyCheckboxGroup from "react-native-bouncy-checkbox-group";
 import { useState } from 'react';
 import { Masks } from 'react-native-mask-input';
 import { useNewEvent } from '../../../hooks/useNewEvent';
+import { white } from '../../../constants/colors';
+import { format } from 'date-fns';
 
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
@@ -35,7 +37,6 @@ const staticData = [
 export default function NewDiaryPatientGuardian({ route }) {
   const { newEvent, loading } = useNewEvent()
   const patient_id = route.params.patient.id
-  const [selected, setSelected] = useState('')
 
   const [inputs, setInputs] = useState({
     patient_id,
@@ -45,7 +46,16 @@ export default function NewDiaryPatientGuardian({ route }) {
     color: ""
   })
 
-  const handleEvent = () => newEvent(inputs)
+  const handleEvent = async () => {
+    await newEvent(inputs)
+    setInputs({
+      patient_id,
+      description: "",
+      date: "",
+      hour: "",
+      color: ""
+    })
+  }
 
   return (
     <View style={styles.container}>

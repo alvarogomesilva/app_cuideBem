@@ -29,7 +29,7 @@ CREATE TABLE `patients` (
     `photo` VARCHAR(191) NULL,
     `birth` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NULL,
-    `inital_date` VARCHAR(191) NULL,
+    `initial_date` VARCHAR(191) NULL,
     `final_date` VARCHAR(191) NULL,
     `description` TEXT NULL,
     `recipe` TEXT NULL,
@@ -52,7 +52,6 @@ CREATE TABLE `dailys` (
     `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    UNIQUE INDEX `dailys_patient_id_key`(`patient_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -60,12 +59,13 @@ CREATE TABLE `dailys` (
 CREATE TABLE `events` (
     `id` VARCHAR(191) NOT NULL,
     `description` TEXT NOT NULL,
-    `date` DATETIME(3) NOT NULL,
+    `date` VARCHAR(191) NOT NULL,
+    `hour` VARCHAR(191) NOT NULL,
+    `color` VARCHAR(191) NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    UNIQUE INDEX `events_patient_id_key`(`patient_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

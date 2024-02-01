@@ -3,8 +3,8 @@ import PrescriptionPatientService from "../../services/doctors/PrescriptionPatie
 
 
 const PrescriptionPatientControler = async (req: Request, res: Response) => {
-    const { title, inital_date, final_date, description, recipe, patient_id } = req.body
-    const reports = await PrescriptionPatientService({ title, inital_date, final_date, description, recipe, patient_id })
+    const { title, initial_date, final_date, description, recipe, patient_id } = req.body
+    const reports = await PrescriptionPatientService({ title, initial_date, final_date, description, recipe, patient_id })
     return res.json(reports)
 }
 
