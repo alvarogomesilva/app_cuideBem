@@ -5,7 +5,7 @@ import Identification from '../screens/Identification'
 import LoginCaregiver from '../screens/Caregiver/LoginCaregiver'
 import LoginGuardian from '../screens/Guardian/LoginGuardian'
 import { neutral, primary, white } from '../constants/colors'
-// import Splash from '../screens/Splash'
+//import Splash from '../screens/Splash'
 
 export default function AuthRoutes() {
 
@@ -21,7 +21,7 @@ export default function AuthRoutes() {
                 options={{
                     headerShown: false
                 }}
-            /> */}
+            />  */}
 
             <Stack.Screen
                 name='Identification'
