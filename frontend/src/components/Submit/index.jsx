@@ -2,7 +2,7 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 
 
-const Submit = ({ onPress, loadingAuth }) => {
+const Submit = ({ onPress, loadingAuth , text }) => {
 
 
     return (
@@ -14,7 +14,7 @@ const Submit = ({ onPress, loadingAuth }) => {
             {loadingAuth ? (
                 <ActivityIndicator size={25} color="white" />
             ) : (
-                <Text style={styles.text}>Login</Text>
+                <Text style={styles.text}>{text}</Text>
             )}
 
         </TouchableOpacity>

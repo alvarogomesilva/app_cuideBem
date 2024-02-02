@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     content: {
         marginHorizontal: 20
     },
-       icon: {
+    icon: {
         position: 'absolute',
         color: neutral,
         fontSize: 20,
