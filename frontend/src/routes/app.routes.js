@@ -30,6 +30,7 @@ import ListMyDiaryPatientGuardian from '../screens/Guardian/ListMyDiaryPatientGu
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
 import RecordCaregiver from '../screens/Caregiver/RecordCaregiver'
 import ReportsRecipesCaregiver from '../screens/Caregiver/ReportsRecipesCaregiver'
+import NewEventCaregiver from '../screens/Caregiver/NewEventCaregiver'
 
 export default function AppRoutes({ role_id }) {
 
@@ -38,6 +39,8 @@ export default function AppRoutes({ role_id }) {
     if (role_id === 1) {
         return (
             <Stack.Navigator initialRouteName='HomeDoctor'>
+
+
                 <Stack.Screen
                     name='HomeDoctor'
                     component={HomeDoctor}
@@ -290,6 +293,14 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='RecordCaregiver'
                     component={RecordCaregiver}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name='NewEventCaregiver'
+                    component={NewEventCaregiver}
                     options={{
                         headerShown: false
                     }}

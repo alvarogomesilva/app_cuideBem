@@ -29,7 +29,7 @@ export default function HomeCaregiver() {
         <Card title="Prontuários/Receitas"  onPress={() => navigation.navigate('ReportsRecipesCaregiver')}>
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
-        <Card title="Agenda">
+        <Card title="Agenda"  onPress={() => navigation.navigate('NewEventCaregiver')}>
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
       </View>

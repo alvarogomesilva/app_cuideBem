@@ -15,6 +15,8 @@ export default function AuthRoutes() {
 
         <Stack.Navigator>
 
+
+
             {/* <Stack.Screen
                 name='Splash'
                 component={Splash}
