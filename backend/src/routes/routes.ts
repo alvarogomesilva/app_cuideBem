@@ -20,6 +20,7 @@ import authenticate from "../middlewares/autenticate";
 import upload from "../config/multer";
 import CreateNewEventController from "../controllers/events/CreateNewEventController";
 import ListEventsController from "../controllers/events/ListEventsController";
+import CreateDailysController from "../controllers/dailys/CreateDailysController";
 
 // ==============================================================================================
 
@@ -46,5 +47,9 @@ Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientC
 // ==================
 Route.post("/events", authenticate, CreateNewEventController)
 Route.get("/events/:patient", authenticate, ListEventsController)
+
+// Rotas Diário
+// =================
+Route.post("/dailys", authenticate, CreateDailysController)
 
 export default Route;
