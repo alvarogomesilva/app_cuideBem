@@ -1,61 +1,50 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { styles } from './styles'
-import Input from '../../../components/Input'
+import React, { useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import BouncyCheckboxGroup from "react-native-bouncy-checkbox-group";
-import { useState } from 'react';
+import { styles } from './styles';
+import Input from '../../../components/Input';
 import { Masks } from 'react-native-mask-input';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import { white } from '../../../constants/colors';
-import { format } from 'date-fns';
-
+import { Picker } from '@react-native-picker/picker';
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
-
-const staticData = [
-  {
-    id: 0,
-    color: "#FF00FF"
-  },
-  {
-    id: 1,
-    color: "#2196f3"
-  },
-  {
-    id: 2,
-    color: "#4caf50"
-  },
-  {
-    id: 3,
-    color: "#ffeb3b"
-  },
+const colors = [
+  { id: 0, label: 'Azul', color: "#81d4fa" },
+  { id: 1, label: 'Verde', color: "#b2dfdb" },
+  { id: 2, label: 'Roxo', color: "#d1c4e9" },
+  { id: 3, label: 'Vermelho', color: "#ffcdd2" },
 ];
 
 export default function NewDiaryPatientGuardian({ route }) {
-  const { newEvent, loading } = useNewEvent()
-  const patient_id = route.params.patient.id
+  const { newEvent, loading } = useNewEvent();
+  const [selectedColor, setSelectedColor] = useState('');
+  const patient_id = route.params.patient.id;
 
   const [inputs, setInputs] = useState({
     patient_id,
     description: "",
     date: "",
     hour: "",
-    color: "#90caf9"
-  })
+    color: selectedColor
+  });
+
 
   const handleEvent = async () => {
-    await newEvent(inputs)
+    //await newEvent(inputs)
+    console.log(inputs)
     setInputs({
       patient_id,
       description: "",
       date: "",
       hour: "",
-      color: "#90caf9"
-    })
+      color: selectedColor
+    });
   }
+
 
   return (
     <View style={styles.container}>
@@ -88,15 +77,21 @@ export default function NewDiaryPatientGuardian({ route }) {
           <Feather name="clock" style={styles.icon} />
         </Input>
 
+        <Picker
+          selectedValue={setSelectedColor}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedColor(itemValue)
+          }>
+            <Picker.Item value={''} label='Selecione uma cor'/>
+          {colors.map((color, index) => (
+            <Picker.Item
+              key={index}
+              label={color.label}
+              value={color.color}
+            />
 
-        {/* <BouncyCheckboxGroup
-          style={styles.boxCheckbox}
-          data={staticData}
-          onChange={(selectedItem) => setInputs({ ...inputs, color: selectedItem.color })}
-          checkboxProps={{
-            size: 50,
-          }}
-        /> */}
+          ))}
+        </Picker>
 
 
         <TouchableOpacity
@@ -112,5 +107,5 @@ export default function NewDiaryPatientGuardian({ route }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }

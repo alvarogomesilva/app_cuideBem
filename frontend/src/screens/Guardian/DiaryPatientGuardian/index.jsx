@@ -5,7 +5,7 @@ import ButtonBottom from '../../../components/ButtonBottom';
 import { styles } from './styles';
 import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native'
-import dateFns from 'date-fns';
+import dateFns, { format } from 'date-fns';
 import api from '../../../api'
 import { white } from '../../../constants/colors';
 
@@ -25,7 +25,7 @@ const renderClassItem = ({ item }) => (
       <View style={[styles.card, { backgroundColor: item.color }]}>
         <View>
           <Text style={styles.cardTitle}>{item.description}</Text>
-          <Text style={styles.cardDate}>{item.date}</Text>
+          <Text style={styles.cardDate}>{format(item.date, 'MM/dd/yyyy')}</Text>
         </View>
       </View>
     </View>
@@ -35,7 +35,8 @@ const renderClassItem = ({ item }) => (
 export default function DiaryPatientGuardian({ route }) {
   const [patient_id, setPatient_id] = useState(route.params.patient.id)
   const [events, setEvents] = useState([])
-  const [daySelected, setDaySelected] = useState('')
+  const [eventsFiltered, setEventsFiltered] = useState([])
+  const [daySelected, setDaySelected] = useState(format(new Date(), 'yyyy-MM-dd'))
   const [loading, setLoading] = useState(false)
   const navigation = useNavigation()
 
@@ -43,7 +44,7 @@ export default function DiaryPatientGuardian({ route }) {
     async function loadEvents() {
       setLoading(true)
       try {
-        const events = await api.get(`/events/${patient_id}/${daySelected}`)
+        const events = await api.get(`/events/${patient_id}`)
         setEvents(events.data)
       } catch (error) {
         console.log(error)
@@ -52,10 +53,18 @@ export default function DiaryPatientGuardian({ route }) {
       }
     }
     loadEvents()
+  }, [])
+
+  useEffect(() => {
+    function filterEvents() {
+      const newEvents = events.filter(e => e.date === daySelected)
+      setEventsFiltered(newEvents)
+    }
+    filterEvents()
   }, [daySelected])
 
-  const markedDates = {};
 
+  const markedDates = {};
   if (events.length > 0) {
     events.forEach((event) => {
       const formattedDate = event.date;
@@ -65,7 +74,11 @@ export default function DiaryPatientGuardian({ route }) {
       } else {
         markedDates[formattedDate] = {
           marked: true,
-          dots: [{ key: event.id, color: event.color }],
+          dots: [{ 
+              key: event.id, 
+              color: event.color, 
+               
+            }],
         };
       }
     });
@@ -79,23 +92,44 @@ export default function DiaryPatientGuardian({ route }) {
         markingType='multi-dot'
         onDayPress={day => setDaySelected(day.dateString)}
         theme={{
-          selectedDotColor: '#29b6f6',
-          backgroundColor: '#29b6f6'
+          backgroundColor: '#ffffff',
+          calendarBackground: '#ffffff',
+          textSectionTitleColor: '#b6c1cd',
+          textSectionTitleDisabledColor: '#d9e1e8',
+          selectedDayBackgroundColor: '#00adf5',
+          selectedDayTextColor: '#ffffff',
+          todayTextColor: '#00adf5',
+          dayTextColor: '#2d4150',
+          textDisabledColor: '#d9e1e8',
+          dotColor: '#00adf5',
+          selectedDotColor: '#ffffff',
+          arrowColor: 'orange',
+          disabledArrowColor: '#d9e1e8',
+          monthTextColor: 'blue',
+          indicatorColor: 'blue',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
         }}
 
       />
 
-
       {loading ? (
         <ActivityIndicator color={white} size="large" />
       ) : (
-        <FlatList
-          contentContainerStyle={{ paddingHorizontal: 16 }}
-          data={events}
 
-          renderItem={renderClassItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        (
+          eventsFiltered.length > 0 ? (
+            <FlatList
+              contentContainerStyle={{ paddingHorizontal: 16 }}
+              data={eventsFiltered}
+              renderItem={renderClassItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          ) : (
+            <Text>Não tem eventos nesse dia!</Text>
+          )
+        )
       )}
 
       <ButtonBottom onPress={() => navigation.navigate('NewDiaryPatientGuardian', {
