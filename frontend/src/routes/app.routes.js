@@ -19,10 +19,10 @@ import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
 import ShowRecordPatientGuardian from '../screens/Guardian/ShowRecordPatientGuardian'
 import ShowPrescriptionPatientGuardian from '../screens/Guardian/ShowPrescriptionPatientGuardian'
 import DailyRoutinePatientGuardian from '../screens/Guardian/DailyRoutinePatientGuardian'
-import DiaryPatientGuardian from '../screens/Guardian/DiaryPatientGuardian'
-import NewDiaryPatientGuardian from '../screens/Guardian/NewDiaryPatientGuardian'
+import EventsPatientGuardian from '../screens/Guardian/EventsPatientGuardian'
+import NewEventPatientGuardian from '../screens/Guardian/NewEventPatientGuardian'
 import ListMyDailyRoutinePatientGuardian from '../screens/Guardian/ListMyDailyRoutinePatientGuardian'
-import ListMyDiaryPatientGuardian from '../screens/Guardian/ListMyDiaryPatientGuardian'
+import ListMyEventsPatientGuardian from '../screens/Guardian/ListMyEventsPatientGuardian'
 
 
 // Telas do cuidador
@@ -143,8 +143,8 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
-                    name='ListMyDiaryPatientGuardian'
-                    component={ListMyDiaryPatientGuardian}
+                    name='ListMyEventsPatientGuardian'
+                    component={ListMyEventsPatientGuardian}
                     options={{
                         title: 'Agendas e Consultas',
                         headerShadowVisible: false,
@@ -237,8 +237,8 @@ export default function AppRoutes({ role_id }) {
 
                 />
                 <Stack.Screen
-                    name='DiaryPatientGuardian'
-                    component={DiaryPatientGuardian}
+                    name='EventsPatientGuardian'
+                    component={EventsPatientGuardian}
                     options={{
                         title: 'Agenda',
                         headerShadowVisible: false,
@@ -250,8 +250,8 @@ export default function AppRoutes({ role_id }) {
 
                 />
                 <Stack.Screen
-                    name='NewDiaryPatientGuardian'
-                    component={NewDiaryPatientGuardian}
+                    name='NewEventPatientGuardian'
+                    component={NewEventPatientGuardian}
                     options={{
                         title: 'Novo evento',
                         headerShadowVisible: false,

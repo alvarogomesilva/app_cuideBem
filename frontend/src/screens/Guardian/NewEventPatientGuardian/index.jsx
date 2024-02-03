@@ -19,7 +19,7 @@ const colors = [
   { id: 3, label: 'Vermelho', color: "#ffcdd2" },
 ];
 
-export default function NewDiaryPatientGuardian({ route }) {
+export default function NewEventPatientGuardian({ route }) {
   const { newEvent, loading } = useNewEvent();
   const [selectedColor, setSelectedColor] = useState('');
   const patient_id = route.params.patient.id;
@@ -29,19 +29,19 @@ export default function NewDiaryPatientGuardian({ route }) {
     description: "",
     date: "",
     hour: "",
-    color: selectedColor
+    color: "#81d4fa"
   });
 
 
   const handleEvent = async () => {
-    //await newEvent(inputs)
+    await newEvent(inputs)
     console.log(inputs)
     setInputs({
       patient_id,
       description: "",
       date: "",
       hour: "",
-      color: selectedColor
+      color: "#81d4fa"
     });
   }
 
@@ -77,21 +77,6 @@ export default function NewDiaryPatientGuardian({ route }) {
           <Feather name="clock" style={styles.icon} />
         </Input>
 
-        <Picker
-          selectedValue={setSelectedColor}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedColor(itemValue)
-          }>
-            <Picker.Item value={''} label='Selecione uma cor'/>
-          {colors.map((color, index) => (
-            <Picker.Item
-              key={index}
-              label={color.label}
-              value={color.color}
-            />
-
-          ))}
-        </Picker>
 
 
         <TouchableOpacity

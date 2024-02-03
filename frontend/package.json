@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "commit": "npx git-cz"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
@@ -34,7 +35,15 @@
     "@react-native-picker/picker": "2.4.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0"
   },
+  "config": {
+    "commitizen": {
+      "path": "./frontend/node_modules/cz-conventional-changelog"
+    }
+  },
+  
   "private": true
 }
