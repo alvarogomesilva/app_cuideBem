@@ -4,8 +4,8 @@ import { Entypo } from '@expo/vector-icons';
 import Card from '../../../components/Card';
 import { useNavigation } from '@react-navigation/native'
 import SignOut from '../../../components/SignOut'
-import { Fontisto } from '@expo/vector-icons';
-
+import { FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 export default function HomeDoctor() {
     const navigation = useNavigation()
 
@@ -14,7 +14,7 @@ export default function HomeDoctor() {
             <SignOut />
             <View style={styles.top}>
                 <View style={styles.boxUser}>
-                    <Fontisto name="doctor" style={styles.iconUser} />
+                    <FontAwesome5 name="user-md" style={styles.iconUser}  />
                 </View>
                 <Text style={styles.nameDoctor}>Ronaldo Ernani da Silva</Text>
                 <Text style={styles.crmDoctor}>CRM: 10116</Text>
