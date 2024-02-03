@@ -6,7 +6,7 @@ import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
 
 const MemoizedPatients = memo(Patients);
-export default function ListMyDiaryPatientGuardian() {
+export default function ListMyEventsPatientGuardian() {
     
     const navigation = useNavigation();
     const { listPatients } = usePatients()
@@ -18,7 +18,7 @@ export default function ListMyDiaryPatientGuardian() {
                 data={listPatients}
                 renderItem={({ item }) => <MemoizedPatients
                     data={item}
-                    onPress={() => navigation.navigate('DiaryPatientGuardian', { patient: item })}
+                    onPress={() => navigation.navigate('EventsPatientGuardian', { patient: item })}
                 />}
 
                 keyExtractor={(item) => item.id.toString()}

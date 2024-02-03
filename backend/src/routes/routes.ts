@@ -21,6 +21,7 @@ import upload from "../config/multer";
 import CreateNewEventController from "../controllers/events/CreateNewEventController";
 import ListEventsController from "../controllers/events/ListEventsController";
 import CreateDailysController from "../controllers/dailys/CreateDailysController";
+import DeleteEventController from "../controllers/events/DeleteEventController";
 
 // ==============================================================================================
 
@@ -47,6 +48,7 @@ Route.put("/patients/:id", authenticate, upload.single("avatar"), UpdatePatientC
 // ==================
 Route.post("/events", authenticate, CreateNewEventController)
 Route.get("/events/:patient", authenticate, ListEventsController)
+Route.delete('/events/:id', authenticate, DeleteEventController)
 
 // Rotas Diário
 // =================
