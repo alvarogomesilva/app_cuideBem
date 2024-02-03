@@ -46,6 +46,7 @@ export default function LoginCaregiver() {
                     <Submit 
                         loadingAuth={loadingAuth}
                         onPress={() => signIn(email, password)}
+                        text='Login'
                     />
                 </KeyboardAvoidingView>
             </LinearGradient>

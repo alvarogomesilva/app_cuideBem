@@ -52,6 +52,7 @@ export default function LoginDoctor() {
                     <Submit
                         loadingAuth={loadingAuth}
                         onPress={() => signIn(email, password)}
+                        text='Login'
                     />
                 </KeyboardAvoidingView>
             </LinearGradient>

@@ -1,16 +1,13 @@
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native'
 
-import { Button, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
 import Card from "../../../components/Card";
-import { useContext } from 'react';
-import { AuthContext } from '../../../contexts/AuthContext'
-import { white } from '../../../constants/colors';
 import SignOut from '../../../components/SignOut';
 
 export default function HomeGuardian() {

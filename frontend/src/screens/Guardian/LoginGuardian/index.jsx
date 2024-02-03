@@ -46,6 +46,7 @@ export default function LoginGuardian() {
                     <Submit 
                         loadingAuth={loadingAuth}
                         onPress={() => signIn(email, password)}
+                        text='Login'
                     />
                 </KeyboardAvoidingView>
             </LinearGradient>

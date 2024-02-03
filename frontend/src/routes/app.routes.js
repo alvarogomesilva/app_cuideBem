@@ -29,8 +29,12 @@ import ListMyEventsPatientGuardian from '../screens/Guardian/ListMyEventsPatient
 // ==================
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
 import RecordCaregiver from '../screens/Caregiver/RecordCaregiver'
-import ReportsRecipesCaregiver from '../screens/Caregiver/ReportsRecipesCaregiver'
+import ConditionalCardsCaregiver from '../screens/Caregiver/ConditionalCardsCaregiver'
 import NewEventCaregiver from '../screens/Caregiver/NewEventCaregiver'
+import ListMyRecordsPatientCaregiver from '../screens/Caregiver/ListMyRecordsPatientCaregiver'
+import ListMyPrescriptionsPatientCaregiver from '../screens/Caregiver/ListMyPrescriptionsPatientCaregiver'
+import ShowRecordPatientCaregiver from '../screens/Caregiver/ShowRecordPatientCaregiver'
+import ShowPrescriptionPatientCaregiver from '../screens/Caregiver/ShowPrescriptionPatientCaregiver'
 
 export default function AppRoutes({ role_id }) {
 
@@ -278,10 +282,10 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
-                    name='ReportsRecipesCaregiver'
-                    component={ReportsRecipesCaregiver}
+                    name='ConditionalCardsCaregiver'
+                    component={ConditionalCardsCaregiver}
                     options={{
-                        title: null,
+                        title: 'Prontuários e Receitas',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
@@ -301,6 +305,50 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='NewEventCaregiver'
                     component={NewEventCaregiver}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ListMyRecordsPatientCaregiver'
+                    component={ListMyRecordsPatientCaregiver}
+                    options={{
+                        title: 'Prontuários',
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ListMyPrescriptionsPatientCaregiver'
+                    component={ListMyPrescriptionsPatientCaregiver}
+                    options={{
+                        title: 'Receitas',
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ShowRecordPatientCaregiver'
+                    component={ShowRecordPatientCaregiver}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ShowPrescriptionPatientCaregiver'
+                    component={ShowPrescriptionPatientCaregiver}
                     options={{
                         headerShown: false
                     }}
