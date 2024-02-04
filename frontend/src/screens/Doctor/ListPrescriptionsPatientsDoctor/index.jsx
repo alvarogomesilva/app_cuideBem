@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const MemoizedPatients = memo(Patients);
 
-export default function ConditionalCardsDoctor({ route }) {
+export default function ListPrescriptionsPatientsDoctor() {
     const navigation = useNavigation();
     const [listPatients, setListPatients] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -35,15 +35,6 @@ export default function ConditionalCardsDoctor({ route }) {
         loadPatients();
     }, [loadPatients]);
 
-    const { paramKey } = route.params;
-
-    useEffect(() => {
-        const title = paramKey === 'Record' ? 'Prontuários' : 'Receitas';
-        navigation.setOptions({
-            title: title,
-        });
-    }, [navigation, paramKey]);
-
     const handleSearchChange = useCallback((text) => {
         setSearchTerm(text);
     }, []);
@@ -69,10 +60,7 @@ export default function ConditionalCardsDoctor({ route }) {
                         renderItem={({ item }) => (
                             <MemoizedPatients
                                 data={item}
-                                onPress={() => navigation.navigate('ConditionalPrescriptionsDoctor', {
-                                    paramKey: paramKey === 'Record' ? 'NewRecord' : 'NewRecipes',
-                                    patientKey: item,
-                                })}
+                                onPress={() => navigation.navigate('PrescriptionPatientDoctor', {patient: item})}
                             />
                         )}
                     />

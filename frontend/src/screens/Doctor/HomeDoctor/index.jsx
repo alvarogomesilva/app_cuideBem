@@ -23,16 +23,14 @@ export default function HomeDoctor() {
             <View style={styles.bottom}>
 
                 <Card
-                    title='Prontuário'
-                    onPress={() => navigation.navigate('ConditionalCardsDoctor',
-                        { paramKey: 'Record' })}>
+                    title='Prontuários'
+                    onPress={() => navigation.navigate('ListRecordsPatientsDoctor')}>
                     <Entypo name="text-document-inverted" style={styles.cardIcon} />
                 </Card>
 
                 <Card
-                    title='Receita'
-                    onPress={() => navigation.navigate('ConditionalCardsDoctor',
-                        { paramKey: 'Recipes' })}>
+                    title='Receitas'
+                    onPress={() => navigation.navigate('ListPrescriptionsPatientsDoctor')}>
                     <Entypo name="text-document" style={styles.cardIcon} />
                 </Card>
             </View>

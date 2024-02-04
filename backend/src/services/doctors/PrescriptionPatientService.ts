@@ -1,28 +1,18 @@
 import Prisma from "../../prisma";
 
-interface Report {
-    title: string;
-    initial_date: string;
-    final_date: string;
-    description: string;
+interface Prescription {
     recipe: string;
     patient_id: string;
+    doctor_id: string;
 }
 
-const PrescriptionPatientService = async ({
-    title,
-    initial_date,
-    final_date,
-    description,
-    recipe,
-    patient_id }: Report) => {
+const PrescriptionPatientService = async ({ recipe, patient_id, doctor_id }: Prescription) => {
 
-        const patient = await Prisma.patient.update({
-            data: { title, initial_date, final_date, description, recipe },
-            where: { id: patient_id }
-        })
+    const patient = await Prisma.prescription.create({
+        data: { recipe, patient_id, doctor_id }
+    })
 
-        return patient
+    return patient
 }
 
 export default PrescriptionPatientService;

@@ -4,8 +4,10 @@ import { neutral, primary } from '../constants/colors'
 // Telas do médico
 // ================
 import HomeDoctor from '../screens/Doctor/HomeDoctor'
-import ConditionalCardsDoctor from '../screens/Doctor/ConditionalCardsDoctor'
-import ConditionalPrescriptionsDoctor from '../screens/Doctor/ConditionalPrescriptionsDoctor'
+import PrescriptionPatientDoctor from '../screens/Doctor/PrescriptionPatientDoctor'
+import ListPrescriptionsPatientsDoctor from '../screens/Doctor/ListPrescriptionsPatientsDoctor'
+import ListRecordsPatientsDoctor from '../screens/Doctor/ListRecordsPatientsDoctor'
+import RecordPatientDoctor from '../screens/Doctor/RecordPatientDoctor'
 
 // Telas do guardião
 // ==================
@@ -44,7 +46,6 @@ export default function AppRoutes({ role_id }) {
         return (
             <Stack.Navigator initialRouteName='HomeDoctor'>
 
-
                 <Stack.Screen
                     name='HomeDoctor'
                     component={HomeDoctor}
@@ -52,12 +53,11 @@ export default function AppRoutes({ role_id }) {
                         headerShown: false
                     }}
                 />
-
                 <Stack.Screen
-                    name='ConditionalCardsDoctor'
-                    component={ConditionalCardsDoctor}
+                    name='ListPrescriptionsPatientsDoctor'
+                    component={ListPrescriptionsPatientsDoctor}
                     options={{
-                        title: null,
+                        title: 'Receitas',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
@@ -66,10 +66,10 @@ export default function AppRoutes({ role_id }) {
                     }}
                 />
                 <Stack.Screen
-                    name='ConditionalPrescriptionsDoctor'
-                    component={ConditionalPrescriptionsDoctor}
+                    name='ListRecordsPatientsDoctor'
+                    component={ListRecordsPatientsDoctor}
                     options={{
-                        title: null,
+                        title: 'Prontuários',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
@@ -77,6 +77,30 @@ export default function AppRoutes({ role_id }) {
                         },
                     }}
                 />
+                    <Stack.Screen
+                        name='PrescriptionPatientDoctor'
+                        component={PrescriptionPatientDoctor}
+                        options={{
+                            title: 'Receita do paciente',
+                            headerShadowVisible: false,
+                            headerTintColor: neutral,
+                            headerStyle: {
+                                backgroundColor: primary
+                            },
+                        }}
+                    />
+                    <Stack.Screen
+                        name='RecordPatientDoctor'
+                        component={RecordPatientDoctor}
+                        options={{
+                            title: 'Prontuário do paciente',
+                            headerShadowVisible: false,
+                            headerTintColor: neutral,
+                            headerStyle: {
+                                backgroundColor: primary
+                            },
+                        }}
+                    />
 
             </Stack.Navigator>
         )

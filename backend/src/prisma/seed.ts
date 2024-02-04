@@ -23,16 +23,41 @@ async function main() {
   })
   const user2 = await Prisma.user.create({
     data: {
+      name: 'Fernando Rodrigues',
+      email: 'fe@gmail.com',
+      password: hashSync('123', 8),
+      crm: 123456,
+      role_id: 1
+    }
+  })
+  const user3 = await Prisma.user.create({
+    data: {
       name: 'Julia Rodrigues',
       email: 'julia@gmail.com',
       password: hashSync('123', 8),
       role_id: 2
     }
   })
-  const user3 = await Prisma.user.create({
+  const user4 = await Prisma.user.create({
+    data: {
+      name: 'Maria Silva',
+      email: 'maria@gmail.com',
+      password: hashSync('123', 8),
+      role_id: 2
+    }
+  })
+  const user5 = await Prisma.user.create({
     data: {
       name: 'Manuela Pereira',
       email: 'manuela@gmail.com',
+      password: hashSync('123', 8),
+      role_id: 3
+    }
+  })
+  const user6 = await Prisma.user.create({
+    data: {
+      name: 'Diva Back',
+      email: 'diva@gmail.com',
       password: hashSync('123', 8),
       role_id: 3
     }
