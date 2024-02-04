@@ -22,6 +22,7 @@ import CreateNewEventController from "../controllers/events/CreateNewEventContro
 import ListEventsController from "../controllers/events/ListEventsController";
 import CreateDailysController from "../controllers/dailys/CreateDailysController";
 import DeleteEventController from "../controllers/events/DeleteEventController";
+import ListPrescriptionPatientController from "../controllers/doctors/ListPrescriptionPatientController";
 
 // ==============================================================================================
 
@@ -35,8 +36,8 @@ Route.get("/me", authenticate, DetailUserController);
 
 // Rotas do Médico
 // ==================
-Route.put("/prescriptions", authenticate, PrescriptionPatientController)
-
+Route.post("/prescriptions", authenticate, PrescriptionPatientController)
+Route.get('/prescriptions/:id', authenticate, ListPrescriptionPatientController)
 
 // Rotas do paciente
 // ==================

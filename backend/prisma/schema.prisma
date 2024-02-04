@@ -32,8 +32,11 @@ model User {
   created_at   DateTime? @default(now())
   updated_at   DateTime? @default(now())
 
-  role    Role      @relation(fields: [role_id], references: [id])
-  patient Patient[]
+  role         Role           @relation(fields: [role_id], references: [id])
+  patients     Patient[]      @relation(name: "UserPatients")
+  caregiver    Patient[]      @relation(name: "CaregiverPatients")
+  Prescription Prescription[]
+  Record       Record[]
 
   @@map("users")
 }
@@ -41,40 +44,65 @@ model User {
 // Tabela de Pacientes
 // ====================
 model Patient {
-  id           String    @id @default(uuid())
-  name         String
-  photo        String?
-  birth        String
-  title        String?
-  initial_date String?
-  final_date   String?
-  description  String?   @db.Text
-  recipe       String?   @db.Text
-  created_at   DateTime? @default(now())
-  updated_at   DateTime? @default(now())
-  user_id      String
-
-  user  User?   @relation(fields: [user_id], references: [id])
-  event Event[]
-  daily Daily[]
+  id            String         @id @default(uuid())
+  name          String
+  photo         String?
+  birth         String
+  user_id       String
+  caregiver_id  String
+  user          User?          @relation(name: "UserPatients", fields: [user_id], references: [id])
+  caregiver     User?          @relation(name: "CaregiverPatients", fields: [caregiver_id], references: [id])
+  events        Event[]
+  dailies       Daily[]
+  prescriptions Prescription[]
+  records       Record[]
 
   @@index([user_id])
   @@map("patients")
 }
 
+// Tabela de Receitas
+// ===================
+model Prescription {
+  id         String @id @default(uuid())
+  recipe     String @db.Text
+  patient_id String
+  doctor_id  String
+
+  patient Patient @relation(fields: [patient_id], references: [id])
+  doctor  User    @relation(fields: [doctor_id], references: [id])
+
+  @@map("prescriptions")
+}
+
+// Tabela de Prontuários
+model Record {
+  id           String @id @default(uuid())
+  title        String
+  initial_date String
+  final_date   String
+  description  String @db.Text
+  patient_id   String
+  doctor_id    String
+
+  patient Patient @relation(fields: [patient_id], references: [id])
+  doctor  User    @relation(fields: [doctor_id], references: [id])
+
+  @@map("records")
+}
+
 // Tabela de Rotina Diária
 // ========================
 model Daily {
-  id          String   @id @default(uuid())
-  title       String
-  hour        DateTime
-  description String   @db.Text
-  done        Boolean
-  patient_id  String
-  patient     Patient @relation(fields: [patient_id], references: [id])
-
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  id           String   @id @default(uuid())
+  title        String
+  description  String   @db.Text
+  hour         DateTime
+  date_initial DateTime
+  final_date   DateTime
+  done         Boolean
+  patient_id   String
+  patient      Patient  @relation(fields: [patient_id], references: [id])
 
   @@map("dailys")
 }
@@ -89,9 +117,6 @@ model Event {
   color       String
   patient_id  String
   patient     Patient @relation(fields: [patient_id], references: [id])
-
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
 
   @@map("events")
 }

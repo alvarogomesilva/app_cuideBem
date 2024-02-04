@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { primary, second } from "../../../constants/colors";
+import { neutral, primary, second } from "../../../constants/colors";
 
 
 export const styles = StyleSheet.create({
@@ -17,6 +17,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         marginTop: 20,
         marginHorizontal: 15
+    },
+
+    noPatients: {
+        marginVertical: 20,
+        fontSize: 20,
+        textAlign: 'center',
+        color: neutral
     },
 
     button: {

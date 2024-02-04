@@ -5,7 +5,7 @@ import { unlink } from 'fs/promises';
 
 const CreatePatientController = async (req: Request, res: Response) => {
 
-    const { name, birth } = req.body
+    const { name, birth, caregiver_id } = req.body
     const user_id = req.user_id
     let avatar: string | null = null;
 
@@ -18,10 +18,10 @@ const CreatePatientController = async (req: Request, res: Response) => {
 
         avatar = `${randomName}.${extension}`
         await unlink(req.file.path)
-    }  
+    }
 
-    const patient = await CreatePatientService({ name, photo: avatar, birth, user_id })
-    return res.json(patient) 
+    const patient = await CreatePatientService({ name, photo: avatar, birth, user_id, caregiver_id })
+    return res.json(patient)
 }
 
 export default CreatePatientController;

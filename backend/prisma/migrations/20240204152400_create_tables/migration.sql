@@ -28,16 +28,33 @@ CREATE TABLE `patients` (
     `name` VARCHAR(191) NOT NULL,
     `photo` VARCHAR(191) NULL,
     `birth` VARCHAR(191) NOT NULL,
-    `title` VARCHAR(191) NULL,
-    `initial_date` VARCHAR(191) NULL,
-    `final_date` VARCHAR(191) NULL,
-    `description` TEXT NULL,
-    `recipe` TEXT NULL,
-    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `user_id` VARCHAR(191) NOT NULL,
+    `caregiver_id` VARCHAR(191) NOT NULL,
 
     INDEX `patients_user_id_idx`(`user_id`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `prescriptions` (
+    `id` VARCHAR(191) NOT NULL,
+    `recipe` TEXT NOT NULL,
+    `patient_id` VARCHAR(191) NOT NULL,
+    `doctor_id` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `records` (
+    `id` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(191) NOT NULL,
+    `initial_date` VARCHAR(191) NOT NULL,
+    `final_date` VARCHAR(191) NOT NULL,
+    `description` TEXT NOT NULL,
+    `patient_id` VARCHAR(191) NOT NULL,
+    `doctor_id` VARCHAR(191) NOT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -45,12 +62,11 @@ CREATE TABLE `patients` (
 CREATE TABLE `dailys` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
-    `hour` DATETIME(3) NOT NULL,
     `description` TEXT NOT NULL,
+    `hour` DATETIME(3) NOT NULL,
+    `date` DATETIME(3) NOT NULL,
     `done` BOOLEAN NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
-    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -63,8 +79,6 @@ CREATE TABLE `events` (
     `hour` VARCHAR(191) NOT NULL,
     `color` VARCHAR(191) NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
-    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -74,6 +88,21 @@ ALTER TABLE `users` ADD CONSTRAINT `users_role_id_fkey` FOREIGN KEY (`role_id`) 
 
 -- AddForeignKey
 ALTER TABLE `patients` ADD CONSTRAINT `patients_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `patients` ADD CONSTRAINT `patients_caregiver_id_fkey` FOREIGN KEY (`caregiver_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `prescriptions` ADD CONSTRAINT `prescriptions_patient_id_fkey` FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `prescriptions` ADD CONSTRAINT `prescriptions_doctor_id_fkey` FOREIGN KEY (`doctor_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `records` ADD CONSTRAINT `records_patient_id_fkey` FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `records` ADD CONSTRAINT `records_doctor_id_fkey` FOREIGN KEY (`doctor_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `dailys` ADD CONSTRAINT `dailys_patient_id_fkey` FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

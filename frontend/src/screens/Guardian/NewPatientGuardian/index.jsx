@@ -1,6 +1,7 @@
 import { ActivityIndicator, Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { neutral, white } from '../../../constants/colors';
 import Input from '../../../components/Input'
 import * as ImagePicker from 'expo-image-picker';
@@ -17,11 +18,11 @@ export default function NewPatientGuardian() {
     const [inputs, setInputs] = useState({
         name: "",
         birth: "",
-        user_id: user.id
+        user_id: user.id,
+        caregiver_id: 'db764c81-cdc2-424a-b665-ab3f9936d070'
     })
     const [loading, setLoading] = useState(false)
-    const [data, setData] = useState('')
-    
+
     const pickImage = async () => {
 
         const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -54,6 +55,7 @@ export default function NewPatientGuardian() {
             formData.append('name', inputs.name)
             formData.append('birth', inputs.birth)
             formData.append('user_id', inputs.user_id)
+            formData.append('caregiver_id', inputs.caregiver_id)
 
             if (image) {
                 const extend = image.split('.')[1]
@@ -63,7 +65,6 @@ export default function NewPatientGuardian() {
                     type: `image/${extend}`
                 })))
             }
-
             const response = await api.post('/patients', formData, {
                 headers: { 'Accept': 'application/json', "content-type": 'multipart/form-data' }
             })
@@ -72,7 +73,8 @@ export default function NewPatientGuardian() {
             setInputs({
                 name: "",
                 birth: "",
-                user_id: user.id
+                user_id: user.id,
+                caregiver_id: 'db764c81-cdc2-424a-b665-ab3f9936d070'
             })
 
             Alert.alert('Salvo com sucesso!')
@@ -113,7 +115,7 @@ export default function NewPatientGuardian() {
                 >
                     <FontAwesome5 name="birthday-cake" style={styles.icon} />
                 </Input>
-               
+
 
                 <Input
                     placeholder="Nome do guardião"
@@ -122,9 +124,16 @@ export default function NewPatientGuardian() {
                     <FontAwesome5 name="user-shield" style={styles.icon} />
                 </Input>
 
+                <Input
+                    placeholder="Nome do cuidador"
+                    value={''}
+                >
+                    <Feather name="search" style={styles.icon} />
+                </Input>
+
                 <TouchableOpacity style={styles.submit} onPress={handlePatient}>
                     {loading ? (
-                        <ActivityIndicator size={25} color={white}/>
+                        <ActivityIndicator size={25} color={white} />
                     ) : (
                         <Text style={styles.submitText}>Cadastrar</Text>
                     )}
