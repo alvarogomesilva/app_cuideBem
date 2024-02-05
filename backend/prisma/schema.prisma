@@ -98,8 +98,7 @@ model Daily {
   title        String
   description  String   @db.Text
   hour         DateTime
-  date_initial DateTime
-  final_date   DateTime
+  date         String
   done         Boolean
   patient_id   String
   patient      Patient  @relation(fields: [patient_id], references: [id])

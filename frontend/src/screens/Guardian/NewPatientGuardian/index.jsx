@@ -19,7 +19,7 @@ export default function NewPatientGuardian() {
         name: "",
         birth: "",
         user_id: user.id,
-        caregiver_id: 'db764c81-cdc2-424a-b665-ab3f9936d070'
+        caregiver_id: '68a01aac-e186-4cd7-b218-141e0d889a85'
     })
     const [loading, setLoading] = useState(false)
 
@@ -74,7 +74,7 @@ export default function NewPatientGuardian() {
                 name: "",
                 birth: "",
                 user_id: user.id,
-                caregiver_id: 'db764c81-cdc2-424a-b665-ab3f9936d070'
+                caregiver_id: '68a01aac-e186-4cd7-b218-141e0d889a85'
             })
 
             Alert.alert('Salvo com sucesso!')

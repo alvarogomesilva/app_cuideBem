@@ -8,7 +8,6 @@ import Input from '../../../components/Input';
 import { Masks } from 'react-native-mask-input';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import { white } from '../../../constants/colors';
-import { Picker } from '@react-native-picker/picker';
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
