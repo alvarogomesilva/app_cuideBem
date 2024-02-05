@@ -24,6 +24,7 @@ import CreateDailysController from "../controllers/dailys/CreateDailysController
 import DeleteEventController from "../controllers/events/DeleteEventController";
 import ListPrescriptionPatientController from "../controllers/doctors/ListPrescriptionPatientController";
 import ListDailyController from "../controllers/dailys/ListDailyController";
+import ListUserController from "../controllers/users/ListUserController";
 
 // ==============================================================================================
 
@@ -34,6 +35,7 @@ const Route = Router();
 Route.post("/users", CreateUserController);
 Route.post("/login", AuthUserController);
 Route.get("/me", authenticate, DetailUserController);
+Route.get('/users', authenticate, ListUserController)
 
 // Rotas do Médico
 // ==================

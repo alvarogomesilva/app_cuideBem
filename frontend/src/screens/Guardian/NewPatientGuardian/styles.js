@@ -4,7 +4,7 @@ import { neutral, primary, second, white } from "../../../constants/colors";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: primary
+        backgroundColor: primary,
     },
 
     content: {

@@ -1,27 +1,31 @@
-import { ActivityIndicator, Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { neutral, white } from '../../../constants/colors';
 import Input from '../../../components/Input'
 import * as ImagePicker from 'expo-image-picker';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext'
 import api from '../../../api';
 import { Masks } from 'react-native-mask-input';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 export default function NewPatientGuardian() {
     const { user } = useContext(AuthContext)
-
+    const [caregivers, setCaregivers] = useState([]);
+    const [selectedCaregiver, setSelectedCaregiver] = useState('')
+    const [data, setData] = useState([])
     const [image, setImage] = useState(null);
     const [uri, setUri] = useState(null)
+    const [loading, setLoading] = useState(false)
+
     const [inputs, setInputs] = useState({
         name: "",
         birth: "",
         user_id: user.id,
-        caregiver_id: '68a01aac-e186-4cd7-b218-141e0d889a85'
+        caregiver_id: selectedCaregiver
     })
-    const [loading, setLoading] = useState(false)
 
     const pickImage = async () => {
 
@@ -55,7 +59,7 @@ export default function NewPatientGuardian() {
             formData.append('name', inputs.name)
             formData.append('birth', inputs.birth)
             formData.append('user_id', inputs.user_id)
-            formData.append('caregiver_id', inputs.caregiver_id)
+            formData.append('caregiver_id', selectedCaregiver)
 
             if (image) {
                 const extend = image.split('.')[1]
@@ -74,8 +78,9 @@ export default function NewPatientGuardian() {
                 name: "",
                 birth: "",
                 user_id: user.id,
-                caregiver_id: '68a01aac-e186-4cd7-b218-141e0d889a85'
+                caregiver_id: selectedCaregiver
             })
+            console.log(formData)
 
             Alert.alert('Salvo com sucesso!')
         } catch (error) {
@@ -85,10 +90,27 @@ export default function NewPatientGuardian() {
         }
     }
 
-    return (
-        <SafeAreaView style={styles.container}>
+    useEffect(() => {
+        async function loadCaregiver() {
+            try {
+                const caregivers = await api.get('/users')
+                let newArray = caregivers.data.map((item) => {
+                    return {key: item.id, value: item.name}
+                  })
+                  
+                  setData(newArray)
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
-            <View style={styles.content}>
+        loadCaregiver()
+    }, [])
+
+    return (
+        <View style={styles.container}>
+
+            <KeyboardAvoidingView style={styles.content} behavior='padding'>
 
                 <TouchableOpacity style={styles.avatar} onPress={pickImage}>
                     {image ? (
@@ -124,12 +146,14 @@ export default function NewPatientGuardian() {
                     <FontAwesome5 name="user-shield" style={styles.icon} />
                 </Input>
 
-                <Input
-                    placeholder="Nome do cuidador"
-                    value={''}
-                >
-                    <Feather name="search" style={styles.icon} />
-                </Input>
+                <SelectList
+                    boxStyles={{
+                        marginVertical: 10
+                    }}
+                    setSelected={(val) => setSelectedCaregiver(val)}
+                    data={data}
+                    save="key"
+                />
 
                 <TouchableOpacity style={styles.submit} onPress={handlePatient}>
                     {loading ? (
@@ -138,8 +162,8 @@ export default function NewPatientGuardian() {
                         <Text style={styles.submitText}>Cadastrar</Text>
                     )}
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
 
-        </SafeAreaView>
+        </View>
     )
 }
