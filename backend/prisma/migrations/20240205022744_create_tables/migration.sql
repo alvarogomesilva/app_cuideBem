@@ -64,7 +64,7 @@ CREATE TABLE `dailys` (
     `title` VARCHAR(191) NOT NULL,
     `description` TEXT NOT NULL,
     `hour` DATETIME(3) NOT NULL,
-    `date` DATETIME(3) NOT NULL,
+    `date` VARCHAR(191) NOT NULL,
     `done` BOOLEAN NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
 

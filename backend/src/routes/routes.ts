@@ -23,6 +23,7 @@ import ListEventsController from "../controllers/events/ListEventsController";
 import CreateDailysController from "../controllers/dailys/CreateDailysController";
 import DeleteEventController from "../controllers/events/DeleteEventController";
 import ListPrescriptionPatientController from "../controllers/doctors/ListPrescriptionPatientController";
+import ListDailyController from "../controllers/dailys/ListDailyController";
 
 // ==============================================================================================
 
@@ -54,5 +55,6 @@ Route.delete('/events/:id', authenticate, DeleteEventController)
 // Rotas Diário
 // =================
 Route.post("/dailys", authenticate, CreateDailysController)
+Route.get("/dailys/:id/:date", authenticate, ListDailyController)
 
 export default Route;

@@ -25,6 +25,7 @@ import EventsPatientGuardian from '../screens/Guardian/EventsPatientGuardian'
 import NewEventPatientGuardian from '../screens/Guardian/NewEventPatientGuardian'
 import ListMyDailyRoutinePatientGuardian from '../screens/Guardian/ListMyDailyRoutinePatientGuardian'
 import ListMyEventsPatientGuardian from '../screens/Guardian/ListMyEventsPatientGuardian'
+import NewDailyRoutineGuardian from '../screens/Guardian/NewDailyRoutineGuardian'
 
 
 // Telas do cuidador
@@ -133,6 +134,19 @@ export default function AppRoutes({ role_id }) {
                     component={NewPatientGuardian}
                     options={{
                         title: null,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+
+                />
+                <Stack.Screen
+                    name='NewDailyRoutineGuardian'
+                    component={NewDailyRoutineGuardian}
+                    options={{
+                        title: 'Nova Rotina',
                         headerShadowVisible: false,
                         headerTintColor: neutral,
                         headerStyle: {
