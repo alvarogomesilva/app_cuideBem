@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
 
     box: {
         position: 'relative',
-        marginVertical: 15
+        marginVertical: 10
     },
 
     input: {
