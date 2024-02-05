@@ -10,7 +10,7 @@ import { format } from 'date-fns'
 export default function NewDailyRoutineGuardian() {
     const [loading, setLoading] = useState(false)
     const [inputs, setInputs] = useState({
-        patient_id: "",
+        patient_id: "109772fd-469b-4cc9-baad-542cd985d8f7",
         title: "",
         description: "",
         hour: new Date(),

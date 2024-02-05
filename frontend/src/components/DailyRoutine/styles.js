@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import  { neutral, primary, white} from '../../../constants/colors'
+import { neutral, primary } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
     container: {
@@ -143,4 +143,3 @@ export const styles = StyleSheet.create({
       fontSize: 16
     }
   });
-  
