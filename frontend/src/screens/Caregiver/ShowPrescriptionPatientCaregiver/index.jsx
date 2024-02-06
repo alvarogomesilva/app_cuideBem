@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { styles } from "./styles";
 
 export default function ShowPrescriptionPatientCaregiver({ route }) {
 
@@ -8,9 +9,10 @@ export default function ShowPrescriptionPatientCaregiver({ route }) {
     const navigation = useNavigation()
 
     const { recipe } = patient
+    console.log(recipe)
     
     return (
-        <View>
+        <View style={styles.container}>
             {
                 recipe ? (
                     <Text>{recipe}</Text>
@@ -19,8 +21,6 @@ export default function ShowPrescriptionPatientCaregiver({ route }) {
                     <Text>Não tem receita</Text>
                 )
             }
-
-
 
         </View>
     )

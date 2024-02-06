@@ -25,14 +25,16 @@ export default function HomeCaregiver() {
       </View>
 
       <View style={styles.bottom}>
-        <Card title="Rotina Diária">
+        <Card title="Rotina Diária"
+          onPress={() => navigation.navigate('ListMyDailyRoutinePatientCaregiver')}>
           <Entypo name="text-document" style={styles.cardIcon} />
         </Card>
 
         <Card title="Prontuários/Receitas" onPress={() => navigation.navigate('ConditionalCardsCaregiver')}>
           <Fontisto name="doctor" style={styles.cardIcon} />
         </Card>
-        <Card title="Agenda/Consultas" onPress={() => navigation.navigate('NewEventCaregiver')}>
+        <Card title="Agenda/Consultas"
+          onPress={() => navigation.navigate('ListMyEventsPatientCaregiver')}>
           <AntDesign name="calendar" style={styles.cardIcon} />
         </Card>
       </View>

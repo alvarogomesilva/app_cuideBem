@@ -13,7 +13,7 @@ export default function ConditionalCardsCaregiver() {
             <View style={styles.boxCards}>
 
                 <Card title="Receitas"
-                        onPress={() => navigation.navigate('ListMyPrescriptionsPatientCaregiver')}>
+                    onPress={() => navigation.navigate('ListMyPrescriptionsPatientCaregiver')}>
                     <MaterialCommunityIcons name="file-document-edit" style={styles.icon} />
                 </Card>
 

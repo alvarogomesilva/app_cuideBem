@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary } from "../../constants/colors";
+import  { neutral, primary, white} from '../../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
@@ -140,6 +140,7 @@ export const styles = StyleSheet.create({
     noDaily: {
       textAlign: 'center',
       color: neutral,
-      fontSize: 20
+      fontSize: 16
     }
   });
+  

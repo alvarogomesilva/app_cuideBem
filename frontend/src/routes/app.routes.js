@@ -39,6 +39,12 @@ import ListMyPrescriptionsPatientCaregiver from '../screens/Caregiver/ListMyPres
 import ShowRecordPatientCaregiver from '../screens/Caregiver/ShowRecordPatientCaregiver'
 import ShowPrescriptionPatientCaregiver from '../screens/Caregiver/ShowPrescriptionPatientCaregiver'
 
+import NewEventPatientCaregiver from '../screens/Caregiver/NewEventPatientCaregiver'
+import EventsPatientCaregiver from '../screens/Caregiver/EventsPatientCaregiver'
+import ListMyEventsPatientCaregiver from '../screens/Caregiver/ListMyEventsPatientCaregiver'
+import ListMyDailyRoutinePatientCaregiver from '../screens/Caregiver/ListMyDailyRoutinePatientCaregiver'
+import DailyRoutinePatientCaregiver from '../screens/Caregiver/DailyRoutinePatientCaregiver'
+
 export default function AppRoutes({ role_id }) {
 
     const Stack = createNativeStackNavigator()
@@ -367,6 +373,74 @@ export default function AppRoutes({ role_id }) {
                     component={ListMyPrescriptionsPatientCaregiver}
                     options={{
                         title: 'Receitas',
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+
+                <Stack.Screen
+                    name='ListMyEventsPatientCaregiver'
+                    component={ListMyEventsPatientCaregiver}
+                    options={{
+                        title: 'Agendas e Consultas',
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='ListMyDailyRoutinePatientCaregiver'
+                    component={ListMyDailyRoutinePatientCaregiver}
+                    options={{
+                        title: 'Meus pacientes',
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+
+                <Stack.Screen
+                    name='DailyRoutinePatientCaregiver'
+                    component={DailyRoutinePatientCaregiver}
+                    options={{
+                        title: null,
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+
+                <Stack.Screen
+                    name='EventsPatientCaregiver'
+                    component={EventsPatientCaregiver}
+                    options={{
+                        title: null,
+                        headerBackTitleVisible: false,
+                        headerShadowVisible: false,
+                        headerTintColor: neutral,
+                        headerStyle: {
+                            backgroundColor: primary
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='NewEventPatientCaregiver'
+                    component={NewEventPatientCaregiver}
+                    options={{
+                        title: 'Novo evento',
                         headerBackTitleVisible: false,
                         headerShadowVisible: false,
                         headerTintColor: neutral,

@@ -12,7 +12,6 @@ const ListPatientService = async ({ user_id, search }: Patient) => {
     const user = await Prisma.user.findFirst({
         where: { id: user_id }
     })
-
   
     if (user.role_id === 1) {
          
@@ -21,14 +20,19 @@ const ListPatientService = async ({ user_id, search }: Patient) => {
                 where: { name: { contains: search } }
             })
          }
-    } else {
+         return patients
+    } else if (user.role_id === 2) {
          patients = await Prisma.patient.findMany({
             where: { user_id }
+        })
+        
+    } else {
+        patients = await Prisma.patient.findMany({
+            where: { caregiver_id: user_id }
         })
     }
 
     return patients
-    
 }
 
 export default ListPatientService;
