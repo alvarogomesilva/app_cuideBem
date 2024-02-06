@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image } from 'react-native';
 import { format } from 'date-fns';
 import DailyRoutine from '../../../components/DailyRoutine';

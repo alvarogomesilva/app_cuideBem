@@ -33,7 +33,6 @@ import NewDailyRoutineGuardian from '../screens/Guardian/NewDailyRoutineGuardian
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
 import RecordCaregiver from '../screens/Caregiver/RecordCaregiver'
 import ConditionalCardsCaregiver from '../screens/Caregiver/ConditionalCardsCaregiver'
-import NewEventCaregiver from '../screens/Caregiver/NewEventCaregiver'
 import ListMyRecordsPatientCaregiver from '../screens/Caregiver/ListMyRecordsPatientCaregiver'
 import ListMyPrescriptionsPatientCaregiver from '../screens/Caregiver/ListMyPrescriptionsPatientCaregiver'
 import ShowRecordPatientCaregiver from '../screens/Caregiver/ShowRecordPatientCaregiver'
@@ -341,14 +340,6 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='RecordCaregiver'
                     component={RecordCaregiver}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-
-                <Stack.Screen
-                    name='NewEventCaregiver'
-                    component={NewEventCaregiver}
                     options={{
                         headerShown: false
                     }}
