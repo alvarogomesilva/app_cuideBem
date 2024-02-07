@@ -1,32 +1,36 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Input from '../../../components/Input'
-import { styles } from './styles'
-import { useState } from 'react'
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import Submit from '../../../components/Submit'
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import Input from '../../../components/Input';
+import Submit from '../../../components/Submit';
 import api from '../../../api';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { SelectList } from 'react-native-dropdown-select-list';
+import { usePatients } from '../../../hooks/usePatients';
+import { styles } from './styles';
 
 export default function NewDailyRoutineGuardian() {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const { listPatients } = usePatients();
+
     const [inputs, setInputs] = useState({
-        patient_id: "3d44b75e-b680-4d1b-924e-69ee82bae491",
+        patient_id: "",
         title: "",
         description: "",
         hour: new Date(),
         date: new Date(),
         final_date: new Date()
-    })
-    const [datePickerVisible1, setDatePickerVisibl1] = useState(false);
+    });
+
+    const [datePickerVisible1, setDatePickerVisible1] = useState(false);
     const [datePickerVisible2, setDatePickerVisible2] = useState(false);
     const [datePickerVisible3, setDatePickerVisible3] = useState(false);
 
-
-    const showDate1 = () => setDatePickerVisibl1(true);
+    const showDate1 = () => setDatePickerVisible1(true);
     const showDate2 = () => setDatePickerVisible2(true);
     const showDate3 = () => setDatePickerVisible3(true);
 
-    const hideDatePicker1 = () => setDatePickerVisibl1(false);
+    const hideDatePicker1 = () => setDatePickerVisible1(false);
     const hideDatePicker2 = () => setDatePickerVisible2(false);
     const hideDatePicker3 = () => setDatePickerVisible3(false);
 
@@ -40,30 +44,35 @@ export default function NewDailyRoutineGuardian() {
         hideDatePicker2();
     };
 
-    const handleConfirmDate3= (date) => {
+    const handleConfirmDate3 = (date) => {
         setInputs({ ...inputs, hour: date });
         hideDatePicker3();
     };
 
     const handleDailyRoutine = async () => {
-        setLoading(true)
+        setLoading(true);
         try {
-            const response = await api.post('/dailys', inputs)
-            console.log(response.data)
+            const response = await api.post('/dailys', inputs);
+            
         } catch (error) {
-            console.log(error)
+            console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-
-                <Input
-                    placeholder='Paciente'
+                <SelectList
+                    boxStyles={{
+                        marginVertical: 10
+                    }}
+                    setSelected={(patient) => setInputs({...inputs, patient_id: patient})}
+                    data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
+                    save='key'
                 />
+
                 <Input
                     placeholder='Titulo'
                     value={inputs.title}
@@ -86,7 +95,6 @@ export default function NewDailyRoutineGuardian() {
 
                     <TouchableOpacity
                         style={styles.input}
-                        placeholder='Data final'
                         onPress={showDate2}
                     >
                         <Text>{format(inputs.final_date, 'dd/MM/yyyy')}</Text>
@@ -94,13 +102,12 @@ export default function NewDailyRoutineGuardian() {
 
                 </View>
 
-               <TouchableOpacity style={styles.hour} onPress={showDate3}>
-                <Text>{format(inputs.hour, 'HH:mm')}</Text>
-               </TouchableOpacity>
-
+                <TouchableOpacity style={styles.hour} onPress={showDate3}>
+                    <Text>{format(inputs.hour, 'HH:mm')}</Text>
+                </TouchableOpacity>
 
                 <DateTimePickerModal
-                    date={inputs.date_initial}
+                    date={inputs.date}
                     isVisible={datePickerVisible1}
                     mode="date"
                     display='inline'
@@ -129,13 +136,12 @@ export default function NewDailyRoutineGuardian() {
                     onCancel={hideDatePicker3}
                 />
 
-
-                <Submit 
-                    text='Adicionar' 
-                    onPress={handleDailyRoutine} 
+                <Submit
+                    text='Adicionar'
+                    onPress={handleDailyRoutine}
                     loadingAuth={loading}
-                    />
+                />
             </View>
         </View>
-    )
+    );
 }
