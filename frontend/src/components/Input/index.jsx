@@ -23,7 +23,7 @@ const Input = ({
 
             <MaskInput
                 placeholder={placeholder}
-                style={[styles.input, { height: height || 45, paddingTop: paddingTop || 'auto' }]}
+                style={[styles.input, { height: height || 45, paddingTop: paddingTop || 10 }]}
                 placeholderTextColor={neutral}
                 autoCapitalize={autoCapitalize}
                 value={value}

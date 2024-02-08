@@ -24,6 +24,5 @@ export default function ListMyPrescriptionsPatientCaregiver() {
                    keyExtractor={(item) => item.id.toString()}
                />
         </View>
-    );
-};
-
+    )
+}

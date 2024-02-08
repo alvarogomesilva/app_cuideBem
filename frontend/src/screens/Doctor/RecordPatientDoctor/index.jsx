@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Keyboard, Text, View } from "react-native";
 import { styles } from "./styles";
 import Input from "../../../components/Input";
 import Submit from "../../../components/Submit";
@@ -54,6 +54,7 @@ export default function RecordPatientDoctor({ route }) {
                 await handleRecord(inputs);
                 setAlertMessage("Registro adicionado com sucesso!");
             }
+            Keyboard.dismiss()
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false)

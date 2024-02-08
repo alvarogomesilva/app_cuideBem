@@ -16,28 +16,32 @@ export default function HomeDoctor() {
             <SignOut />
             <View style={styles.top}>
                 <View style={styles.boxUser}>
-                    <FontAwesome5 name="user-md" style={styles.iconUser}  />
+                    <FontAwesome5 name="user-md" style={styles.iconUser} />
                 </View>
                 <Text style={styles.nameDoctor}>{user.name}</Text>
-                <Text style={styles.crmDoctor}>CRM: 10116</Text>
+                {/* <Text style={styles.crmDoctor}>CRM: {user.crm}</Text> */}
 
             </View>
             <View style={styles.bottom}>
 
                 <Card
-                    title='Prontuários'
                     onPress={() => navigation.navigate('ListRecordsPatientsDoctor')}>
-                    <Entypo name="text-document-inverted" style={styles.cardIcon} />
+                    <Image
+                        source={require('../../../../assets/record.png')}
+                        style={{ width: 230, height: 230 }}
+                    />
                 </Card>
 
                 <Card
-                    title='Receitas'
                     onPress={() => navigation.navigate('ListPrescriptionsPatientsDoctor')}>
-                    <Entypo name="text-document" style={styles.cardIcon} />
+                    <Image
+                        source={require('../../../../assets/prescription.png')}
+                        style={{ width: 230, height: 230 }}
+                    />
                 </Card>
-                <Image 
+                <Image
                     source={require('../../../../assets/doctors.png')}
-                    
+                    style={{ width: 220, height: 220 }}
                 />
             </View>
 

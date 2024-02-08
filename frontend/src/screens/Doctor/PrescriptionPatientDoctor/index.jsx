@@ -1,4 +1,4 @@
-import { View, Alert } from "react-native";
+import { View, Alert, Keyboard } from "react-native";
 import { styles } from "./styles";
 import Input from '../../../components/Input'
 import Submit from '../../../components/Submit'
@@ -30,13 +30,14 @@ export default function PrescriptionPatientDoctor({ route }) {
     }, [])
 
     const showAlertMessage = () => setShowAlert(true);
-    
+
     const handleAddOrUpdatePrescription = async () => {
         if (id) {
             await handleUpdatePrescription(input, patient, id);
         } else {
             await handlePrescription(recipe, patient);
         }
+        Keyboard.dismiss()
         showAlertMessage();
         setTimeout(() => {
             setShowAlert(false)
