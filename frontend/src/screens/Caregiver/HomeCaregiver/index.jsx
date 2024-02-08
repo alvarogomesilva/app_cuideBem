@@ -3,17 +3,19 @@ import { useNavigation } from "@react-navigation/native";
 
 import { SafeAreaView, Text, View } from "react-native";
 
-
 import { Fontisto } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Card from "../../../components/Card";
 import SignOut from '../../../components/SignOut'
+import { AuthContext } from '../../../contexts/AuthContext';
+import { useContext } from "react";
+
 
 export default function HomeCaregiver() {
   const navigation = useNavigation()
-
+  const {user} = useContext(AuthContext)
   return (
     <SafeAreaView style={styles.background}>
       <SignOut />
@@ -21,7 +23,7 @@ export default function HomeCaregiver() {
         <View style={styles.boxUser}>
           <FontAwesome5 name="user-nurse" style={styles.iconUser} />
         </View>
-        <Text style={styles.namePatient}>Ana Maria Gomes</Text>
+        <Text style={styles.namePatient}>{user.name}</Text>
       </View>
 
       <View style={styles.bottom}>

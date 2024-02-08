@@ -45,10 +45,6 @@ export default function LoginDoctor() {
                         <Feather name="lock" style={styles.icon} />
                     </Input>
 
-                    <Input placeholder='Digite seu CRM'>
-                        <Fontisto name="doctor" style={styles.icon} />
-                    </Input>
-
                     <Submit
                         loadingAuth={loadingAuth}
                         onPress={() => signIn(email, password)}

@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, SafeAreaView, View } from "react-native";
+import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from "react-native";
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Patients from "../../../components/Patients";
@@ -55,16 +55,19 @@ export default function ListRecordsPatientsDoctor() {
                 {loading ? (
                     <ActivityIndicator size="large" color="#FFF" />
                 ) : (
-                    <FlatList
-                        data={listPatients}
-                        renderItem={({ item }) => (
-                            <MemoizedPatients
-                                data={item}
-                                onPress={() => navigation.navigate('RecordPatientDoctor', 
-                                {patient: item})}
-                            />
-                        )}
-                    />
+                    (listPatients && listPatients.length > 0 ? (
+                        <FlatList
+                            data={listPatients}
+                            renderItem={({ item }) => (
+                                <MemoizedPatients
+                                    data={item}
+                                    onPress={() => navigation.navigate('RecordPatientDoctor', { patient: item })}
+                                />
+                            )}
+                        />
+                    ) : (
+                        <Text style={styles.text}>Nenhum paciente encontrado!</Text>
+                    ))
                 )}
             </View>
         </SafeAreaView>

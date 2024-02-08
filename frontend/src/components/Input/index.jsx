@@ -12,6 +12,9 @@ const Input = ({
     secureTextEntry,
     mask,
     keyboardType,
+    height,
+    paddingTop,
+    multiline
 }) => {
 
     return (
@@ -20,14 +23,15 @@ const Input = ({
 
             <MaskInput
                 placeholder={placeholder}
-                style={styles.input}
+                style={[styles.input, { height: height || 45, paddingTop: paddingTop || 'auto' }]}
                 placeholderTextColor={neutral}
                 autoCapitalize={autoCapitalize}
                 value={value}
                 onChangeText={(text) => onChangeText(text)}
                 secureTextEntry={secureTextEntry}
                 mask={mask}
-                keyboardType={keyboardType}
+                keyboardType={keyboardType}   
+                multiline={multiline || false}         
             />
         </View>
 

@@ -9,10 +9,13 @@ import { Fontisto } from '@expo/vector-icons';
 
 import Card from "../../../components/Card";
 import SignOut from '../../../components/SignOut';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { useContext } from 'react';
+
 
 export default function HomeGuardian() {
     const navigation = useNavigation()
-
+    const {user} = useContext(AuthContext)
     return (
         <SafeAreaView style={styles.background}>
             <SignOut />
@@ -21,7 +24,7 @@ export default function HomeGuardian() {
                     <FontAwesome5 name="user-shield" style={styles.iconUser} />
                 </View>
 
-                <Text style={styles.namePatient}>Ulda Zabel Reis</Text>
+                <Text style={styles.namePatient}>{user.name}</Text>
                 <Text>Data de Nascimento: 09/07/1943</Text>
             </View>
 

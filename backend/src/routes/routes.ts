@@ -26,6 +26,10 @@ import ListPrescriptionPatientController from "../controllers/doctors/ListPrescr
 import ListDailyController from "../controllers/dailys/ListDailyController";
 import ListUserController from "../controllers/users/ListUserController";
 import DoneDailyController from "../controllers/dailys/DoneDailyController";
+import UpdatePrescriptionPatientController from "../controllers/doctors/UpdatePrescriptionPatientController";
+import RecordPatientController from "../controllers/doctors/RecordPatientController";
+import ListRecordPatientController from "../controllers/doctors/ListRecordPatientController";
+import UpdateRecordPatientController from "../controllers/doctors/UpdateRecordPatientController";
 
 // ==============================================================================================
 
@@ -42,6 +46,11 @@ Route.get('/users', authenticate, ListUserController)
 // ==================
 Route.post("/prescriptions", authenticate, PrescriptionPatientController)
 Route.get('/prescriptions/:id', authenticate, ListPrescriptionPatientController)
+Route.put('/prescriptions/:id', authenticate, UpdatePrescriptionPatientController)
+
+Route.post('/records', authenticate, RecordPatientController)
+Route.get('/records/:id', authenticate, ListRecordPatientController)
+Route.put('/records/:id', authenticate, UpdateRecordPatientController)
 
 // Rotas do paciente
 // ==================

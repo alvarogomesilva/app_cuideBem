@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, SafeAreaView, View } from "react-native";
+import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from "react-native";
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Patients from "../../../components/Patients";
@@ -19,6 +19,7 @@ export default function ListPrescriptionsPatientsDoctor() {
         try {
             const patients = await api.get('/patients', { params: { search: searchTerm } });
             setListPatients(patients.data);
+            
         } catch (error) {
             console.error("Error loading patients:", error);
         } finally {
@@ -55,15 +56,19 @@ export default function ListPrescriptionsPatientsDoctor() {
                 {loading ? (
                     <ActivityIndicator size="large" color="#FFF" />
                 ) : (
+                   (listPatients && listPatients.length > 0 ? (
                     <FlatList
-                        data={listPatients}
-                        renderItem={({ item }) => (
-                            <MemoizedPatients
-                                data={item}
-                                onPress={() => navigation.navigate('PrescriptionPatientDoctor', {patient: item})}
-                            />
-                        )}
-                    />
+                    data={listPatients}
+                    renderItem={({ item }) => (
+                        <MemoizedPatients
+                            data={item}
+                            onPress={() => navigation.navigate('PrescriptionPatientDoctor', {patient: item})}
+                        />
+                    )}
+                />
+                   ):(
+                    <Text style={styles.text}>Nenhum paciente encontrado!</Text>
+                   ))
                 )}
             </View>
         </SafeAreaView>

@@ -13,9 +13,9 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: white,
         color: neutral,
-        height: 50,
         borderRadius: 10,
         fontSize: 18,
+        textAlignVertical: "top",
         paddingLeft: 50
     }
 })
