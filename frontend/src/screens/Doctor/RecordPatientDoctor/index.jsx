@@ -6,7 +6,6 @@ import Submit from "../../../components/Submit";
 import MaskInput, { Masks } from "react-native-mask-input";
 import { useRecord } from "../../../hooks/doctors/useRecord";
 import api from "../../../api";
-import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default function RecordPatientDoctor({ route }) {
     const { handleRecord, handleUpdateRecord, loading } = useRecord();
@@ -72,7 +71,7 @@ export default function RecordPatientDoctor({ route }) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Input
+                {/* <Input
                     placeholder='Titulo'
                     value={inputs.title}
                     onChangeText={(text) => setInputs({ ...inputs, title: text })}
@@ -106,25 +105,15 @@ export default function RecordPatientDoctor({ route }) {
                     height={100}
                     value={inputs.description}
                     onChangeText={(text) => setInputs({ ...inputs, description: text })}
-                />
+                /> */}
 
-                <Submit
+                {/* <Submit
                     text={id ? 'Atualizar' : 'Adicionar'}
                     onPress={handleAddOrUpdateRecord}
                     loadingAuth={loading}
-                />
+                /> */}
             </View>
-            <AwesomeAlert
-                show={showAlert}
-                showProgress={false}
-                title="Mensagem"
-                message={alertMessage}
-                closeOnTouchOutside={true}
-                closeOnHardwareBackPress={false}
-                showCancelButton={false}
-                showConfirmButton={false}
-                onConfirmPressed={handleCloseAlert}
-            />
+
         </View>
     )
 }

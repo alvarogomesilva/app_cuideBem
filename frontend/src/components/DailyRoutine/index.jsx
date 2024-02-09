@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
 import { compareAsc, differenceInMinutes, format, parse } from 'date-fns';
-import AwesomeAlert from 'react-native-awesome-alerts';
 import api from '../../api' 
 import {styles} from './styles'
 
@@ -129,19 +128,7 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
         keyExtractor={(item) => item.id.toString()}
       />
       <NoRoutineMessage />
-      <AwesomeAlert
-        show={alertVisible}
-        showProgress={false}
-        title={alertMessage}
-        closeOnTouchOutside={true}
-        closeOnHardwareBackPress={false}
-        showCancelButton={showCancelButton}
-        showConfirmButton={showConfirmButton}
-        cancelText={cancelText}
-        confirmText={confirmText}
-        onCancelPressed={hideAlert}
-        onConfirmPressed={handleDone}
-      />
+
     </View>
   );
 };

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Keyboard, TextInput, Text, Image } from 'react-native';
 import Submit from '../../../components/Submit';
 import { usePrescription } from '../../../hooks/doctors/usePrescription';
-import AwesomeAlert from 'react-native-awesome-alerts';
 import api from '../../../api';
 import { styles } from './styles';
+
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 
 export default function PrescriptionPatientDoctor({ route }) {
     const [input, setInput] = useState('');
@@ -13,7 +14,7 @@ export default function PrescriptionPatientDoctor({ route }) {
     const [photo, setPhoto] = useState(route.params.patient.photo)
     const { handlePrescription, handleUpdatePrescription, loading } = usePrescription();
     const [showAlert, setShowAlert] = useState(false);
-    console.log(route.params.patient)
+
     useEffect(() => {
         async function loadPrescription() {
             try {
@@ -30,13 +31,32 @@ export default function PrescriptionPatientDoctor({ route }) {
 
     const showAlertMessage = () => setShowAlert(true);
 
+    const handleKeyPress = ({ nativeEvent }) => {
+        if (nativeEvent.key === 'Enter') {
+          Keyboard.dismiss();
+        }
+      };
+
     const handleAddOrUpdatePrescription = async () => {
         if (id) {
             Keyboard.dismiss();
             await handleUpdatePrescription(input, patient, id);
+            Toast.show({
+                type: ALERT_TYPE.SUCCESS,
+                title: 'Mensagem',
+                textBody: 'Atualizado com sucesso!',
+                autoClose: 1500,
+                
+            })
         } else {
             Keyboard.dismiss();
             await handlePrescription(input, patient);
+            Toast.show({
+                type: ALERT_TYPE.SUCCESS,
+                title: 'Mensagem',
+                textBody: 'Adicionado com sucesso!',
+                autoClose: 1500
+            })
         }
         showAlertMessage();
         setTimeout(() => {
@@ -45,39 +65,41 @@ export default function PrescriptionPatientDoctor({ route }) {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                    <View style={styles.box}>
-        <Image
-            source={{ uri: `http://192.168.0.100:3000/files/${photo}`}}
-            width={100}
-            height={100}
-            borderRadius={50}
-         />
+            <View style={styles.container}>
+
+                <View style={styles.patient}>
+                    <Image
+                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
+                        width={60}
+                        height={60}
+                        borderRadius={30}
+                    />
+                    <Text style={styles.name}>{route.params.patient.name}</Text>
                 </View>
 
-                <TextInput
-                placeholder='Descreva a receita' 
-                    style={styles.textarea}
-                    multiline={true}
-                    value={input}
-                    onChangeText={(text) => setInput(text)}
-                />
-                <Submit
-                    text={id ? 'Atualizar' : 'Adicionar'}
-                    onPress={handleAddOrUpdatePrescription}
-                    loadingAuth={loading}
-                />
+
+                <View style={styles.box}>
+                    <View style={styles.content}>
+
+                        <Text style={styles.text}>Descreva a receita:</Text>
+
+                        <TextInput
+                            placeholder='Descreva a receita'
+                            style={styles.textarea}
+                            multiline={true}
+                            value={input}
+                            onChangeText={(text) => setInput(text)}
+                            onKeyPress={handleKeyPress}
+                        />
+
+                        <Submit
+                            text={id ? 'Atualizar' : 'Adicionar'}
+                            onPress={handleAddOrUpdatePrescription}
+                            loadingAuth={loading}
+                        />
+                    </View>
+                </View>
+
             </View>
-            <AwesomeAlert
-                show={showAlert}
-                showProgress={false}
-                title="Mensagem"
-                message={id ? 'Receita atualizada com sucesso!' : 'Receita adicionada com sucesso!'}
-                closeOnTouchOutside={true}
-                closeOnHardwareBackPress={false}
-                showCancelButton={false}
-            />
-        </View>
     );
 }

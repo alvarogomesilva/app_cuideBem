@@ -8,32 +8,47 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    content: {
-        padding: 15,
+    patient: {
+        marginBottom: 20,
         marginHorizontal: 15,
-        justifyContent: 'center',
+        padding: 10,
+        borderRadius: 10,
         backgroundColor: white,
-        marginVertical: 15,
-        borderRadius: 12
-        
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 15
     },
 
     box: {
-        width: 100, 
-        height: 100,
-        backgroundColor: '#1976d2',
-        marginVertical: 10,
-        alignSelf: 'center',
-        borderRadius: 50
+        flex: 2,
+        backgroundColor: white,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25
+    },
+
+    content: {
+        marginVertical: 15,
+        marginHorizontal: 15
+    },
+
+    name: {
+        fontSize: 18,
+        color: neutral
+    },
+
+    text: {
+        fontStyle: 'italic',
+        color: neutral,
+        marginVertical: 5,
+        fontSize: 20
     },
 
     textarea: {
         padding: 15,
-        height: 100,
+        height: 350,
         borderRadius: 10,
         textAlignVertical: 'top',
-        backgroundColor: '#fafafa',
-        fontSize: 22,
-        
+        backgroundColor: '#eeeeee',
+        fontSize: 20,
     }
 })
