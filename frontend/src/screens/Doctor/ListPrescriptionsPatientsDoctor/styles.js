@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary } from "../../../constants/colors";
+import { neutral, primary, white } from "../../../constants/colors";
 
 const styles = StyleSheet.create({
   background: {
@@ -7,9 +7,15 @@ const styles = StyleSheet.create({
     backgroundColor: primary,
   },
 
-  container:{
-    flex:1,
-    marginHorizontal: 15
+  content: {
+    flex: 2,
+    marginTop: 25,
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    backgroundColor: white,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: '#fafafa'
   },
 
   title: {
@@ -21,7 +27,8 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     color: neutral,
-    fontSize: 20
+    fontSize: 20,
+    marginVertical: 15
   }
 
 });

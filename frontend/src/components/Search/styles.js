@@ -4,7 +4,8 @@ import { neutral, second, white } from "../../constants/colors";
 export const styles = StyleSheet.create({
     container: {
         height: 58,
-        marginVertical: 15,
+        marginVertical: 10,
+        marginHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
     },

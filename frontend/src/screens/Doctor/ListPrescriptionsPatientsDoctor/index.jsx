@@ -1,10 +1,11 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Patients from "../../../components/Patients";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
+import { primary } from "../../../constants/colors";
 
 const MemoizedPatients = memo(Patients);
 
@@ -19,7 +20,7 @@ export default function ListPrescriptionsPatientsDoctor() {
         try {
             const patients = await api.get('/patients', { params: { search: searchTerm } });
             setListPatients(patients.data);
-            
+
         } catch (error) {
             console.error("Error loading patients:", error);
         } finally {
@@ -45,32 +46,33 @@ export default function ListPrescriptionsPatientsDoctor() {
     }, [loadPatients]);
 
     return (
-        <SafeAreaView style={styles.background}>
-            <View style={styles.container}>
+        <View style={styles.background} >
+
                 <Search
                     value={searchTerm}
                     onChangeText={handleSearchChange}
                     onSubmitEditing={handleSearchSubmit}
                 />
 
-                {loading ? (
-                    <ActivityIndicator size="large" color="#FFF" />
-                ) : (
-                   (listPatients && listPatients.length > 0 ? (
-                    <FlatList
-                    data={listPatients}
-                    renderItem={({ item }) => (
-                        <MemoizedPatients
-                            data={item}
-                            onPress={() => navigation.navigate('PrescriptionPatientDoctor', {patient: item})}
-                        />
+                <View style={styles.content}>
+                    {loading ? (
+                        <ActivityIndicator size="large" color={primary} />
+                    ) : (
+                        (listPatients && listPatients.length > 0 ? (
+                            <FlatList
+                                data={listPatients}
+                                renderItem={({ item }) => (
+                                    <MemoizedPatients
+                                        data={item}
+                                        onPress={() => navigation.navigate('PrescriptionPatientDoctor', { patient: item })}
+                                    />
+                                )}
+                            />
+                        ) : (
+                            <Text style={styles.text}>Nenhum paciente encontrado!</Text>
+                        ))
                     )}
-                />
-                   ):(
-                    <Text style={styles.text}>Nenhum paciente encontrado!</Text>
-                   ))
-                )}
-            </View>
-        </SafeAreaView>
+                </View>
+        </View>
     );
 }

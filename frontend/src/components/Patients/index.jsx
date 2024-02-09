@@ -3,15 +3,15 @@ import { styles } from "./styles";
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { neutral } from "../../constants/colors";
+import { neutral, primary } from "../../constants/colors";
 import { useEffect, useState } from "react";
 
 const Patients = ({ data, onPress, newPatient }) => {
 
-  const [avatar, setAvatar] = useState(`http://10.3.18.71:3000/files/${data?.photo}`);
+  const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`);
 
   useEffect(() => {
-    setAvatar(`http://10.3.18.71:3000/files/${data?.photo}`);
+    setAvatar(`http://192.168.0.100:3000/files/${data?.photo}`);
   }, [data?.photo]);
 
   return (
@@ -37,7 +37,7 @@ const Patients = ({ data, onPress, newPatient }) => {
       {newPatient ? (
         <Feather name="edit" size={20} color={neutral} />
       ) : (
-        <AntDesign name="right" size={20} color={neutral} />
+        <View style={{ width: 10, height: 10, backgroundColor: primary, borderRadius: 5, marginRight: 15 }}/>
       )}
     </TouchableOpacity>
   );

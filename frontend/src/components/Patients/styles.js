@@ -10,9 +10,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         gap: 10,
         backgroundColor: white,
+        marginHorizontal: 5,
         borderRadius: 10,
         marginVertical: 10,
-        padding: 10
+        padding: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 2,
     },
 
     box: {

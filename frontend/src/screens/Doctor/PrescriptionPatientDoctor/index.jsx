@@ -1,60 +1,68 @@
-import { View, Alert, Keyboard } from "react-native";
-import { styles } from "./styles";
-import Input from '../../../components/Input'
-import Submit from '../../../components/Submit'
-import { useEffect, useState } from "react";
-import api from "../../../api";
-import { usePrescription } from "../../../hooks/doctors/usePrescription";
+import React, { useState, useEffect } from 'react';
+import { View, Keyboard, TextInput, Text, Image } from 'react-native';
+import Submit from '../../../components/Submit';
+import { usePrescription } from '../../../hooks/doctors/usePrescription';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import api from '../../../api';
+import { styles } from './styles';
 
 export default function PrescriptionPatientDoctor({ route }) {
-    const [input, setInput] = useState('')
-    const [recipe, setRecipe] = useState('')
-    const [id, setId] = useState('')
-    const [patient, setPatient] = useState(route.params.patient.id)
-    const { handlePrescription, handleUpdatePrescription, loading } = usePrescription()
+    const [input, setInput] = useState('');
+    const [id, setId] = useState('');
+    const [patient, setPatient] = useState(route.params.patient.id);
+    const [photo, setPhoto] = useState(route.params.patient.photo)
+    const { handlePrescription, handleUpdatePrescription, loading } = usePrescription();
     const [showAlert, setShowAlert] = useState(false);
-
+    console.log(route.params.patient)
     useEffect(() => {
         async function loadPrescription() {
             try {
-                const prescription = await api.get(`/prescriptions/${patient}`)
-                setInput(prescription.data.recipe)
-                setId(prescription.data.id)
+                const prescription = await api.get(`/prescriptions/${patient}`);
+                setInput(prescription.data.recipe);
+                setId(prescription.data.id);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
 
-        loadPrescription()
-    }, [])
+        loadPrescription();
+    }, [patient]);
 
     const showAlertMessage = () => setShowAlert(true);
 
     const handleAddOrUpdatePrescription = async () => {
         if (id) {
+            Keyboard.dismiss();
             await handleUpdatePrescription(input, patient, id);
         } else {
-            await handlePrescription(recipe, patient);
+            Keyboard.dismiss();
+            await handlePrescription(input, patient);
         }
-        Keyboard.dismiss()
         showAlertMessage();
         setTimeout(() => {
-            setShowAlert(false)
-        }, 1700)
+            setShowAlert(false);
+        }, 1700);
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Input
-                    value={id ? input : recipe}
-                    onChangeText={id ? setInput : setRecipe}
-                    height={150}
-                    multiline={true}
-                    paddingTop={15}
-                />
+                    <View style={styles.box}>
+        <Image
+            source={{ uri: `http://192.168.0.100:3000/files/${photo}`}}
+            width={100}
+            height={100}
+            borderRadius={50}
+         />
+                </View>
 
+                <TextInput
+                placeholder='Descreva a receita' 
+                    style={styles.textarea}
+                    multiline={true}
+                    value={input}
+                    onChangeText={(text) => setInput(text)}
+                />
                 <Submit
                     text={id ? 'Atualizar' : 'Adicionar'}
                     onPress={handleAddOrUpdatePrescription}
@@ -65,7 +73,7 @@ export default function PrescriptionPatientDoctor({ route }) {
                 show={showAlert}
                 showProgress={false}
                 title="Mensagem"
-                message={id ? "Receita atualizada com sucesso!" : "Receita adicionada com sucesso!"}
+                message={id ? 'Receita atualizada com sucesso!' : 'Receita adicionada com sucesso!'}
                 closeOnTouchOutside={true}
                 closeOnHardwareBackPress={false}
                 showCancelButton={false}

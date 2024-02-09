@@ -44,32 +44,32 @@ export default function ListRecordsPatientsDoctor() {
     }, [loadPatients]);
 
     return (
-        <SafeAreaView style={styles.background}>
-            <View style={styles.container}>
+        <View style={styles.background}>
                 <Search
                     value={searchTerm}
                     onChangeText={handleSearchChange}
                     onSubmitEditing={handleSearchSubmit}
                 />
 
-                {loading ? (
-                    <ActivityIndicator size="large" color="#FFF" />
-                ) : (
-                    (listPatients && listPatients.length > 0 ? (
-                        <FlatList
-                            data={listPatients}
-                            renderItem={({ item }) => (
-                                <MemoizedPatients
-                                    data={item}
-                                    onPress={() => navigation.navigate('RecordPatientDoctor', { patient: item })}
-                                />
-                            )}
-                        />
+                <View style={styles.content}>
+                    {loading ? (
+                        <ActivityIndicator size="large" color="#FFF" />
                     ) : (
-                        <Text style={styles.text}>Nenhum paciente encontrado!</Text>
-                    ))
-                )}
-            </View>
-        </SafeAreaView>
+                        (listPatients && listPatients.length > 0 ? (
+                            <FlatList
+                                data={listPatients}
+                                renderItem={({ item }) => (
+                                    <MemoizedPatients
+                                        data={item}
+                                        onPress={() => navigation.navigate('RecordPatientDoctor', { patient: item })}
+                                    />
+                                )}
+                            />
+                        ) : (
+                            <Text style={styles.text}>Nenhum paciente encontrado!</Text>
+                        ))
+                    )}
+                </View>
+        </View>
     );
 }
