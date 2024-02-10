@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 import AuthProvider from './src/contexts/AuthContext';
 import { preventAutoHideAsync } from 'expo-splash-screen'
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,7 @@ export default function App() {
           <Routes />
         </NavigationContainer>
       </AuthProvider>
-
+    
     </AlertNotificationRoot>
 
   );

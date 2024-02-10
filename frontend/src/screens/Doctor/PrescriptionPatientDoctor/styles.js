@@ -59,14 +59,14 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderWidth: 3,
         borderRadius: 10,
-        borderColor: Colors.ghost,
+        borderColor: '#e0e0e0',
         textAlignVertical: 'top',
         padding: 15
     },
 
     day: {
         alignSelf: 'flex-end',
-        color: '#DDDDDD',
+        color: '#e0e0e0',
         marginTop: 10,
         marginRight: 20
     },

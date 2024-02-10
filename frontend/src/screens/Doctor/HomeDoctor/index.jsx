@@ -1,51 +1,63 @@
 import { styles } from './styles';
-import { Image, SafeAreaView, Text, View } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
-import Card from '../../../components/Card';
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import SignOut from '../../../components/SignOut'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
-
+import { LinearGradient } from 'expo-linear-gradient';
+import { Entypo } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 export default function HomeDoctor() {
     const navigation = useNavigation()
     const { user } = useContext(AuthContext)
     return (
-        <SafeAreaView style={styles.container}>
-            <SignOut />
-            <View style={styles.top}>
-                <View style={styles.boxUser}>
-                    <FontAwesome5 name="user-md" style={styles.iconUser} />
-                </View>
-                <Text style={styles.nameDoctor}>{user.name}</Text>
-                {/* <Text style={styles.crmDoctor}>CRM: {user.crm}</Text> */}
+        <View style={styles.container}>
 
-            </View>
+            <LinearGradient
+                colors={['#809DBB', '#8BA8C6', '#96B3D1', '#FFFFFF']}
+                style={styles.gradient}>
+                <SafeAreaView style={styles.top}>
+
+                    <View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                            <Text style={styles.title}>Olá,</Text>
+                            <FontAwesome name="user-md" style={styles.doctor} />
+                        </View>
+                        <Text style={styles.name}>{user.name}</Text>
+                    </View>
+                    <Image
+                        source={require('../../../../assets/logo.png')}
+                        style={{ width: 150, height: 150 }}
+                    />
+                </SafeAreaView>
+            </LinearGradient>
+
             <View style={styles.bottom}>
+                <View style={styles.cards}>
+                    <TouchableOpacity 
+                        style={styles.card} 
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ListRecordsPatientsDoctor')}    
+                    >
+                        <MaterialCommunityIcons name="ballot-recount-outline" style={styles.icon} />
+                        <Text style={styles.text}>Prontuários</Text>
+                        <Fontisto name="heartbeat-alt" style={styles.pulse} />
+                    </TouchableOpacity>
 
-                <Card
-                    onPress={() => navigation.navigate('ListRecordsPatientsDoctor')}>
-                    <Image
-                        source={require('../../../../assets/record.png')}
-                        style={{ width: 230, height: 230 }}
-                    />
-                </Card>
-
-                <Card
-                    onPress={() => navigation.navigate('ListPrescriptionsPatientsDoctor')}>
-                    <Image
-                        source={require('../../../../assets/prescription.png')}
-                        style={{ width: 230, height: 230 }}
-                    />
-                </Card>
-                <Image
-                    source={require('../../../../assets/doctors.png')}
-                    style={{ width: 220, height: 220 }}
-                />
+                    <TouchableOpacity 
+                        style={styles.card} 
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ListPrescriptionsPatientsDoctor')} 
+                    >
+                        <Fontisto name="prescription" style={styles.icon} />
+                        <Text style={styles.text}>Receitas</Text>
+                        <Fontisto name="heartbeat-alt" style={styles.pulse} />
+                    </TouchableOpacity>
+                </View>
             </View>
-
-
-        </SafeAreaView>
+        </View>
     )
 }
