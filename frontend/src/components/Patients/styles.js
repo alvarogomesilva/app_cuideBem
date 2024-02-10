@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { neutral, white } from '../../constants/colors'
+import Colors, { neutral, white } from '../../constants/colors'
 
 
 export const styles = StyleSheet.create({
@@ -36,6 +36,6 @@ export const styles = StyleSheet.create({
     }, 
 
     birth: {
-        color: neutral
+        color: '#e0e0e0'
     }
 })

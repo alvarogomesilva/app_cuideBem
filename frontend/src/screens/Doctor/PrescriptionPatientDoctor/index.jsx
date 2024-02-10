@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Keyboard, TextInput, Text, Image } from 'react-native';
-import Submit from '../../../components/Submit';
+import { View, Keyboard, TextInput, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { usePrescription } from '../../../hooks/doctors/usePrescription';
 import api from '../../../api';
 import { styles } from './styles';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import Colors from '../../../constants/colors';
+import { format } from 'date-fns'
 
 export default function PrescriptionPatientDoctor({ route }) {
     const [input, setInput] = useState('');
@@ -29,14 +31,6 @@ export default function PrescriptionPatientDoctor({ route }) {
         loadPrescription();
     }, [patient]);
 
-    const showAlertMessage = () => setShowAlert(true);
-
-    const handleKeyPress = ({ nativeEvent }) => {
-        if (nativeEvent.key === 'Enter') {
-          Keyboard.dismiss();
-        }
-      };
-
     const handleAddOrUpdatePrescription = async () => {
         if (id) {
             Keyboard.dismiss();
@@ -45,8 +39,8 @@ export default function PrescriptionPatientDoctor({ route }) {
                 type: ALERT_TYPE.SUCCESS,
                 title: 'Mensagem',
                 textBody: 'Atualizado com sucesso!',
-                autoClose: 1500,
-                
+                autoClose: 2000,
+
             })
         } else {
             Keyboard.dismiss();
@@ -55,51 +49,65 @@ export default function PrescriptionPatientDoctor({ route }) {
                 type: ALERT_TYPE.SUCCESS,
                 title: 'Mensagem',
                 textBody: 'Adicionado com sucesso!',
-                autoClose: 1500
+                autoClose: 2000
             })
         }
-        showAlertMessage();
-        setTimeout(() => {
-            setShowAlert(false);
-        }, 1700);
+    
+    };
+
+    const handleKeyPress = ({ nativeEvent }) => {
+        if (nativeEvent.key === 'Enter') {
+            Keyboard.dismiss();
+        }
     };
 
     return (
-            <View style={styles.container}>
 
-                <View style={styles.patient}>
-                    <Image
-                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
-                        width={60}
-                        height={60}
-                        borderRadius={30}
-                    />
-                    <Text style={styles.name}>{route.params.patient.name}</Text>
-                </View>
-
-
-                <View style={styles.box}>
-                    <View style={styles.content}>
-
-                        <Text style={styles.text}>Descreva a receita:</Text>
-
-                        <TextInput
-                            placeholder='Descreva a receita'
-                            style={styles.textarea}
-                            multiline={true}
-                            value={input}
-                            onChangeText={(text) => setInput(text)}
-                            onKeyPress={handleKeyPress}
-                        />
-
-                        <Submit
-                            text={id ? 'Atualizar' : 'Adicionar'}
-                            onPress={handleAddOrUpdatePrescription}
-                            loadingAuth={loading}
-                        />
-                    </View>
-                </View>
-
+        <View style={styles.container}>
+            <View style={styles.top}>
+                <LinearGradient
+                    colors={['#5E7B99', '#C4E1FF']}
+                    style={styles.gradient}>
+                </LinearGradient>
             </View>
+
+            <View style={styles.bottom}>
+                <View style={styles.rounded}>
+                    <Image
+                        source={{ uri: `http://192.168.0.100:3000/files/${photo}` }}
+                        style={styles.image}
+                    />
+                </View>
+                <Text style={styles.name}>{route.params.patient.name}</Text>
+                <Text style={styles.patient}>Paciente</Text>
+
+                <TextInput
+                    style={styles.textarea}
+                    placeholder='Descreva a receita'
+                    multiline={true}
+                    onKeyPress={handleKeyPress}
+                    value={input}
+                    onChangeText={(text) => setInput(text)}
+                />
+                <Text style={styles.day}>{format(new Date(), 'dd MMM, yyyy')
+}</Text>
+
+                <View style={styles.areaButton}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        activeOpacity={0.9}
+                        onPress={handleAddOrUpdatePrescription}
+                    >
+                        {loading ? (
+                            <ActivityIndicator size="large" color="#FFF"/>
+                        ) : (
+                            <Text style={styles.buttonText}>{id ? 'Atualizar' : 'Adicionar'}</Text>
+                        )}
+                        
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+        </View>
     );
 }

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Keyboard, Text, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, Animated, Image, Keyboard, KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import Input from "../../../components/Input";
-import Submit from "../../../components/Submit";
-import MaskInput, { Masks } from "react-native-mask-input";
 import { useRecord } from "../../../hooks/doctors/useRecord";
 import api from "../../../api";
+import { LinearGradient } from "expo-linear-gradient";
+import { format } from 'date-fns'
+import { Toast, ALERT_TYPE } from "react-native-alert-notification";
 
 export default function RecordPatientDoctor({ route }) {
     const { handleRecord, handleUpdateRecord, loading } = useRecord();
     const [patient, setPatient] = useState(route.params.patient.id);
+    const [photo, setPhoto] = useState(route.params.patient.photo)
     const [id, setId] = useState('');
     const [inputs, setInputs] = useState({
         title: '',
@@ -18,102 +19,148 @@ export default function RecordPatientDoctor({ route }) {
         description: '',
         patient_id: patient
     });
-    const [showAlert, setShowAlert] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
+
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+    const fadeAnim = useRef(new Animated.Value(1)).current; // Initial opacity value
 
     useEffect(() => {
-        async function loadPrescription() {
-            try {
-                const record = await api.get(`/records/${patient}`);
-                if (record.data) {
-                    const { title, initial_date, final_date, description } = record.data;
-                    setInputs({
-                        title,
-                        initial_date,
-                        final_date,
-                        description,
-                        patient_id: patient
-                    });
-                    setId(record.data.id);
-                }
-            } catch (error) {
-                console.log(error);
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+                Animated.timing(
+                    fadeAnim,
+                    {
+                        toValue: 0,
+                        duration: 500,
+                        useNativeDriver: true,
+                    }
+                ).start();
             }
-        }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+                Animated.timing(
+                    fadeAnim,
+                    {
+                        toValue: 1,
+                        duration: 300,
+                        useNativeDriver: true,
+                    }
+                ).start();
+            }
+        );
 
-        loadPrescription();
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
     }, []);
 
     const handleAddOrUpdateRecord = async () => {
         try {
             if (id) {
                 await handleUpdateRecord(inputs, id);
-                setAlertMessage("Registro atualizado com sucesso!");
+                Toast.show({
+                    type: ALERT_TYPE.SUCCESS,
+                    title: 'Mensagem',
+                    textBody: 'Atualizado com sucesso!',
+                    autoClose: 2000,
+    
+                })
             } else {
                 await handleRecord(inputs);
-                setAlertMessage("Registro adicionado com sucesso!");
+                Toast.show({
+                    type: ALERT_TYPE.SUCCESS,
+                    title: 'Mensagem',
+                    textBody: 'Adicionado com sucesso!',
+                    autoClose: 2000
+                })
             }
-            Keyboard.dismiss()
-            setShowAlert(true);
-            setTimeout(() => {
-                setShowAlert(false)
-            }, 1700)
             
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleCloseAlert = () => {
-        setShowAlert(false);
+    const handleKeyPress = ({ nativeEvent }) => {
+        if (nativeEvent.key === 'Enter') {
+            Keyboard.dismiss();
+        }
     };
+
+    useEffect(() => {
+        async function loadPrescription() {
+            try {
+                const record = await api.get(`/records/${patient}`);
+                const { title, description } = record.data
+                setInputs({ title, description });
+                setId(record.data.id);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        loadPrescription();
+    }, [patient]);
 
     return (
         <View style={styles.container}>
-            <View style={styles.content}>
-                {/* <Input
-                    placeholder='Titulo'
-                    value={inputs.title}
-                    onChangeText={(text) => setInputs({ ...inputs, title: text })}
-                />
-
-                <View style={styles.box}>
-                    <MaskInput
-                        placeholder="01/01/2024"
-                        style={styles.input}
-                        mask={Masks.DATE_DDMMYYYY}
-                        value={inputs.initial_date}
-                        keyboardType="numeric"
-                        onChangeText={(text) => setInputs({ ...inputs, initial_date: text })}
-                    />
-
-                    <Text style={styles.text}>Até</Text>
-                    <MaskInput
-                        placeholder="01/04/2024"
-                        style={styles.input}
-                        mask={Masks.DATE_DDMMYYYY}
-                        value={inputs.final_date}
-                        keyboardType="numeric"
-                        onChangeText={(text) => setInputs({ ...inputs, final_date: text })}
-                    />
-                </View>
-
-                <Input
-                    placeholder='Descrição'
-                    paddingTop={15}
-                    multiline={true}
-                    height={100}
-                    value={inputs.description}
-                    onChangeText={(text) => setInputs({ ...inputs, description: text })}
-                /> */}
-
-                {/* <Submit
-                    text={id ? 'Atualizar' : 'Adicionar'}
-                    onPress={handleAddOrUpdateRecord}
-                    loadingAuth={loading}
-                /> */}
+            <View style={styles.top}>
+                <LinearGradient
+                    colors={['#5E7B99', '#C4E1FF']}
+                    style={styles.gradient}>
+                </LinearGradient>
             </View>
 
+            <View style={styles.bottom}>
+                <View style={styles.rounded}>
+                    <Image
+                        source={{ uri: `http://192.168.0.100:3000/files/${photo}` }}
+                        style={styles.image}
+                    />
+                </View>
+                <Text style={styles.name}>{route.params.patient.name}</Text>
+                <Text style={styles.patient}>Paciente</Text>
+
+                <ScrollView>
+                    <TextInput
+                        value={inputs.title}
+                        placeholder='Descreva o titulo'
+                        style={styles.input}
+                        onChangeText={(text) => setInputs({...inputs, title: text})}
+                    />
+                    <TextInput
+                        style={styles.textarea}
+                        placeholder='Descreva a receita'
+                        multiline={true}
+                        onKeyPress={handleKeyPress}
+                        value={inputs.description}
+                        onChangeText={(text) => setInputs({...inputs, description: text})}
+                    />
+                    <Text
+                        style={styles.day}>
+                        {format(new Date(), 'dd MMM, yyyy')}
+                    </Text>
+                </ScrollView>
+
+                <Animated.View style={[styles.areaButton, { opacity: fadeAnim }]}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        activeOpacity={0.9}
+                        onPress={handleAddOrUpdateRecord}
+                    >
+                        {loading ? (
+                            <ActivityIndicator size="large" color="#FFF" />
+                        ) : (
+                            <Text style={styles.buttonText}>{id ? 'Atualizar' : 'Adicionar'}</Text>
+                        )}
+                    </TouchableOpacity>
+                </Animated.View>
+            </View>
         </View>
     )
 }

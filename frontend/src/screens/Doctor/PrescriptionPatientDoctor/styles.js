@@ -1,54 +1,96 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary, white } from "../../../constants/colors";
+import Colors from "../../../constants/colors";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: primary,
-        justifyContent: 'center'
+        backgroundColor: Colors.white
     },
 
-    patient: {
-        marginBottom: 20,
-        marginHorizontal: 15,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: white,
-        flexDirection: 'row',
+    gradient: {
+        height: hp(25),
+        backgroundColor: Colors.quinary,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
+    },
+
+    rounded:{
+        width: wp(30),
+        height: hp(17),
+        borderRadius: 100,
+        backgroundColor: Colors.white,
+        justifyContent: 'center',
         alignItems: 'center',
-        gap: 15
+        alignSelf: 'center',
+        top: -hp(9)
+    }, 
+
+    image: {
+        width: wp(28),
+        height: hp(16),
+        borderRadius: 100
     },
 
-    box: {
-        flex: 2,
-        backgroundColor: white,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
-    },
-
-    content: {
-        marginVertical: 15,
-        marginHorizontal: 15
+    bottom: {
+        flex: 1,
+        backgroundColor: Colors.white,
+        
     },
 
     name: {
-        fontSize: 18,
-        color: neutral
+        top: -hp(7),
+        color: Colors.black,
+        fontSize: hp(3),
+        textAlign: 'center'
     },
 
-    text: {
-        fontStyle: 'italic',
-        color: neutral,
-        marginVertical: 5,
-        fontSize: 20
+    patient: {
+        top: -hp(7),
+        textAlign: 'center',
+        color: '#bdbdbd'
     },
 
     textarea: {
-        padding: 15,
-        height: 350,
+        alignSelf: 'center',
+        width: wp('90%'),
+        height: hp(30),
+        fontSize: hp(2.6),
+        backgroundColor: Colors.white,
+        borderWidth: 3,
         borderRadius: 10,
+        borderColor: Colors.ghost,
         textAlignVertical: 'top',
-        backgroundColor: '#eeeeee',
-        fontSize: 20,
+        padding: 15
+    },
+
+    day: {
+        alignSelf: 'flex-end',
+        color: '#DDDDDD',
+        marginTop: 10,
+        marginRight: 20
+    },
+
+    areaButton : {
+        flex: 1,
+    },
+
+    button: {
+        position: 'absolute',
+        backgroundColor: Colors.quaternary,
+        width: wp('90%'),
+        alignSelf: 'center',
+        height: hp(8),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        bottom: 0,
+        marginBottom: 15
+    },
+
+    buttonText: {
+        color: Colors.white,
+        fontSize: hp(2.5)
     }
+
 })

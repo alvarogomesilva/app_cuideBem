@@ -1,11 +1,12 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TextInput, View, VirtualizedList } from "react-native";
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Patients from "../../../components/Patients";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
-import { primary } from "../../../constants/colors";
+import { LinearGradient } from "expo-linear-gradient";
+import { Feather } from '@expo/vector-icons';
 
 const MemoizedPatients = memo(Patients);
 
@@ -46,33 +47,47 @@ export default function ListPrescriptionsPatientsDoctor() {
     }, [loadPatients]);
 
     return (
-        <View style={styles.background} >
+        <View style={styles.container} >
+            <View style={styles.top}>
+                <LinearGradient
+                    colors={['#5E7B99', '#C4E1FF']}
+                    style={styles.gradient}>
 
-                <Search
-                    value={searchTerm}
-                    onChangeText={handleSearchChange}
-                    onSubmitEditing={handleSearchSubmit}
-                />
+                    <Text style={styles.title}>Encontre um paciente</Text>
+                    <View style={styles.boxSearch}>
 
-                <View style={styles.content}>
-                    {loading ? (
-                        <ActivityIndicator size="large" color={primary} />
+                        <TextInput
+                            style={styles.search}
+                            placeholder="Pesquisar"
+                            value={searchTerm}
+                            onChangeText={(text) => setSearchTerm(text)}
+                        />
+                        <Feather name="search" style={styles.icon} />
+                    </View>
+
+                </LinearGradient>
+            </View>
+
+            <View style={styles.content}>
+
+                {loading ? (
+                    <ActivityIndicator size="large" color='#EEE' />
+                ) : (
+                    (listPatients && listPatients.length > 0 ? (
+                        <FlatList
+                            data={listPatients}
+                            renderItem={({ item }) => (
+                                <MemoizedPatients
+                                    data={item}
+                                    onPress={() => navigation.navigate('PrescriptionPatientDoctor', { patient: item })}
+                                />
+                            )}
+                        />
                     ) : (
-                        (listPatients && listPatients.length > 0 ? (
-                            <FlatList
-                                data={listPatients}
-                                renderItem={({ item }) => (
-                                    <MemoizedPatients
-                                        data={item}
-                                        onPress={() => navigation.navigate('PrescriptionPatientDoctor', { patient: item })}
-                                    />
-                                )}
-                            />
-                        ) : (
-                            <Text style={styles.text}>Nenhum paciente encontrado!</Text>
-                        ))
-                    )}
-                </View>
+                        <Text style={styles.text}>Nenhum paciente encontrado!</Text>
+                    ))
+                )}
+            </View>
         </View>
     );
 }

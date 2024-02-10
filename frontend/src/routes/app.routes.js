@@ -62,49 +62,57 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListPrescriptionsPatientsDoctor'
                     component={ListPrescriptionsPatientsDoctor}
-                    options={{
-                        title: 'Receitas',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    // options={{
+                    //     title: 'Receitas',
+                    //     headerShadowVisible: false,
+                    //     headerTintColor: neutral,
+                    //     headerStyle: {
+                    //         backgroundColor: primary
+                    //     },
+                    // }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name='ListRecordsPatientsDoctor'
                     component={ListRecordsPatientsDoctor}
-                    options={{
-                        title: 'Prontuários',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    // options={{
+                    //     title: 'Prontuários',
+                    //     headerShadowVisible: false,
+                    //     headerTintColor: neutral,
+                    //     headerStyle: {
+                    //         backgroundColor: primary
+                    //     },
+                    // }}
+                    options={{ headerShown: false }}
                 />
                     <Stack.Screen
                         name='PrescriptionPatientDoctor'
                         component={PrescriptionPatientDoctor}
+                        // options={{
+                        //     title: null,
+                        //     headerShadowVisible: false,
+                        //     headerTintColor: neutral,
+                        //     headerStyle: {
+                        //         backgroundColor: primary
+                        //     },
+                        // }}
                         options={{
-                            title: 'Receita do paciente',
-                            headerShadowVisible: false,
-                            headerTintColor: neutral,
-                            headerStyle: {
-                                backgroundColor: primary
-                            },
+                            headerShown: false
                         }}
                     />
                     <Stack.Screen
                         name='RecordPatientDoctor'
                         component={RecordPatientDoctor}
+                        // options={{
+                        //     title: 'Prontuário do paciente',
+                        //     headerShadowVisible: false,
+                        //     headerTintColor: neutral,
+                        //     headerStyle: {
+                        //         backgroundColor: primary
+                        //     },
+                        // }}
                         options={{
-                            title: 'Prontuário do paciente',
-                            headerShadowVisible: false,
-                            headerTintColor: neutral,
-                            headerStyle: {
-                                backgroundColor: primary
-                            },
+                            headerShown: false
                         }}
                     />
 

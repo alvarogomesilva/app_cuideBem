@@ -1,34 +1,60 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary, white } from "../../../constants/colors";
+import Colors from "../../../constants/colors";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
-    backgroundColor: primary,
+    backgroundColor: Colors.white
   },
 
-  content: {
-    flex: 2,
-    marginTop: 25,
-    paddingHorizontal: 15,
-    paddingTop: 15,
-    backgroundColor: white,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    backgroundColor: '#fafafa'
+  gradient: {
+    height: hp(30),
+    backgroundColor: Colors.quinary,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    justifyContent: 'flex-end'
   },
 
   title: {
-    fontSize: 40,
-    textAlign: 'center',
-    marginVertical: 15
+    fontSize: hp(3),
+    color: Colors.white,
+    marginHorizontal: 15
+    
+  },
+
+  boxSearch: {
+    position: 'relative'
+  },
+
+  search: {
+    fontSize: hp(2.5),
+    paddingLeft: 15,
+    backgroundColor: Colors.white,
+    marginHorizontal: 15,
+    marginVertical: 15,
+    height: hp(8),
+    borderRadius: 10
+  },
+
+  icon: {
+    fontSize: hp(3),
+    color: '#e0e0e0',
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    top: hp(4.5),
+    right: 30
   },
 
   text: {
+    color: '#e0e0e0',
     textAlign: 'center',
-    color: neutral,
-    fontSize: 20,
+    fontSize: 18,
     marginVertical: 15
+  },
+
+  content: {
+    marginHorizontal: 15
   }
 
 });
