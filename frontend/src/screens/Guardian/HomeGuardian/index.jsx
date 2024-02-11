@@ -1,53 +1,87 @@
-import styles from './styles';
+import { styles } from './styles';
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-
-import { SafeAreaView, Text, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
+import SignOut from '../../../components/SignOut'
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
-import Card from "../../../components/Card";
-import SignOut from '../../../components/SignOut';
-import { AuthContext } from '../../../contexts/AuthContext';
-import { useContext } from 'react';
-
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 export default function HomeGuardian() {
     const navigation = useNavigation()
     const {user} = useContext(AuthContext)
     return (
-        <SafeAreaView style={styles.background}>
-            <SignOut />
-            <View style={styles.top}>
-                <View style={styles.boxUser}>
-                    <FontAwesome5 name="user-shield" style={styles.iconUser} />
-                </View>
+        <View style={styles.container}>
 
-                <Text style={styles.namePatient}>{user.name}</Text>
-                <Text>Data de Nascimento: 09/07/1943</Text>
-            </View>
+            <LinearGradient
+                colors={['#809DBB', '#8BA8C6', '#96B3D1', '#FFFFFF']}
+                style={styles.gradient}>
+
+                <SafeAreaView style={styles.top}>
+                    <View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                            <Text style={styles.title}>Olá,</Text>
+                        </View>
+                        <Text style={styles.name}>{user.name}</Text>
+                    </View>
+                    <View>
+                        <FontAwesome5 name="user-shield" style={styles.guardian} />
+                        <Text style={styles.span}>Guardião</Text>
+                    </View>
+
+                </SafeAreaView>
+            </LinearGradient>
 
             <View style={styles.bottom}>
+                <View style={styles.cards}>
+                    <TouchableOpacity
+                        style={styles.card}
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ListMyPatientsGuardian')}
+                    >
+                        <FontAwesome5 name="user-friends" style={styles.icon} />
+                        <Text style={styles.text}>Pacientes</Text>
+                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                    </TouchableOpacity>
 
-                <Card title="Pacientes" onPress={() => navigation.navigate("ListMyPatientsGuardian", { newPatient: true })}>
-                    <FontAwesome5 name="user-friends" style={styles.cardIcon} />
-                </Card>
+                    <TouchableOpacity
+                        style={styles.card}
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ListMyDailyRoutinePatientGuardian')}
+                    >
+                        <Fontisto name="prescription" style={styles.icon} />
+                        <Text style={styles.text}>Rotina Diária</Text>
+                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                    </TouchableOpacity>
 
-                <Card title="Rotina Diária" onPress={() => navigation.navigate('ListMyDailyRoutinePatientGuardian')}>
-                    <Entypo name="text-document" style={styles.cardIcon} />
-                </Card>
+                    <TouchableOpacity
+                        style={styles.card}
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ConditionalCardsGuardian')}
+                    >
+                        <FontAwesome5 name="user-md" style={styles.icon} />
+                        <Text style={styles.text}>Prontuário/Receita</Text>
+                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.card}
+                        activeOpacity={0.9}
+                        onPress={() => navigation.navigate('ListMyEventsPatientGuardian')}
+                    >
+                        <FontAwesome5 name="calendar-alt" style={styles.icon} />
+                        <Text style={styles.text}>Agenda/Consulta</Text>
+                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                    </TouchableOpacity>
+                </View>
 
-                <Card title="Prontuário/Receita" onPress={() => navigation.navigate('ConditionalCardsGuardian')}>
-                    <Fontisto name="doctor" style={styles.cardIcon} />
-                </Card>
-
-                <Card title="Agenda/Consultas" onPress={() => navigation.navigate('ListMyEventsPatientGuardian')}>
-                    <AntDesign name="calendar" style={styles.cardIcon} />
-                </Card>
+                <View style={styles.areaButton}>
+                    <SignOut />
+                </View>
             </View>
-
-
-        </SafeAreaView>
+        </View>
     )
 }

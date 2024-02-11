@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: hp(3),
+    fontSize: hp(4.5),
     color: Colors.white,
     marginHorizontal: 15
     

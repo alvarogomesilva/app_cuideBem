@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginHorizontal: 15
+        marginHorizontal: 20
     },
 
     title: {
@@ -34,8 +34,15 @@ export const styles = StyleSheet.create({
     },
 
     doctor: {
-        fontSize: hp(2.5),
-        color: Colors.white
+        fontSize: hp(8),
+        color: Colors.white,
+        marginBottom: 5
+    },
+
+    span: {
+        fontSize: hp(2),
+        color: Colors.white,
+        textAlign: 'center'
     },
 
     bottom: {
@@ -72,12 +79,17 @@ export const styles = StyleSheet.create({
     },
 
     pulse: {
-        fontSize: hp(2.5),
+        fontSize: hp(2),
         position: 'absolute',
         bottom: 0,
-        right: 15,
+        right: 10,
         marginBottom: 15,
         color: Colors.white
-    }
+    },
 
+    areaButton: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 10
+    }
 })

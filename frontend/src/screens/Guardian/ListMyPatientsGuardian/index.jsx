@@ -14,8 +14,8 @@ const ListMyPatientsGuardian = ({ route }) => {
     const { listPatients } = usePatients()
 
 
-    const paramKey = route.params?.paramKey ?? '';
-    const newPatient = route.params.newPatient ?? '';
+    //const paramKey = route.params?.paramKey ?? '';
+    //const newPatient = route.params.newPatient ?? '';
 
     return (
         <SafeAreaView style={styles.container}>
@@ -24,7 +24,7 @@ const ListMyPatientsGuardian = ({ route }) => {
                 style={styles.flatList}
                 data={listPatients}
                 renderItem={({ item }) => <MemoizedPatients
-                    data={item} newPatient={newPatient}
+                    data={item}
                 />}
                 keyExtractor={(item) => item.id.toString()}
             />
@@ -32,7 +32,7 @@ const ListMyPatientsGuardian = ({ route }) => {
                 <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
             )}
 
-            {newPatient && (
+            {/* {newPatient && (
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.7}
@@ -40,7 +40,7 @@ const ListMyPatientsGuardian = ({ route }) => {
                 >
                     <Entypo name="plus" size={30} color="#FFF" />
                 </TouchableOpacity>
-            )}
+            )} */}
 
 
         </SafeAreaView>
