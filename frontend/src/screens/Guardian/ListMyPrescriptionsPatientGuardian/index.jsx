@@ -21,11 +21,6 @@ export default function ListMyPrescriptionsPatientGuardian() {
                     style={styles.gradient}>
 
                     <Text style={styles.title}>Receitas</Text>
-                    <View style={styles.boxSearch}>
-
-
-                    </View>
-
                 </LinearGradient>
             </View>
 
@@ -36,7 +31,7 @@ export default function ListMyPrescriptionsPatientGuardian() {
                     data={listPatients}
                     renderItem={({ item }) => <MemoizedPatients
                         data={item}
-                        onPress={() => navigation.navigate('ShowPrescriptionPatientGuardian', { patient: item })}
+                        onPress={() => navigation.navigate('ListMyDoctorsPrescriptionGuardian', { patient: item })}
                     />}
 
                     keyExtractor={(item) => item.id.toString()}

@@ -25,10 +25,14 @@ export default function HomeDoctor() {
                             <Text style={styles.title}>Olá,</Text>
                         </View>
                         <Text style={styles.name}>{user.name}</Text>
+                        <Text style={styles.span}>Médico</Text>
                     </View>
                     <View>
-                    <FontAwesome5 name="user-md" style={styles.doctor} />
-                        <Text style={styles.span}>Médico</Text>
+                        <Image
+                            source={require('../../../../assets/doctorsHome.png')}
+                            style={{ width: 130, height: 130 }}
+
+                        />
                     </View>
 
                 </SafeAreaView>

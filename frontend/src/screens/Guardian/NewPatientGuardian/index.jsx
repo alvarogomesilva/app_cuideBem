@@ -93,7 +93,7 @@ export default function NewPatientGuardian() {
     useEffect(() => {
         async function loadCaregiver() {
             try {
-                const caregivers = await api.get('/users')
+                const caregivers = await api.get(`/users/${3}`)
                 let newArray = caregivers.data.map((item) => {
                     return {key: item.id, value: item.name}
                   })

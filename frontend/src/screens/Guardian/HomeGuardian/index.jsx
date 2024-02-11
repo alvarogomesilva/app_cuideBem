@@ -27,10 +27,15 @@ export default function HomeGuardian() {
                             <Text style={styles.title}>Olá,</Text>
                         </View>
                         <Text style={styles.name}>{user.name}</Text>
+                        <Text style={styles.span}>Guardião</Text>
                     </View>
                     <View>
-                        <FontAwesome5 name="user-shield" style={styles.guardian} />
-                        <Text style={styles.span}>Guardião</Text>
+                        <Image 
+                            source={require('../../../../assets/guardians.png')}
+                            style={{ width: 130, height: 130 }}
+                        
+                        />
+                       
                     </View>
 
                 </SafeAreaView>

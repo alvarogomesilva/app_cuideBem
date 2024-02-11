@@ -2,46 +2,62 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
+import api from "../../../api";
 
 export default function ShowPrescriptionPatientGuardian({ route }) {
 
-    const [patient, setPatient] = useState(route.params?.patient)
+    const [id, setId] = useState(route.params?.patient.id)
+    const [doctor, setDoctor] = useState(route.params?.doctor.id)
+    const [prescription, setPrescription] = useState('')
     const navigation = useNavigation()
 
-    const { recipe } = patient
-    
+    useEffect(() => {
+        async function loadPrescription() {
+            try {
+                const prescription = await api.get(`/patients/${id}/${doctor}`)
+                setPrescription(prescription.data.recipe)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        loadPrescription()
+    }, [])
+
     return (
         <View style={styles.container}>
-           <SafeAreaView style={styles.safeAreaView}>
-            <View style={styles.top}>
-                <View style={styles.rounded}>
-                    <Image 
-                        source={require('../../../../assets/doctor.png')}
-                        style={{ width: 250, height: 250 }}
-                    />
+            <SafeAreaView style={styles.safeAreaView}>
+                <View style={styles.top}>
+                    <View style={styles.rounded}>
+                        <Image
+                            source={require('../../../../assets/doctor.png')}
+                            style={{ width: 250, height: 250 }}
+                        />
+                    </View>
                 </View>
-            </View>
-            <View style={styles.bottom}>
-                <Text>Dr Mary Jones</Text>
-                <Text>Médico</Text>
+                <View style={styles.bottom}>
+                    <Text>Dr. {route.params.doctor.name}</Text>
+                    <Text>Médico</Text>
 
-                <View style={styles.hr}/>
-                <Text>Receita</Text>
-                <Text>
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                </Text>
+                    <View style={styles.hr} />
+                    <Text>Receita</Text>
+                    <Text>
+                        {prescription ? (
+                            prescription
+                        ): 'Não possui receita'}
+                    </Text>
 
-                <View style={styles.areaButtom}>
-                    <TouchableOpacity 
-                        style={styles.button} 
-                        activeOpacity={0.9}
-                        onPress={() => navigation.goBack()}
-                    >
-                        <Text style={styles.buttonText}>Voltar</Text>
-                    </TouchableOpacity>
+                    <View style={styles.areaButtom}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            activeOpacity={0.9}
+                            onPress={() => navigation.goBack()}
+                        >
+                            <Text style={styles.buttonText}>Voltar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-           </SafeAreaView>
+            </SafeAreaView>
         </View>
     )
 }

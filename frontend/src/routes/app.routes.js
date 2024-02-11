@@ -26,6 +26,8 @@ import NewEventPatientGuardian from '../screens/Guardian/NewEventPatientGuardian
 import ListMyDailyRoutinePatientGuardian from '../screens/Guardian/ListMyDailyRoutinePatientGuardian'
 import ListMyEventsPatientGuardian from '../screens/Guardian/ListMyEventsPatientGuardian'
 import NewDailyRoutineGuardian from '../screens/Guardian/NewDailyRoutineGuardian'
+import ListMyDoctorsPrescriptionGuardian from '../screens/Guardian/ListMyDoctorsPrescriptionGuardian'
+import ListMyDoctorsRecordGuardian from '../screens/Guardian/ListMyDoctorsRecordGuardian'
 
 
 // Telas do cuidador
@@ -163,6 +165,15 @@ export default function AppRoutes({ role_id }) {
                 />
 
                 <Stack.Screen
+                    name='ListMyDoctorsRecordGuardian'
+                    component={ListMyDoctorsRecordGuardian}
+                   options={{
+                    headerShown: false
+                   }}
+
+                />
+
+                <Stack.Screen
                     name='ListMyEventsPatientGuardian'
                     component={ListMyEventsPatientGuardian}
                     options={{
@@ -210,6 +221,13 @@ export default function AppRoutes({ role_id }) {
                             backgroundColor: primary
                         },
                     }}
+
+                />
+
+                <Stack.Screen
+                    name='ListMyDoctorsPrescriptionGuardian'
+                    component={ListMyDoctorsPrescriptionGuardian}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen

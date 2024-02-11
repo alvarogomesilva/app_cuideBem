@@ -1,8 +1,8 @@
 import Prisma from "../../prisma"
 
 
-const ListUserService = async () => {
-    const role_id = 3
+const ListUserService = async ({role_id}: {role_id: number}) => {
+    
 
     const users = await Prisma.user.findMany({
         where: { role_id }

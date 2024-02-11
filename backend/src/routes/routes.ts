@@ -30,6 +30,8 @@ import UpdatePrescriptionPatientController from "../controllers/doctors/UpdatePr
 import RecordPatientController from "../controllers/doctors/RecordPatientController";
 import ListRecordPatientController from "../controllers/doctors/ListRecordPatientController";
 import UpdateRecordPatientController from "../controllers/doctors/UpdateRecordPatientController";
+import ListMyPrescriptionPatientController from "../controllers/patients/ListPrescriptionPatientController";
+import ListMyRecordPatientController from "../controllers/patients/ListMyRecordPatientController";
 
 // ==============================================================================================
 
@@ -40,17 +42,20 @@ const Route = Router();
 Route.post("/users", CreateUserController);
 Route.post("/login", AuthUserController);
 Route.get("/me", authenticate, DetailUserController);
-Route.get('/users', authenticate, ListUserController)
+Route.get('/users/:id', authenticate, ListUserController)
 
 // Rotas do Médico
 // ==================
 Route.post("/prescriptions", authenticate, PrescriptionPatientController)
 Route.get('/prescriptions/:id', authenticate, ListPrescriptionPatientController)
 Route.put('/prescriptions/:id', authenticate, UpdatePrescriptionPatientController)
+Route.get('/patients/:id/:doctor', authenticate, ListMyPrescriptionPatientController)
+
 
 Route.post('/records', authenticate, RecordPatientController)
 Route.get('/records/:id', authenticate, ListRecordPatientController)
 Route.put('/records/:id', authenticate, UpdateRecordPatientController)
+Route.get('/records/:id/:doctor', authenticate, ListMyRecordPatientController)
 
 // Rotas do paciente
 // ==================
