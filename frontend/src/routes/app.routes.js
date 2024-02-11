@@ -62,40 +62,18 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListPrescriptionsPatientsDoctor'
                     component={ListPrescriptionsPatientsDoctor}
-                    // options={{
-                    //     title: 'Receitas',
-                    //     headerShadowVisible: false,
-                    //     headerTintColor: neutral,
-                    //     headerStyle: {
-                    //         backgroundColor: primary
-                    //     },
-                    // }}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name='ListRecordsPatientsDoctor'
                     component={ListRecordsPatientsDoctor}
-                    // options={{
-                    //     title: 'Prontuários',
-                    //     headerShadowVisible: false,
-                    //     headerTintColor: neutral,
-                    //     headerStyle: {
-                    //         backgroundColor: primary
-                    //     },
-                    // }}
+               
                     options={{ headerShown: false }}
                 />
                     <Stack.Screen
                         name='PrescriptionPatientDoctor'
                         component={PrescriptionPatientDoctor}
-                        // options={{
-                        //     title: null,
-                        //     headerShadowVisible: false,
-                        //     headerTintColor: neutral,
-                        //     headerStyle: {
-                        //         backgroundColor: primary
-                        //     },
-                        // }}
+             
                         options={{
                             headerShown: false
                         }}
@@ -103,14 +81,6 @@ export default function AppRoutes({ role_id }) {
                     <Stack.Screen
                         name='RecordPatientDoctor'
                         component={RecordPatientDoctor}
-                        // options={{
-                        //     title: 'Prontuário do paciente',
-                        //     headerShadowVisible: false,
-                        //     headerTintColor: neutral,
-                        //     headerStyle: {
-                        //         backgroundColor: primary
-                        //     },
-                        // }}
                         options={{
                             headerShown: false
                         }}
@@ -186,14 +156,9 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyPrescriptionsPatientGuardian'
                     component={ListMyPrescriptionsPatientGuardian}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                   options={{
+                    headerShown: false
+                   }}
 
                 />
 
@@ -215,12 +180,7 @@ export default function AppRoutes({ role_id }) {
                     name='ListMyRecordsPatientGuardian'
                     component={ListMyRecordsPatientGuardian}
                     options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
+                        headerShown: false
                     }}
 
                 />
@@ -255,27 +215,13 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ShowRecordPatientGuardian'
                     component={ShowRecordPatientGuardian}
-                    options={{
-                        title: 'Prontuário',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen
                     name='ShowPrescriptionPatientGuardian'
                     component={ShowPrescriptionPatientGuardian}
-                    options={{
-                        title: 'Receita',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen

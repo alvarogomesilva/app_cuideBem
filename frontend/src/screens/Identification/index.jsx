@@ -22,7 +22,7 @@ export default function Identification({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate('LoginDoctor')} activeOpacity={0.8}>
-          <Image source={require("../../../assets/doctor.png")} />
+          <Image source={require("../../../assets/doctors.png")} />
           <View style={styles.textaligh}>
             <Text style={styles.title}>Médicos</Text>
           </View>
