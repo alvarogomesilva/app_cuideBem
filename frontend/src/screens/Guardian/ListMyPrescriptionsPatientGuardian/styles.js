@@ -20,7 +20,30 @@ export const styles = StyleSheet.create({
     fontSize: hp(4.5),
     color: Colors.white,
     marginHorizontal: 15
-    
+  
+  },
+
+  boxSearch: {
+    position: 'relative'
+  },
+
+  search: {
+    fontSize: hp(2.5),
+    paddingLeft: 15,
+    backgroundColor: Colors.white,
+    marginHorizontal: 15,
+    marginVertical: 15,
+    height: hp(8),
+    borderRadius: 10
+  },
+
+  icon: {
+    fontSize: hp(3),
+    color: '#e0e0e0',
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    top: hp(4.5),
+    right: 30
   },
 
   text: {
@@ -33,8 +56,29 @@ export const styles = StyleSheet.create({
   content: {
     marginHorizontal: 15,
     marginTop: 15
+  },
+
+  areaButton: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginBottom: 15,
+    marginRight: 15
+  },
+
+  button: {
+    width: wp(15),
+    height: hp(8),
+    borderRadius: 100,
+    backgroundColor: Colors.quinary,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  buttonText: {
+    fontSize: hp(3.5),
+    color: Colors.white
   }
 
 });
-
 

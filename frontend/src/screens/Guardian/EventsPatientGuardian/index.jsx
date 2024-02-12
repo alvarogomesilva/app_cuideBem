@@ -1,14 +1,14 @@
 import LocaleConfig from './util'
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
 import ButtonBottom from '../../../components/ButtonBottom';
 import { styles } from './styles';
-import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import api from '../../../api';
 import { white } from '../../../constants/colors';
 import Events from '../../../components/Events';
+import { Agenda, Calendar, WeekCalendar } from 'react-native-calendars';
 
 const MemoizedEvents = memo(Events);
 
@@ -73,7 +73,7 @@ export default function EventsPatientGuardian({ route }) {
   }, {});
 
   const calendarTheme = {
-    dayBackgroundColor: '#FF00FF', 
+    dayBackgroundColor: '#FF00FF',
     selectedDayBackgroundColor: '#00adf5',
     backgroundColor: '#ffffff',
     calendarBackground: '#ffffff',
@@ -93,6 +93,7 @@ export default function EventsPatientGuardian({ route }) {
     textMonthFontWeight: 'bold',
     textDayHeaderFontWeight: '300',
   };
+
 
   return (
     <View style={styles.container}>
@@ -121,5 +122,7 @@ export default function EventsPatientGuardian({ route }) {
 
       <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian', { patient })} />
     </View>
-  );
+  )
 }
+
+

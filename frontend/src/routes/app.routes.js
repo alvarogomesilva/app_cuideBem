@@ -45,6 +45,8 @@ import EventsPatientCaregiver from '../screens/Caregiver/EventsPatientCaregiver'
 import ListMyEventsPatientCaregiver from '../screens/Caregiver/ListMyEventsPatientCaregiver'
 import ListMyDailyRoutinePatientCaregiver from '../screens/Caregiver/ListMyDailyRoutinePatientCaregiver'
 import DailyRoutinePatientCaregiver from '../screens/Caregiver/DailyRoutinePatientCaregiver'
+import ListMyDoctorsPrescriptionCaregiver from '../screens/Caregiver/ListMyDoctorsPrescriptionCaregiver'
+import ListMyDoctorsRecordCaregiver from '../screens/Caregiver/ListMyDoctorsRecordCaregiver'
 
 export default function AppRoutes({ role_id }) {
 
@@ -69,24 +71,24 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListRecordsPatientsDoctor'
                     component={ListRecordsPatientsDoctor}
-               
+
                     options={{ headerShown: false }}
                 />
-                    <Stack.Screen
-                        name='PrescriptionPatientDoctor'
-                        component={PrescriptionPatientDoctor}
-             
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name='RecordPatientDoctor'
-                        component={RecordPatientDoctor}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
+                <Stack.Screen
+                    name='PrescriptionPatientDoctor'
+                    component={PrescriptionPatientDoctor}
+
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name='RecordPatientDoctor'
+                    component={RecordPatientDoctor}
+                    options={{
+                        headerShown: false
+                    }}
+                />
 
             </Stack.Navigator>
         )
@@ -137,18 +139,18 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyPrescriptionsPatientGuardian'
                     component={ListMyPrescriptionsPatientGuardian}
-                   options={{
-                    headerShown: false
-                   }}
+                    options={{
+                        headerShown: false
+                    }}
 
                 />
 
                 <Stack.Screen
                     name='ListMyDoctorsRecordGuardian'
                     component={ListMyDoctorsRecordGuardian}
-                   options={{
-                    headerShown: false
-                   }}
+                    options={{
+                        headerShown: false
+                    }}
 
                 />
 
@@ -230,14 +232,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='EventsPatientGuardian'
                     component={EventsPatientGuardian}
-                    options={{
-                        title: 'Agenda',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen
@@ -264,14 +259,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ConditionalCardsCaregiver'
                     component={ConditionalCardsCaregiver}
-                    options={{
-                        title: 'Prontuários e Receitas',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
@@ -285,29 +273,19 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyRecordsPatientCaregiver'
                     component={ListMyRecordsPatientCaregiver}
-                    options={{
-                        title: 'Prontuários',
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
                     name='ListMyPrescriptionsPatientCaregiver'
                     component={ListMyPrescriptionsPatientCaregiver}
-                    options={{
-                        title: 'Receitas',
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                    name='ListMyDoctorsRecordCaregiver'
+                    component={ListMyDoctorsRecordCaregiver}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
@@ -335,6 +313,11 @@ export default function AppRoutes({ role_id }) {
                             backgroundColor: primary
                         },
                     }}
+                />
+                <Stack.Screen
+                    name='ListMyDoctorsPrescriptionCaregiver'
+                    component={ListMyDoctorsPrescriptionCaregiver}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
