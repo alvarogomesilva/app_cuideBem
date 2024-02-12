@@ -155,14 +155,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyEventsPatientGuardian'
                     component={ListMyEventsPatientGuardian}
-                    options={{
-                        title: 'Agendas e Consultas',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
 
@@ -250,14 +243,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='NewEventPatientGuardian'
                     component={NewEventPatientGuardian}
-                    options={{
-                        title: 'Novo evento',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
 
