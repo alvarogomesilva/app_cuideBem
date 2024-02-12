@@ -29,7 +29,7 @@ export default function App() {
           <Routes />
         </NavigationContainer>
       </AuthProvider>
-    
+    <StatusBar barStyle='light-content'/>
     </AlertNotificationRoot>
 
   );

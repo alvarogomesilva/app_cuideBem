@@ -1,54 +1,98 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary, second, white } from "../../../constants/colors";
+import Colors from "../../../constants/colors";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: primary,
+        backgroundColor: Colors.white
     },
 
-    content: {
-        width: '90%',
-        alignSelf: 'center'
+    gradient: {
+        height: hp(23),
+        backgroundColor: Colors.quinary,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     },
 
-    avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: white,
+    rounded: {
+        width: wp(30),
+        height: hp(17),
+        borderRadius: 100,
+        backgroundColor: Colors.ghost,
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        top: -hp(9)
     },
 
-    icon: {
-        position: 'absolute',
-        color: neutral,
-        fontSize: 20,
-        top: 15,
-        left: 15,
-        zIndex: 2
+
+    boxSearch: {
+        position: 'relative'
     },
 
-    button: {
-        marginVertical: 10,
-        backgroundColor: neutral,
-        padding: 10,
-        borderRadius: 10,
-        alignSelf: 'center'
-    },
-
-    submit: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: second,
-        height: 50,
+    search: {
+        fontSize: hp(2.5),
+        paddingLeft: 15,
+        backgroundColor: Colors.white,
+        marginHorizontal: 15,
+        marginVertical: 15,
+        height: hp(8),
         borderRadius: 10
     },
 
-    submitText: {
-        color: white,
-        fontSize: 20
+    icon: {
+        fontSize: hp(3),
+        color: '#e0e0e0',
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        top: hp(4.5),
+        right: 30
+    },
+
+    text: {
+        color: '#e0e0e0',
+        textAlign: 'center',
+        fontSize: 18,
+        marginVertical: 15
+    },
+
+    content: {
+        marginHorizontal: 15,
+    },
+
+    input: {
+        alignSelf: 'center',
+        width: wp('90%'),
+        fontSize: hp(2.6),
+        backgroundColor: Colors.white,
+        borderWidth: 3,
+        borderRadius: 10,
+        borderColor: '#e0e0e0',
+        textAlignVertical: 'top',
+        padding: 15,
+        marginBottom: 10
+    },
+
+    areaButton: {
+        flex: 1,
+        alignItems: 'center'
+    },
+
+    button: {
+        width: wp('90%'),
+        height: hp(8),
+        borderRadius: 10,
+        marginTop: 15,
+        backgroundColor: Colors.quinary,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    buttonText: {
+        fontSize: hp(3),
+        color: Colors.white
     }
-})
+
+});
+

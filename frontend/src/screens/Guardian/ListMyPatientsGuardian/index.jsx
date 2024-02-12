@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback, memo } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
+
 import { styles } from './styles';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -13,37 +15,43 @@ const ListMyPatientsGuardian = ({ route }) => {
     const navigation = useNavigation();
     const { listPatients } = usePatients()
 
-
-    //const paramKey = route.params?.paramKey ?? '';
-    //const newPatient = route.params.newPatient ?? '';
-
     return (
-        <SafeAreaView style={styles.container}>
-            {listPatients.length > 0 ? (
-                <FlatList
-                style={styles.flatList}
-                data={listPatients}
-                renderItem={({ item }) => <MemoizedPatients
-                    data={item}
-                />}
-                keyExtractor={(item) => item.id.toString()}
-            />
-            ): (
-                <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
-            )}
+        <View style={styles.container} >
+            <View style={styles.top}>
+                <LinearGradient
+                    colors={['#5E7B99', '#C4E1FF']}
+                    style={styles.gradient}>
 
-            {/* {newPatient && (
-                <TouchableOpacity
+                    <Text style={styles.title}>Meus Pacientes</Text>
+
+                </LinearGradient>
+            </View>
+            <View style={styles.content}>
+                {listPatients.length > 0 ? (
+                    <FlatList
+                        style={styles.flatList}
+                        data={listPatients}
+                        renderItem={({ item }) => <MemoizedPatients
+                            data={item}
+                        />}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                ) : (
+                    <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
+                )}
+            </View>
+
+            <View style={styles.areaButton}>
+                <TouchableOpacity 
+                    activeOpacity={0.8}
                     style={styles.button}
-                    activeOpacity={0.7}
                     onPress={() => navigation.navigate('NewPatientGuardian')}
-                >
-                    <Entypo name="plus" size={30} color="#FFF" />
+                    >
+                    <Entypo name="plus" style={styles.buttonText} />
                 </TouchableOpacity>
-            )} */}
+            </View>
 
-
-        </SafeAreaView>
+        </View>
     );
 };
 

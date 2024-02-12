@@ -104,27 +104,13 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyPatientsGuardian'
                     component={ListMyPatientsGuardian}
-                    options={{
-                        title: 'Meus pacientes',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen
                     name='NewPatientGuardian'
                     component={NewPatientGuardian}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen
@@ -144,14 +130,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ConditionalCardsGuardian'
                     component={ConditionalCardsGuardian}
-                    options={{
-                        title: null,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
 

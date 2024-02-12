@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { neutral, primary } from "../../constants/colors";
+import Colors, { neutral, primary } from "../../constants/colors";
 import { useEffect, useState } from "react";
 
 const Patients = ({ data, onPress, newPatient }) => {
@@ -37,7 +37,7 @@ const Patients = ({ data, onPress, newPatient }) => {
       {newPatient ? (
         <Feather name="edit" size={20} color={neutral} />
       ) : (
-        <View style={{ width: 10, height: 10, backgroundColor: primary, borderRadius: 5, marginRight: 15 }}/>
+        <View style={{ width: 10, height: 10, backgroundColor: Colors.septenary, borderRadius: 5, marginRight: 15 }}/>
       )}
     </TouchableOpacity>
   );

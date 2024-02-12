@@ -1,15 +1,17 @@
-import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { neutral, white } from '../../../constants/colors';
+import Colors, { neutral, white } from '../../../constants/colors';
 import Input from '../../../components/Input'
 import * as ImagePicker from 'expo-image-picker';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext'
 import api from '../../../api';
-import { Masks } from 'react-native-mask-input';
+import MaskInput, { Masks } from 'react-native-mask-input';
 import { SelectList } from 'react-native-dropdown-select-list'
+import { LinearGradient } from "expo-linear-gradient";
+import { Toast, ALERT_TYPE } from "react-native-alert-notification";
 
 export default function NewPatientGuardian() {
     const { user } = useContext(AuthContext)
@@ -80,9 +82,14 @@ export default function NewPatientGuardian() {
                 user_id: user.id,
                 caregiver_id: selectedCaregiver
             })
-            console.log(formData)
+            Toast.show({
+                type: ALERT_TYPE.SUCCESS,
+                title: 'Mensagem',
+                textBody: 'Adicionado com sucesso!',
+                autoClose: 2000,
 
-            Alert.alert('Salvo com sucesso!')
+            })
+
         } catch (error) {
             console.log(error)
         } finally {
@@ -95,10 +102,10 @@ export default function NewPatientGuardian() {
             try {
                 const caregivers = await api.get(`/users/${3}`)
                 let newArray = caregivers.data.map((item) => {
-                    return {key: item.id, value: item.name}
-                  })
-                  
-                  setData(newArray)
+                    return { key: item.id, value: item.name }
+                })
+
+                setData(newArray)
             } catch (error) {
                 console.log(error)
             }
@@ -108,62 +115,62 @@ export default function NewPatientGuardian() {
     }, [])
 
     return (
-        <View style={styles.container}>
-
-            <KeyboardAvoidingView style={styles.content} behavior='padding'>
-
-                <TouchableOpacity style={styles.avatar} onPress={pickImage}>
+        <View style={styles.container} >
+            <View style={styles.top}>
+                <LinearGradient
+                    colors={['#5E7B99', '#C4E1FF']}
+                    style={styles.gradient}>
+                </LinearGradient>
+            </View>
+            <View style={styles.content}>
+                <TouchableOpacity style={styles.rounded} onPress={pickImage} activeOpacity={0.8}>
                     {image ? (
-                        <Image source={{ uri: uri }} width={100} height={100} borderRadius={50} />
+                        <Image source={{ uri: uri }} width={110} height={110} borderRadius={50} />
                     ) : (
-                        <FontAwesome5 name="user-alt" size={50} color={neutral} />
+                        <FontAwesome5 name="user-alt" size={50} color={Colors.octonary} />
                     )}
                 </TouchableOpacity>
 
-                <Input
-                    placeholder="Nome do paciente"
-                    value={inputs.name}
-                    onChangeText={(text) => setInputs({ ...inputs, name: text })}
-                >
-                    <FontAwesome5 name="user-injured" style={styles.icon} />
-                </Input>
+                <ScrollView>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Descreva a receita'
+                        editable={false}
+                        value={user.name}
 
-                <Input
-                    placeholder="Data de nascimento"
-                    value={inputs.birth}
-                    mask={Masks.DATE_DDMMYYYY}
-                    onChangeText={(text) => setInputs({ ...inputs, birth: text })}
-                    keyboardType="numeric"
-                >
-                    <FontAwesome5 name="birthday-cake" style={styles.icon} />
-                </Input>
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Nome do paciente'
+                        value={inputs.name}
+                        onChangeText={(text) => setInputs({ ...inputs, name: text })}
+                    />
+                    <MaskInput
+                        style={styles.input}
+                        placeholder='Data de nascimento'
+                        mask={Masks.DATE_DDMMYYYY}
+                        value={inputs.birth}
+                        onChangeText={(text) => setInputs({ ...inputs, birth: text })}
+                        keyboardType="numeric"
+                    />
+                    <SelectList
+                        boxStyles={styles.input}
+                        setSelected={(val) => setSelectedCaregiver(val)}
+                        data={data}
+                        save="key"
+                    />
+                </ScrollView>
 
-
-                <Input
-                    placeholder="Nome do guardião"
-                    value={user.name}
-                >
-                    <FontAwesome5 name="user-shield" style={styles.icon} />
-                </Input>
-
-                <SelectList
-                    boxStyles={{
-                        marginVertical: 10
-                    }}
-                    setSelected={(val) => setSelectedCaregiver(val)}
-                    data={data}
-                    save="key"
-                />
-
-                <TouchableOpacity style={styles.submit} onPress={handlePatient}>
-                    {loading ? (
-                        <ActivityIndicator size={25} color={white} />
-                    ) : (
-                        <Text style={styles.submitText}>Cadastrar</Text>
-                    )}
-                </TouchableOpacity>
-            </KeyboardAvoidingView>
-
+                <View style={styles.areaButton}>
+                    <TouchableOpacity style={styles.button} onPress={handlePatient}>
+                        {loading ? (
+                            <ActivityIndicator size={25} color={Colors.white} />
+                        ) : (
+                            <Text style={styles.buttonText}>Cadastrar</Text>
+                        )}
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     )
 }
