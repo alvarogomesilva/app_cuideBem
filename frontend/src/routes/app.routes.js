@@ -118,14 +118,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='NewDailyRoutineGuardian'
                     component={NewDailyRoutineGuardian}
-                    options={{
-                        title: 'Nova Rotina',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
 
@@ -173,14 +166,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyDailyRoutinePatientGuardian'
                     component={ListMyDailyRoutinePatientGuardian}
-                    options={{
-                        title: 'Rotina diária',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
 
