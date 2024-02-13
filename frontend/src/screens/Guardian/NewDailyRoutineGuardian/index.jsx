@@ -12,6 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import Colors from '../../../constants/colors';
+import { Toast, ALERT_TYPE } from "react-native-alert-notification";
 
 export default function NewDailyRoutineGuardian() {
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,20 @@ export default function NewDailyRoutineGuardian() {
     setLoading(true);
     try {
       const response = await api.post('/dailys', inputs);
-      console.log('deu certo')
+      Toast.show({
+        type: ALERT_TYPE.SUCCESS,
+        title: 'Mensagem',
+        textBody: 'Nova rotina adicionada!',
+        autoClose: 2000,
+      })
+      setInputs({
+        patient_id: "",
+        title: "",
+        description: "",
+        date: new Date(),
+        final_date: new Date()
+      })
+ 
     } catch (error) {
       console.log(error);
     } finally {
@@ -125,7 +139,7 @@ export default function NewDailyRoutineGuardian() {
             style={styles.input}
             placeholder='Digite um horário'
             pointerEvents='none'
-            value={format(inputs.hour, 'HH:mm')}
+            value={format(new Date(), 'HH:mm')}
           />
           <Feather name="clock" style={styles.icon} />
         </TouchableOpacity>
@@ -164,86 +178,3 @@ export default function NewDailyRoutineGuardian() {
     </View>
   );
 }
-
-
-{/* <View style={styles.container}>
-            <View style={styles.content}>
-                <SelectList
-                    boxStyles={{
-                        marginVertical: 10
-                    }}
-                    setSelected={(patient) => setInputs({...inputs, patient_id: patient})}
-                    data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
-                    save='key'
-                />
-
-                <Input
-                    placeholder='Titulo'
-                    value={inputs.title}
-                    onChangeText={(text) => setInputs({ ...inputs, title: text })}
-                />
-
-                <Input
-                    placeholder='Descrição'
-                    value={inputs.description}
-                    onChangeText={(text) => setInputs({ ...inputs, description: text })}
-                />
-
-                <View style={styles.boxDates}>
-                    <TouchableOpacity
-                        style={styles.input}
-                        onPress={showDate1}
-                    >
-                        <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.input}
-                        onPress={showDate2}
-                    >
-                        <Text>{format(inputs.final_date, 'dd/MM/yyyy')}</Text>
-                    </TouchableOpacity>
-
-                </View>
-
-                <TouchableOpacity style={styles.hour} onPress={showDate3}>
-                    <Text>{format(inputs.hour, 'HH:mm')}</Text>
-                </TouchableOpacity>
-
-                <DateTimePickerModal
-                    date={inputs.date}
-                    isVisible={datePickerVisible1}
-                    mode="date"
-                    display='inline'
-                    locale='pt'
-                    onConfirm={handleConfirmDate1}
-                    onCancel={hideDatePicker1}
-                />
-
-                <DateTimePickerModal
-                    date={inputs.final_date}
-                    isVisible={datePickerVisible2}
-                    mode="date"
-                    display='inline'
-                    locale='pt'
-                    onConfirm={handleConfirmDate2}
-                    onCancel={hideDatePicker2}
-                />
-
-                <DateTimePickerModal
-                    date={inputs.hour}
-                    isVisible={datePickerVisible3}
-                    mode="time"
-                    display='inline'
-                    locale='pt'
-                    onConfirm={handleConfirmDate3}
-                    onCancel={hideDatePicker3}
-                />
-
-                <Submit
-                    text='Adicionar'
-                    onPress={handleDailyRoutine}
-                    loadingAuth={loading}
-                />
-            </View>
-        </View> */}

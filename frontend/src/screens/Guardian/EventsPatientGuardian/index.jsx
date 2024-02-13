@@ -8,7 +8,6 @@ import { format } from 'date-fns';
 import api from '../../../api';
 import { white } from '../../../constants/colors';
 import Events from '../../../components/Events';
-import { Agenda, Calendar, WeekCalendar } from 'react-native-calendars';
 
 const MemoizedEvents = memo(Events);
 
@@ -29,6 +28,7 @@ export default function EventsPatientGuardian({ route }) {
   const [daySelected, setDaySelected] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const loadEvents = useCallback(async () => {
     try {
@@ -72,38 +72,9 @@ export default function EventsPatientGuardian({ route }) {
     return result;
   }, {});
 
-  const calendarTheme = {
-    dayBackgroundColor: '#FF00FF',
-    selectedDayBackgroundColor: '#00adf5',
-    backgroundColor: '#ffffff',
-    calendarBackground: '#ffffff',
-    textSectionTitleColor: '#b6c1cd',
-    textSectionTitleDisabledColor: '#d9e1e8',
-    selectedDayTextColor: '#FF00FF',
-    todayTextColor: '#00adf5',
-    dayTextColor: '#2d4150',
-    textDisabledColor: '#d9e1e8',
-    dotColor: '#00adf5',
-    selectedDotColor: '#ffffff',
-    arrowColor: 'orange',
-    disabledArrowColor: '#d9e1e8',
-    monthTextColor: 'blue',
-    indicatorColor: 'blue',
-    textDayFontWeight: '300',
-    textMonthFontWeight: 'bold',
-    textDayHeaderFontWeight: '300',
-  };
-
-
   return (
     <View style={styles.container}>
-      <Calendar
-        style={styles.calendar}
-        markedDates={markedDates}
-        markingType='multi-dot'
-        onDayPress={day => setDaySelected(day.dateString)}
-        theme={calendarTheme}
-      />
+
 
       {loading ? (
         <ActivityIndicator color={white} size="large" />

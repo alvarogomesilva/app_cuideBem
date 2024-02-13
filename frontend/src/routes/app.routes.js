@@ -205,14 +205,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='DailyRoutinePatientGuardian'
                     component={DailyRoutinePatientGuardian}
-                    options={{
-                        title: 'Rotina de Hoje',
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
 
                 />
                 <Stack.Screen

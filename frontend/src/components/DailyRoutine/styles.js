@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { neutral, primary } from "../../constants/colors";
-
+import Colors from "../../constants/colors";
 export const styles = StyleSheet.create({
     container: {
       flex:1,
@@ -83,13 +83,13 @@ export const styles = StyleSheet.create({
       width: 12,
       height: 12,
       borderRadius: 6,
-      backgroundColor: neutral,
+      backgroundColor: Colors.senary,
       marginBottom: 8,
     },
     timelineLine: {
       flex: 1,
       width: 2,
-      backgroundColor: neutral,
+      backgroundColor: Colors.quinary,
     },
 
     checkbox: {

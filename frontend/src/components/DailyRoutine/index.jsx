@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
-import { compareAsc, differenceInMinutes, format, parse } from 'date-fns';
-import api from '../../api' 
-import {styles} from './styles'
+import { addMinutes, compareAsc, differenceInMinutes, format, parse } from 'date-fns';
+import api from '../../api'
+import { styles } from './styles'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 const DailyRoutine = ({ data, patient, onUpdate }) => {
   const [alertVisible, setAlertVisible] = useState(false);
@@ -11,11 +12,11 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
   const [showConfirmButton, setShowConfirmButton] = useState(false)
   const [cancelText, setCancelText] = useState('')
   const [confirmText, setConfirmText] = useState('')
-  const [selectedDaily, setSelectedDaily] = useState(null); 
+  const [selectedDaily, setSelectedDaily] = useState(null);
 
   const showAlert = (message, daily) => {
     setAlertVisible(true);
-    setSelectedDaily(daily); 
+    setSelectedDaily(daily);
     if (message === 'Já passou da hora!') {
       setAlertMessage(message);
       setShowCancelButton(false)
@@ -49,7 +50,7 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
       }, 1000);
     } catch (error) {
       console.log(error)
-    } 
+    }
   };
 
   const handleCheckboxChange = async (daily) => {
@@ -68,20 +69,6 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
     }
   };
 
-  const Header = () => {
-    return (
-      <View style={styles.cardPatient}>
-        <View style={styles.body}>
-          <Image source={{ uri: `http://192.168.0.100:3000/files/${patient.photo}` }} style={styles.avatar} />
-          <View style={styles.userInfo}>
-            <Text style={styles.userName}>{patient.name}</Text>
-            <Text style={styles.userRole}>{patient.birth}</Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
-
   const NoRoutineMessage = () => {
     if (data.length === 0) {
       return (
@@ -94,18 +81,16 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
   const DailyItem = ({ item }) => {
     const backgroundColor = item.done ? '#69f0ae' : '#ffcdd2';
     return (
-      <TouchableOpacity 
-        style={[styles.classItem]} 
+      <TouchableOpacity
+        style={[styles.classItem]}
         onPress={() => handleCheckboxChange(item)}
       >
         <View style={styles.timelineContainer}>
-          <View style={styles.timelineDot} />
-          <View style={styles.timelineLine} />
         </View>
         <View style={styles.classContent}>
           <View style={styles.classHours}>
             <Text style={styles.startTime}>{format(item.hour, 'HH:mm')}</Text>
-            <Text style={styles.endTime}>{item.endTime}</Text>
+            <Text style={styles.endTime}>{format(addMinutes(item.hour, 15), 'HH:mm')}</Text>
           </View>
           <View style={[styles.card, { backgroundColor }]}>
             <View>
@@ -123,11 +108,26 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 16 }}
         data={data}
-        ListHeaderComponent={Header}
         renderItem={({ item }) => <DailyItem item={item} />}
         keyExtractor={(item) => item.id.toString()}
       />
       <NoRoutineMessage />
+
+      <AwesomeAlert
+        show={alertVisible}
+        showProgress={false}
+        title="Confirmação"
+        message={alertMessage}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={showCancelButton}
+        showConfirmButton={showConfirmButton}
+        cancelText={cancelText}
+        confirmText={confirmText}
+        confirmButtonColor="#DD6B55"
+        onCancelPressed={hideAlert}
+        onConfirmPressed={handleDone}
+      />
 
     </View>
   );
