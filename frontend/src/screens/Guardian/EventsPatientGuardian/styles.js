@@ -6,10 +6,6 @@ import Colors from "../../../constants/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.octonary,
+    backgroundColor: Colors.secondary,
   },
-
-  
-
-
 });

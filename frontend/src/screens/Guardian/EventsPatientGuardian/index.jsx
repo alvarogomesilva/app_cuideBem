@@ -1,14 +1,13 @@
-import LocaleConfig from './util'
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import ButtonBottom from '../../../components/ButtonBottom';
-import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import api from '../../../api';
-import { white } from '../../../constants/colors';
+import Colors, { white } from '../../../constants/colors';
 import Events from '../../../components/Events';
-
+import { Agenda } from 'react-native-calendars';
+import { styles } from './styles';
 const MemoizedEvents = memo(Events);
 
 function sortByHourAscending(events) {
@@ -24,7 +23,7 @@ export default function EventsPatientGuardian({ route }) {
   const { id: patient_id } = patient;
 
   const [events, setEvents] = useState([]);
-  const [eventsFiltered, setEventsFiltered] = useState([]);
+  const [eventsFiltered, setEventsFiltered] = useState({});
   const [daySelected, setDaySelected] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
@@ -54,46 +53,47 @@ export default function EventsPatientGuardian({ route }) {
     function filterEvents() {
       const sortedEvents = sortByHourAscending(events);
       const newEvents = sortedEvents.filter(e => e.date === daySelected);
-      setEventsFiltered(newEvents);
+      const eventsObj = newEvents.reduce((acc, event) => {
+        acc[event.date] = acc[event.date] || [];
+        acc[event.date].push(event);
+        return acc;
+      }, {});
+      setEventsFiltered(eventsObj);
     }
     filterEvents();
   }, [daySelected, events]);
 
-  const markedDates = events.reduce((result, event) => {
-    const formattedDate = event.date;
-
-    result[formattedDate] = result[formattedDate] || {
-      marked: true,
-      dots: [],
-    };
-
-    result[formattedDate].dots.push({ key: event.id, color: event.color });
-
-    return result;
-  }, {});
+  const markedDates = useMemo(() => {
+    const marked = {};
+    events.forEach(event => {
+      const formattedDate = event.date;
+      marked[formattedDate] = marked[formattedDate] || { dots: [] };
+      marked[formattedDate].dots.push({ key: event.id, color: event.color });
+    });
+    return marked;
+  }, [events]);
 
   return (
     <View style={styles.container}>
-
-
-      {loading ? (
-        <ActivityIndicator color={white} size="large" />
-      ) : (
-        eventsFiltered.length > 0 ? (
-          <FlatList
-            contentContainerStyle={{ paddingHorizontal: 16 }}
-            data={eventsFiltered}
-            renderItem={({ item }) => <MemoizedEvents item={item} onDelete={handleEventDeletion} />}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        ) : (
-          <Text style={styles.noEvent}>Não tem eventos Hoje!</Text>
-        )
-      )}
-
+      <Text>16 June 2024</Text>
+      <Text>Agenda</Text>
+      <Agenda
+        items={eventsFiltered}
+        renderItem={(item) => <MemoizedEvents item={item} onDelete={handleEventDeletion} />}
+        renderEmptyData={() => {
+          return (
+            <View>
+              <Text>Não tem eventos</Text>
+            </View>
+          )
+        }}
+        rowHasChanged={(r1, r2) => r1.name !== r2.name}
+        keyExtractor={(item, index) => index.toString()}
+        columnWrapperStyle={{ backgroundColor: '#ff00ff' }}
+        scrollEnabled 
+      />
+    
       <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian', { patient })} />
     </View>
   )
 }
-
-
