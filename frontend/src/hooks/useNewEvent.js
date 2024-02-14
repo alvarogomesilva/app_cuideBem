@@ -7,15 +7,15 @@ export const useNewEvent = () => {
     const newEvent = async (inputs) => {
         setLoading(true)
         const { color, description, patient_id, hour, date } = inputs;
-        const [day, month, year] = date.split('/');
-        const newDate = [year, month, day].join('-');
+        // const [day, month, year] = date.split('/');
+        // const newDate = [year, month, day].join('-');
         try {
             const response = await api.post('/events', {
                 color, 
                 description, 
                 patient_id, 
                 hour, 
-                date: newDate
+                date
             })
             Alert.alert('Evento criado')
         } catch (error) {

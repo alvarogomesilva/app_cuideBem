@@ -11,6 +11,9 @@ import Colors, { white } from '../../../constants/colors';
 import { LinearGradient } from "expo-linear-gradient";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Checkbox from 'expo-checkbox';
+import { SelectList } from 'react-native-dropdown-select-list';
+import { usePatients } from '../../../hooks/usePatients';
+import { format } from 'date-fns';
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
@@ -24,34 +27,44 @@ const colors = [
 
 export default function NewEventPatientGuardian({ route }) {
   const { newEvent, loading } = useNewEvent();
-  const patient_id = route.params.patient.id;
-  
+  const patient_id = route.params?.patient.id;
+  const { listPatients } = usePatients()
+
   const [inputs, setInputs] = useState({
     patient_id,
     description: "",
-    date: "",
-    hour: "",
-    color: "#81d4fa"
+    date: new Date(),
+    hour: new Date(),
+    color: ""
   });
 
   const [selectedCheckbox, setSelectedCheckbox] = useState(0);
 
   const handleEvent = async () => {
     await newEvent(inputs);
-    console.log(inputs);
     setInputs({
       patient_id,
       description: "",
-      date: "",
-      hour: "",
-      color: "#81d4fa"
+      date: new Date(),
+      hour: new Date(),
+      color: selectedCheckbox
     });
   }
 
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
   const showDate1 = () => setDatePickerVisible1(true);
   const hideDatePicker1 = () => setDatePickerVisible1(false);
+
+  const [datePickerVisible2, setDatePickerVisible2] = useState(false);
+  const showDate2 = () => setDatePickerVisible2(true);
+  const hideDatePicker2 = () => setDatePickerVisible2(false);
+  const handleConfirmDate2 = (date) => {
+    setInputs({ ...inputs, hour: date });
+    hideDatePicker2();
+  };
+
   const handleConfirmDate1 = (date) => {
+    setInputs({ ...inputs, date: format(date, 'yyyy-MM-dd') });
     hideDatePicker1();
   };
 
@@ -77,24 +90,37 @@ export default function NewEventPatientGuardian({ route }) {
       </View>
 
       <View style={styles.content}>
+
+      <SelectList
+          boxStyles={styles.input}
+          setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
+          data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
+          save='key'
+        />
+
+
         <TextInput
           style={styles.input}
           placeholder='Descreva uma descrição'
+          value={inputs.description}
+          onChangeText={(text) => setInputs({...inputs, description: text})}
         />
 
         <TouchableOpacity onPress={showDate1}>
           <TextInput
+            value={format(inputs.date, 'dd/MM/yyyy')}
             style={styles.input}
             placeholder='Digite uma data'
             pointerEvents="none"
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={showDate1}>
+        <TouchableOpacity onPress={showDate2}>
           <TextInput
             style={styles.input}
             placeholder='Digite um horário'
             pointerEvents='none'
+            value={format(inputs.hour, 'HH:mm')}
           />
         </TouchableOpacity>
 
@@ -134,6 +160,15 @@ export default function NewEventPatientGuardian({ route }) {
           locale='pt'
           onConfirm={handleConfirmDate1}
           onCancel={hideDatePicker1}
+        />
+        <DateTimePickerModal
+          date={inputs.hour}
+          isVisible={datePickerVisible2}
+          mode="time"
+          display='inline'
+          locale='pt'
+          onConfirm={handleConfirmDate2}
+          onCancel={hideDatePicker2}
         />
       </View>
     </View>

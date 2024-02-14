@@ -48,7 +48,7 @@ export default function DailyRoutinePatientGuardian({ route }) {
 
           <View style={styles.areaImage}>
             <Image
-              source={{ uri: `http://10.3.18.71:3000/files/${patient.photo}` }}
+              source={{ uri: `http://192.168.0.100:3000/files/${patient.photo}` }}
               style={styles.image}
             />
 

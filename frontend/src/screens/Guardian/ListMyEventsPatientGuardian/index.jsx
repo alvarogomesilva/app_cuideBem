@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
 import { LinearGradient } from "expo-linear-gradient";
-
+import ButtonBottom from '../../../components/ButtonBottom'
 const MemoizedPatients = memo(Patients);
 export default function ListMyEventsPatientGuardian() {
     
@@ -38,6 +38,9 @@ export default function ListMyEventsPatientGuardian() {
                     <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
                 )}
             </View>
+
+             <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian')} />
+
 
         </View> 
     );

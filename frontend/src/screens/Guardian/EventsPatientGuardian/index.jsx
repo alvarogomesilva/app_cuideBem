@@ -1,13 +1,15 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
 import ButtonBottom from '../../../components/ButtonBottom';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import api from '../../../api';
 import Colors, { white } from '../../../constants/colors';
 import Events from '../../../components/Events';
-import { Agenda } from 'react-native-calendars';
+import { Agenda, Calendar } from 'react-native-calendars';
 import { styles } from './styles';
+import { LinearGradient } from "expo-linear-gradient";
+
 const MemoizedEvents = memo(Events);
 
 function sortByHourAscending(events) {
@@ -32,7 +34,7 @@ export default function EventsPatientGuardian({ route }) {
   const loadEvents = useCallback(async () => {
     try {
       const response = await api.get(`/events/${patient_id}`);
-      setEvents(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
     } finally {
@@ -63,37 +65,48 @@ export default function EventsPatientGuardian({ route }) {
     filterEvents();
   }, [daySelected, events]);
 
-  const markedDates = useMemo(() => {
-    const marked = {};
-    events.forEach(event => {
-      const formattedDate = event.date;
-      marked[formattedDate] = marked[formattedDate] || { dots: [] };
-      marked[formattedDate].dots.push({ key: event.id, color: event.color });
-    });
-    return marked;
-  }, [events]);
+  const [selected, setSelected] = useState(new Date());
+  // const marked = useMemo(() => ({
+  //   [selected]: {
+  //     selected: true,
+  //     selectedColor: 'blue',
+  //     selectedTextColor: 'white',
+  //   }
+  // }), [selected]);
 
   return (
     <View style={styles.container}>
-      <Text>16 June 2024</Text>
-      <Text>Agenda</Text>
-      <Agenda
-        items={eventsFiltered}
-        renderItem={(item) => <MemoizedEvents item={item} onDelete={handleEventDeletion} />}
-        renderEmptyData={() => {
-          return (
-            <View>
-              <Text>Não tem eventos</Text>
-            </View>
-          )
-        }}
-        rowHasChanged={(r1, r2) => r1.name !== r2.name}
-        keyExtractor={(item, index) => index.toString()}
-        columnWrapperStyle={{ backgroundColor: '#ff00ff' }}
-        scrollEnabled 
-      />
-    
-      <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian', { patient })} />
+      <View style={styles.top}>
+        <LinearGradient
+          colors={['#5E7B99', '#C4E1FF']}
+          style={styles.gradient}>
+
+          <SafeAreaView>
+            <Calendar
+
+              markedDates={eventsFiltered}
+              onDayPress={(day) => { setSelected(day.dateString) }}
+              style={{
+                borderRadius: 5,
+                margin: 15
+              }}
+              theme={{
+                calendarBackground: 'transparent',
+                dayTextColor: '#fff',
+                textDisabledColor: '#444',
+                monthTextColor: Colors.white
+              }}
+            />
+          </SafeAreaView>
+
+
+        </LinearGradient>
+      </View>
+
+
+
     </View>
   )
 }
+
+// <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian', { patient })} />
