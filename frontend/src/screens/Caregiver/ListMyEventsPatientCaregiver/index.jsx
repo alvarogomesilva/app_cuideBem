@@ -41,15 +41,15 @@ export default function ListMyEventsPatientCaregiver({ route }) {
                 )}
             </View>
 
-            {/* <View style={styles.areaButton}>
+            <View style={styles.areaButton}>
                 <TouchableOpacity 
                     activeOpacity={0.8}
                     style={styles.button}
-                    onPress={() => navigation.navigate('NewPatientGuardian')}
+                    onPress={() => navigation.navigate('NewEventPatientCaregiver' )}
                     >
                     <Entypo name="plus" style={styles.buttonText} />
                 </TouchableOpacity>
-            </View> */}
+            </View>
 
         </View>
     );

@@ -41,15 +41,7 @@ export default function ListMyDailyRoutinePatientCaregiver({ route }) {
                 )}
             </View>
 
-            {/* <View style={styles.areaButton}>
-                <TouchableOpacity 
-                    activeOpacity={0.8}
-                    style={styles.button}
-                    onPress={() => navigation.navigate('NewPatientGuardian')}
-                    >
-                    <Entypo name="plus" style={styles.buttonText} />
-                </TouchableOpacity>
-            </View> */}
+
 
         </View>
     );

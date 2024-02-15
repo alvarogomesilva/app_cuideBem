@@ -18,7 +18,7 @@ export default function ListMyEventsPatientGuardian() {
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
-
+                        
                     <Text style={styles.title}>Meus Pacientes</Text>
 
                 </LinearGradient>

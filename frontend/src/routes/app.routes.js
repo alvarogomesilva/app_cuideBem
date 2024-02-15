@@ -297,15 +297,7 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='NewEventPatientCaregiver'
                     component={NewEventPatientCaregiver}
-                    options={{
-                        title: 'Novo evento',
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
