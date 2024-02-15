@@ -17,4 +17,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     justifyContent: 'center'
   },
+
+  content: {
+    marginTop: 15,
+    marginHorizontal: 15
+  }
+
 });

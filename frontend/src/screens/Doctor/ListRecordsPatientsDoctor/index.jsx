@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, SafeAreaView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import styles from "./styles";
-import Search from "../../../components/Search";
 import Patients from "../../../components/Patients";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const MemoizedPatients = memo(Patients);
 
@@ -37,13 +37,6 @@ export default function ListRecordsPatientsDoctor() {
         loadPatients();
     }, [loadPatients]);
 
-    const handleSearchChange = useCallback((text) => {
-        setSearchTerm(text);
-    }, []);
-
-    const handleSearchSubmit = useCallback(() => {
-        loadPatients();
-    }, [loadPatients]);
 
     return (
         <View style={styles.container} >
@@ -51,6 +44,15 @@ export default function ListRecordsPatientsDoctor() {
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
+
+                    <SafeAreaView>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <MaterialIcons
+                                name="arrow-back-ios"
+                                style={styles.back} />
+                        </Pressable>
+
+                    </SafeAreaView>
 
                     <Text style={styles.title}>Encontre um paciente</Text>
                     <View style={styles.boxSearch}>

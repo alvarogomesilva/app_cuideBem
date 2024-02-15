@@ -15,6 +15,13 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 20
     },
 
+    back: {
+        top: 10,
+        left: 15,
+        color: Colors.white,
+        fontSize: hp(3.5)
+      },
+
     rounded:{
         width: wp(30),
         height: hp(17),

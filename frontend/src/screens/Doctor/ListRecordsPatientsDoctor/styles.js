@@ -13,14 +13,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.quinary,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   },
+
+  back: {
+    position: 'absolute',
+    top: 10,
+    left: 15,
+    color: Colors.white,
+    fontSize: hp(3.5)
+  },
+
 
   title: {
     fontSize: hp(4.5),
     color: Colors.white,
-    marginHorizontal: 15
-  
+    marginHorizontal: 15,
+    marginTop: 50
   },
 
   boxSearch: {
@@ -47,7 +56,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#e0e0e0',
+    color: Colors.octonary,
     textAlign: 'center',
     fontSize: 18,
     marginVertical: 15

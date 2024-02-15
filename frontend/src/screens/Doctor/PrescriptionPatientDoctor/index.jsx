@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Keyboard, TextInput, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Keyboard, TextInput, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView, Pressable, SafeAreaView } from 'react-native';
 import { usePrescription } from '../../../hooks/doctors/usePrescription';
 import api from '../../../api';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
-import Colors from '../../../constants/colors';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { format } from 'date-fns'
+import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { pt } from 'date-fns/locale'
 
 export default function PrescriptionPatientDoctor({ route }) {
+    const navigation = useNavigation();
+
     const [input, setInput] = useState('');
     const [id, setId] = useState('');
     const [patient, setPatient] = useState(route.params.patient.id);
@@ -52,7 +56,7 @@ export default function PrescriptionPatientDoctor({ route }) {
                 autoClose: 2000
             })
         }
-    
+
     };
 
     const handleKeyPress = ({ nativeEvent }) => {
@@ -68,6 +72,16 @@ export default function PrescriptionPatientDoctor({ route }) {
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
+
+                    <SafeAreaView>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <MaterialIcons
+                                name="arrow-back-ios"
+                                style={styles.back} />
+                        </Pressable>
+
+                    </SafeAreaView>
+
                 </LinearGradient>
             </View>
 
@@ -89,8 +103,9 @@ export default function PrescriptionPatientDoctor({ route }) {
                     value={input}
                     onChangeText={(text) => setInput(text)}
                 />
-                <Text style={styles.day}>{format(new Date(), 'dd MMM, yyyy')
-}</Text>
+
+                <Text style={styles.day}>{format(new Date(), 'dd MMM, yyyy', { locale: pt })
+                }</Text>
 
                 <View style={styles.areaButton}>
                     <TouchableOpacity
@@ -99,11 +114,11 @@ export default function PrescriptionPatientDoctor({ route }) {
                         onPress={handleAddOrUpdatePrescription}
                     >
                         {loading ? (
-                            <ActivityIndicator size="large" color="#FFF"/>
+                            <ActivityIndicator size="large" color="#FFF" />
                         ) : (
                             <Text style={styles.buttonText}>{id ? 'Atualizar' : 'Adicionar'}</Text>
                         )}
-                        
+
                     </TouchableOpacity>
 
                 </View>

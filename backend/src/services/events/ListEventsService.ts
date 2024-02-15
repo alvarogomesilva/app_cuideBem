@@ -8,7 +8,8 @@ const ListEventsService = async ({patient_id}: Event) => {
     if (!patient_id) return { messageError: 'Patient invalid!' }
 
     const events = await Prisma.event.findMany({
-        where: { patient_id }
+        where: { patient_id, },
+        orderBy: { hour: 'asc' } 
     })
 
     return events

@@ -16,6 +16,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
+  back: {
+    position: 'absolute',
+    top: 10,
+    left: 15,
+    color: Colors.white,
+    fontSize: hp(3.5)
+  },
+
   title: {
     fontSize: hp(4.5),
     color: Colors.white,
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#e0e0e0',
+    color: Colors.octonary,
     textAlign: 'center',
     fontSize: 18,
     marginVertical: 15

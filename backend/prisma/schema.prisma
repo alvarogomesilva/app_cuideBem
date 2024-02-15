@@ -112,7 +112,7 @@ model Event {
   id          String  @id @default(uuid())
   description String  @db.Text
   date        String
-  hour        String
+  hour        DateTime
   color       String
   patient_id  String
   patient     Patient @relation(fields: [patient_id], references: [id])

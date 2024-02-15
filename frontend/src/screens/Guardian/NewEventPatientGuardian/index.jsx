@@ -35,7 +35,7 @@ export default function NewEventPatientGuardian({ route }) {
     description: "",
     date: new Date(),
     hour: new Date(),
-    color: ""
+    color: "#81d4fa"
   });
 
   const [selectedCheckbox, setSelectedCheckbox] = useState(0);
@@ -58,13 +58,14 @@ export default function NewEventPatientGuardian({ route }) {
   const [datePickerVisible2, setDatePickerVisible2] = useState(false);
   const showDate2 = () => setDatePickerVisible2(true);
   const hideDatePicker2 = () => setDatePickerVisible2(false);
+
   const handleConfirmDate2 = (date) => {
     setInputs({ ...inputs, hour: date });
     hideDatePicker2();
   };
 
   const handleConfirmDate1 = (date) => {
-    setInputs({ ...inputs, date: format(date, 'yyyy-MM-dd') });
+    setInputs({ ...inputs, date: date });
     hideDatePicker1();
   };
 
@@ -101,7 +102,7 @@ export default function NewEventPatientGuardian({ route }) {
 
         <TextInput
           style={styles.input}
-          placeholder='Descreva uma descrição'
+          placeholder='Evento'
           value={inputs.description}
           onChangeText={(text) => setInputs({...inputs, description: text})}
         />
@@ -153,7 +154,7 @@ export default function NewEventPatientGuardian({ route }) {
         </View>
 
         <DateTimePickerModal
-          date={new Date()}
+          date={inputs.date}
           isVisible={datePickerVisible1}
           mode="date"
           display='inline'

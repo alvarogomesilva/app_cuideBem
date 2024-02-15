@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Animated, Image, Keyboard, KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, Image, Keyboard, Pressable, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { useRecord } from "../../../hooks/doctors/useRecord";
 import api from "../../../api";
 import { LinearGradient } from "expo-linear-gradient";
 import { format } from 'date-fns'
 import { Toast, ALERT_TYPE } from "react-native-alert-notification";
+import { MaterialIcons } from '@expo/vector-icons';
+import { pt } from 'date-fns/locale'
+import { useNavigation } from "@react-navigation/native";
 
 export default function RecordPatientDoctor({ route }) {
+    const navigation = useNavigation()
     const { handleRecord, handleUpdateRecord, loading } = useRecord();
     const [patient, setPatient] = useState(route.params.patient.id);
     const [photo, setPhoto] = useState(route.params.patient.photo)
@@ -69,7 +73,7 @@ export default function RecordPatientDoctor({ route }) {
                     title: 'Mensagem',
                     textBody: 'Atualizado com sucesso!',
                     autoClose: 2000,
-    
+
                 })
             } else {
                 await handleRecord(inputs);
@@ -80,7 +84,7 @@ export default function RecordPatientDoctor({ route }) {
                     autoClose: 2000
                 })
             }
-            
+
         } catch (error) {
             console.log(error);
         }
@@ -110,9 +114,19 @@ export default function RecordPatientDoctor({ route }) {
     return (
         <View style={styles.container}>
             <View style={styles.top}>
+
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
+                    <SafeAreaView>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <MaterialIcons
+                                name="arrow-back-ios"
+                                style={styles.back} />
+                        </Pressable>
+
+                    </SafeAreaView>
+
                 </LinearGradient>
             </View>
 
@@ -131,7 +145,7 @@ export default function RecordPatientDoctor({ route }) {
                         value={inputs.title}
                         placeholder='Descreva o titulo'
                         style={styles.input}
-                        onChangeText={(text) => setInputs({...inputs, title: text})}
+                        onChangeText={(text) => setInputs({ ...inputs, title: text })}
                     />
                     <TextInput
                         style={styles.textarea}
@@ -139,11 +153,11 @@ export default function RecordPatientDoctor({ route }) {
                         multiline={true}
                         onKeyPress={handleKeyPress}
                         value={inputs.description}
-                        onChangeText={(text) => setInputs({...inputs, description: text})}
+                        onChangeText={(text) => setInputs({ ...inputs, description: text })}
                     />
                     <Text
                         style={styles.day}>
-                        {format(new Date(), 'dd MMM, yyyy')}
+                        {format(new Date(), 'dd MMM, yyyy', { locale: pt })}
                     </Text>
                 </ScrollView>
 
