@@ -21,7 +21,7 @@ import UpdatePatientGuardian from '../screens/Guardian/UpdatePatientGuardian'
 import ShowRecordPatientGuardian from '../screens/Guardian/ShowRecordPatientGuardian'
 import ShowPrescriptionPatientGuardian from '../screens/Guardian/ShowPrescriptionPatientGuardian'
 import DailyRoutinePatientGuardian from '../screens/Guardian/DailyRoutinePatientGuardian'
-import EventsPatientGuardian from '../screens/Guardian/EventsPatientGuardian'
+import EventsPatientGuardian from '../screens/Guardian/EventsPatientCaregiver'
 import NewEventPatientGuardian from '../screens/Guardian/NewEventPatientGuardian'
 import ListMyDailyRoutinePatientGuardian from '../screens/Guardian/ListMyDailyRoutinePatientGuardian'
 import ListMyEventsPatientGuardian from '../screens/Guardian/ListMyEventsPatientGuardian'
@@ -270,28 +270,12 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='ListMyEventsPatientCaregiver'
                     component={ListMyEventsPatientCaregiver}
-                    options={{
-                        title: 'Agendas e Consultas',
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name='ListMyDailyRoutinePatientCaregiver'
                     component={ListMyDailyRoutinePatientCaregiver}
-                    options={{
-                        title: 'Meus pacientes',
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name='ListMyDoctorsPrescriptionCaregiver'
@@ -302,29 +286,13 @@ export default function AppRoutes({ role_id }) {
                 <Stack.Screen
                     name='DailyRoutinePatientCaregiver'
                     component={DailyRoutinePatientCaregiver}
-                    options={{
-                        title: null,
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
                     name='EventsPatientCaregiver'
                     component={EventsPatientCaregiver}
-                    options={{
-                        title: null,
-                        headerBackTitleVisible: false,
-                        headerShadowVisible: false,
-                        headerTintColor: neutral,
-                        headerStyle: {
-                            backgroundColor: primary
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name='NewEventPatientCaregiver'

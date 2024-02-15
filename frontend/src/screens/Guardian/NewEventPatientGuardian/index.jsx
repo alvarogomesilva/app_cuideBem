@@ -14,6 +14,7 @@ import Checkbox from 'expo-checkbox';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { usePatients } from '../../../hooks/usePatients';
 import { format } from 'date-fns';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
@@ -42,6 +43,12 @@ export default function NewEventPatientGuardian({ route }) {
 
   const handleEvent = async () => {
     await newEvent(inputs);
+    Toast.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Mensagem',
+      textBody: 'Novo evento adicionado!',
+      autoClose: 2000,
+    });
     setInputs({
       patient_id,
       description: "",
@@ -107,22 +114,12 @@ export default function NewEventPatientGuardian({ route }) {
           onChangeText={(text) => setInputs({...inputs, description: text})}
         />
 
-        <TouchableOpacity onPress={showDate1}>
-          <TextInput
-            value={format(inputs.date, 'dd/MM/yyyy')}
-            style={styles.input}
-            placeholder='Digite uma data'
-            pointerEvents="none"
-          />
+        <TouchableOpacity onPress={showDate1} style={styles.input}>
+          <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={showDate2}>
-          <TextInput
-            style={styles.input}
-            placeholder='Digite um horário'
-            pointerEvents='none'
-            value={format(inputs.hour, 'HH:mm')}
-          />
+        <TouchableOpacity onPress={showDate2} style={styles.input}>
+        <Text>{format(inputs.hour, 'HH:mm')}</Text>
         </TouchableOpacity>
 
         <View style={styles.boxCheckbox}>

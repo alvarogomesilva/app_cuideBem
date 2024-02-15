@@ -87,7 +87,7 @@ export default function EventsPatientGuardian({ route }) {
       </View>
       <View style={styles.content}>
         {loading ? (
-          <ActivityIndicator size="large" color={Colors.blue} />
+          <ActivityIndicator size="large" color={Colors.denary} />
         ) : eventsFiltered.length === 0 ? (
           <Text style={styles.noEventsText}>Não há eventos para este dia.</Text>
         ) : (

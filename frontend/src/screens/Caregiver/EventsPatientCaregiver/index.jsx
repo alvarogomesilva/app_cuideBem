@@ -1,36 +1,28 @@
-import LocaleConfig from './util'
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
 import ButtonBottom from '../../../components/ButtonBottom';
-import { styles } from './styles';
-import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import api from '../../../api';
-import { white } from '../../../constants/colors';
+import Colors, { white } from '../../../constants/colors';
+import { Agenda, Calendar } from 'react-native-calendars';
+import { styles } from './styles';
+import { LinearGradient } from "expo-linear-gradient";
 import Events from '../../../components/Events';
 
 const MemoizedEvents = memo(Events);
 
-function sortByHourAscending(events) {
-  return events.slice().sort((a, b) => {
-    const timeA = new Date(`1970-01-01T${a.hour}`);
-    const timeB = new Date(`1970-01-01T${b.hour}`);
-    return timeA - timeB;
-  });
-}
-
 export default function EventsPatientCaregiver({ route }) {
   const { params: { patient } } = route;
   const { id: patient_id } = patient;
-
+  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   const [events, setEvents] = useState([]);
   const [eventsFiltered, setEventsFiltered] = useState([]);
   const [daySelected, setDaySelected] = useState(format(new Date(), 'yyyy-MM-dd'));
-  const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
-
+  
   const loadEvents = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await api.get(`/events/${patient_id}`);
       setEvents(response.data);
@@ -41,10 +33,10 @@ export default function EventsPatientCaregiver({ route }) {
     }
   }, [patient_id]);
 
-  const handleEventDeletion = async () => {
+  const handleEventDeletion = useCallback(async () => {
     await loadEvents();
-  };
-
+  }, [loadEvents]);
+  
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', handleEventDeletion);
     return unsubscribe;
@@ -52,74 +44,60 @@ export default function EventsPatientCaregiver({ route }) {
 
   useEffect(() => {
     function filterEvents() {
-      const sortedEvents = sortByHourAscending(events);
-      const newEvents = sortedEvents.filter(e => e.date === daySelected);
-      setEventsFiltered(newEvents);
+      const filteredEvents = events.filter(event => format(new Date(event.date), 'yyyy-MM-dd') === daySelected);
+      setEventsFiltered(filteredEvents);
     }
     filterEvents();
   }, [daySelected, events]);
 
-  const markedDates = events.reduce((result, event) => {
-    const formattedDate = event.date;
+  const [selected, setSelected] = useState(new Date());
 
-    result[formattedDate] = result[formattedDate] || {
-      marked: true,
-      dots: [],
-    };
-
-    result[formattedDate].dots.push({ key: event.id, color: event.color });
-
-    return result;
-  }, {});
-
-  const calendarTheme = {
-    dayBackgroundColor: '#FF00FF', 
-    selectedDayBackgroundColor: '#00adf5',
-    backgroundColor: '#ffffff',
-    calendarBackground: '#ffffff',
-    textSectionTitleColor: '#b6c1cd',
-    textSectionTitleDisabledColor: '#d9e1e8',
-    selectedDayTextColor: '#FF00FF',
-    todayTextColor: '#00adf5',
-    dayTextColor: '#2d4150',
-    textDisabledColor: '#d9e1e8',
-    dotColor: '#00adf5',
-    selectedDotColor: '#ffffff',
-    arrowColor: 'orange',
-    disabledArrowColor: '#d9e1e8',
-    monthTextColor: 'blue',
-    indicatorColor: 'blue',
-    textDayFontWeight: '300',
-    textMonthFontWeight: 'bold',
-    textDayHeaderFontWeight: '300',
-  };
+  const marked = useMemo(() => ({
+    [selected]: {
+      selected: true,
+      selectedColor: Colors.denary,
+      selectedTextColor: 'white',
+    }
+  }), [selected]);
 
   return (
     <View style={styles.container}>
-      <Calendar
-        style={styles.calendar}
-        markedDates={markedDates}
-        markingType='multi-dot'
-        onDayPress={day => setDaySelected(day.dateString)}
-        theme={calendarTheme}
-      />
-
-      {loading ? (
-        <ActivityIndicator color={white} size="large" />
-      ) : (
-        eventsFiltered.length > 0 ? (
-          <FlatList
-            contentContainerStyle={{ paddingHorizontal: 16 }}
+      <View style={styles.top}>
+        <LinearGradient
+          colors={['#5E7B99', '#C4E1FF']}
+          style={styles.gradient}>
+          <SafeAreaView>
+            <Calendar
+              markedDates={marked}
+              onDayPress={(day) => { setSelected(day.dateString); setDaySelected(day.dateString) }}
+              style={{
+                borderRadius: 5,
+                margin: 15
+              }}
+              theme={{
+                calendarBackground: 'transparent',
+                dayTextColor: '#fff',
+                textDisabledColor: '#444',
+                monthTextColor: Colors.white,
+                
+              }}
+            />
+          </SafeAreaView>
+        </LinearGradient>
+      </View>
+      <View style={styles.content}>
+        {loading ? (
+          <ActivityIndicator size="large" color={Colors.denary} />
+        ) : eventsFiltered.length === 0 ? (
+          <Text style={styles.noEventsText}>Não há eventos para este dia.</Text>
+        ) : (
+          <FlatList 
             data={eventsFiltered}
-            renderItem={({ item }) => <MemoizedEvents item={item} onDelete={handleEventDeletion} />}
+            renderItem={({item}) => <MemoizedEvents item={item} onLoad={loadEvents} />}
             keyExtractor={(item, index) => index.toString()}
           />
-        ) : (
-          <Text style={styles.noEvent}>Não tem eventos Hoje!</Text>
-        )
-      )}
-
-      <ButtonBottom onPress={() => navigation.navigate('NewEventPatientCaregiver', { patient })} />
+        )}
+      </View>
     </View>
-  );
+  )
 }

@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Alert } from 'react-native'
 import api from '../api'
 import { addDays, format } from "date-fns"
 export const useNewEvent = () => {
@@ -17,7 +16,6 @@ export const useNewEvent = () => {
                 hour, 
                 date: newDate
             })
-            Alert.alert('Evento criado')
         } catch (error) {
             console.log(error)
         } finally {

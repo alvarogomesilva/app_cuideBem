@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Input from '../../../components/Input';
-import Submit from '../../../components/Submit';
 import api from '../../../api';
 import { format } from 'date-fns';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -9,8 +7,6 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { usePatients } from '../../../hooks/usePatients';
 import { styles } from './styles';
 import { LinearGradient } from "expo-linear-gradient";
-import { Entypo } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 import Colors from '../../../constants/colors';
 import { Toast, ALERT_TYPE } from "react-native-alert-notification";
 
@@ -63,21 +59,21 @@ export default function NewDailyRoutineGuardian() {
         title: 'Mensagem',
         textBody: 'Nova rotina adicionada!',
         autoClose: 2000,
-      })
+      });
       setInputs({
         patient_id: "",
         title: "",
         description: "",
+        hour: new Date(),
         date: new Date(),
         final_date: new Date()
-      })
- 
+      });
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <View style={styles.container} >
@@ -85,13 +81,11 @@ export default function NewDailyRoutineGuardian() {
         <LinearGradient
           colors={['#5E7B99', '#C4E1FF']}
           style={styles.gradient}>
-
           <Text style={styles.title}>Nova Rotina diária</Text>
         </LinearGradient>
       </View>
 
       <View style={styles.content}>
-
         <SelectList
           boxStyles={styles.input}
           setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
@@ -101,7 +95,7 @@ export default function NewDailyRoutineGuardian() {
 
         <TextInput
           style={styles.input}
-          placeholder='Descreva uma titulo'
+          placeholder='Descreva um título'
           value={inputs.title}
           onChangeText={(text) => setInputs({ ...inputs, title: text })}
         />
@@ -113,35 +107,17 @@ export default function NewDailyRoutineGuardian() {
         />
 
         <View style={styles.box}>
-          <TouchableOpacity>
-            <TextInput
-              style={styles.date}
-              placeholder='01/01/2024'
-              pointerEvents="none"
-              value={format(new Date(), 'dd/MM/yyyy')}
-            />
-            <Entypo name="calendar" style={styles.icon} />
+          <TouchableOpacity onPress={showDate1} activeOpacity={0.9} style={styles.date}>
+            <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={showDate2} activeOpacity={0.9}>
-            <TextInput
-              style={styles.date}
-              placeholder='10/01/2024'
-              pointerEvents="none"
-              value={format(inputs.final_date, 'dd/MM/yyyy')}
-            />
-            <Entypo name="calendar" style={styles.icon} />
+          <TouchableOpacity onPress={showDate2} activeOpacity={0.9} style={styles.date}>
+            <Text>{format(inputs.final_date, 'dd/MM/yyyy')}</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={showDate3} activeOpacity={0.9}>
-          <TextInput
-            style={styles.input}
-            placeholder='Digite um horário'
-            pointerEvents='none'
-            value={format(new Date(), 'HH:mm')}
-          />
-          <Feather name="clock" style={styles.icon} />
+        <TouchableOpacity onPress={showDate3} activeOpacity={0.9} style={styles.input}>
+          <Text>{format(inputs.hour, 'HH:mm')}</Text>
         </TouchableOpacity>
 
         <View style={styles.areaButton}>
@@ -154,6 +130,15 @@ export default function NewDailyRoutineGuardian() {
           </TouchableOpacity>
         </View>
 
+        <DateTimePickerModal
+          date={inputs.date}
+          isVisible={datePickerVisible1}
+          mode="date"
+          display='inline'
+          locale='pt'
+          onConfirm={handleConfirmDate1}
+          onCancel={hideDatePicker1}
+        />
 
         <DateTimePickerModal
           date={inputs.final_date}

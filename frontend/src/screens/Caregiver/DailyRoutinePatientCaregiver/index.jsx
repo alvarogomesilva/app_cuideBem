@@ -6,14 +6,16 @@ import DailyRoutine from '../../../components/DailyRoutine';
 import { AuthContext } from '../../../contexts/AuthContext';
 import api from '../../../api';
 import { styles } from './styles';
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function DailyRoutinePatientCaregiver({ route }) {
+
   const [patient, setPatient] = useState(route.params.patient);
   const [date, setDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const [routineDailys, setRoutineDailys] = useState([]);
   const [updateCounter, setUpdateCounter] = useState(0);
   const { user } = useContext(AuthContext);
-
+  console.log(patient)
   const loadRoutine = async () => {
     try {
       const routines = await api.get(`/dailys/${patient.id}/${date}`);
@@ -39,13 +41,36 @@ export default function DailyRoutinePatientCaregiver({ route }) {
   };
 
   return (
-    <View style={styles.container}>
-      <DailyRoutine
-        data={routineDailys}
-        patient={patient}
-        user={user.role_id}
-        onUpdate={handleUpdate} 
-      />
+    <View style={styles.container} >
+      <View style={styles.top}>
+        <LinearGradient
+          colors={['#5E7B99', '#C4E1FF']}
+          style={styles.gradient}>
+
+          <View style={styles.areaImage}>
+            <Image
+              source={{ uri: `http://192.168.0.100:3000/files/${patient.photo}` }}
+              style={styles.image}
+            />
+
+            <View>
+              <Text style={styles.name}>{patient.name}</Text>
+              <Text style={styles.subTitle}>Paciente</Text>
+            </View>
+          </View>
+
+        </LinearGradient>
+      </View>
+
+      <View style={styles.content}>
+        <DailyRoutine
+          data={routineDailys}
+          patient={patient}
+          user={user.role_id}
+          onUpdate={handleUpdate}
+        />
+
+      </View>
     </View>
   );
 }

@@ -2,8 +2,14 @@ import { format } from "date-fns";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import api from '../../api';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import { useState } from "react";
+import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 
 const Events = ({ item, onLoad }) => {
+  const [alertVisible, setAlertVisible] = useState(false);
+
+
   const deleteEvent = async () => {
     try {
       await api.delete(`/events/${item.id}`);
@@ -12,25 +18,24 @@ const Events = ({ item, onLoad }) => {
     } catch (error) {
       console.log(error);
     }
+    Toast.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Mensagem',
+      textBody: 'Excluida com sucesso!',
+      autoClose: 2000,
+    });
   };
 
   const handleEvent = () => {
-    Alert.alert(
-      `${item.description}`,
-      'Deseja realmente excluir?',
-      [
-        { text: 'No', onPress: () => console.log('Cancelado'), style: 'cancel' },
-        { text: 'Yes', onPress: deleteEvent },
-      ],
-      {
-        cancelable: true,
-      }
-    );
+    setAlertVisible(true)
+
   };
 
+  const hideAlert = () => setAlertVisible(false);
+
+
   return (
-    <TouchableOpacity style={styles.classItem} onLongPress={handleEvent}>
-      
+    <TouchableOpacity style={styles.classItem} onLongPress={handleEvent} activeOpacity={0.8}>
       <View style={styles.classContent}>
         <View style={styles.classHours}>
           <Text style={styles.startTime}>Horário</Text>
@@ -44,6 +49,21 @@ const Events = ({ item, onLoad }) => {
           </View>
         </View>
       </View>
+
+      <AwesomeAlert
+        show={alertVisible}
+        showProgress={false}
+        title="Deseja realmente excluir?"
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText='Não, cancelar'
+        confirmText='Sim, excluir'
+        confirmButtonColor="#DD6B55"
+        onCancelPressed={hideAlert}
+        onConfirmPressed={deleteEvent}
+      />
     </TouchableOpacity>
   );
 };
