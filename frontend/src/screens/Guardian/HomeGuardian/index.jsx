@@ -7,6 +7,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -30,7 +31,8 @@ export default function HomeGuardian() {
                         <Text style={styles.span}>Guardião</Text>
                     </View>
                     <View>
-                        <Image 
+                        <Animatable.Image 
+                            animation='fadeIn'
                             source={require('../../../../assets/guardians.png')}
                             style={{ width: 130, height: 130 }}
                         

@@ -10,6 +10,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { styles } from './styles'
+import * as Animatable from 'react-native-animatable';
 
 
 export default function HomeCaregiver() {
@@ -32,7 +33,8 @@ export default function HomeCaregiver() {
                         <Text style={styles.span}>Cuidador</Text>
                     </View>
                     <View>
-                        <Image 
+                        <Animatable.Image 
+                            animation='fadeIn'
                             source={require('../../../../assets/caregivers.png')}
                             style={{ width: 130, height: 130 }}
                         

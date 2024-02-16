@@ -8,6 +8,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 export default function HomeDoctor() {
     const navigation = useNavigation()
@@ -28,7 +29,8 @@ export default function HomeDoctor() {
                         <Text style={styles.span}>Médico</Text>
                     </View>
                     <View>
-                        <Image
+                        <Animatable.Image
+                            animation='fadeIn'
                             source={require('../../../../assets/doctorsHome.png')}
                             style={{ width: 130, height: 130 }}
 
