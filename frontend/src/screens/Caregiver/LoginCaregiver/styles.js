@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: hp(3.5),
         fontWeight: "700",
-        color: Colors.quinary,
+        color: Colors.octonary,
         marginBottom: 15
     },
 
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
 
     submit: {
         height: hp(8),
-        backgroundColor: Colors.quaternary,
+        backgroundColor: Colors.octonary,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
@@ -76,7 +76,11 @@ export const styles = StyleSheet.create({
     submitText: {
         color: Colors.white,
         fontSize: hp(2.5)
-    }
+    },
 
+    labelError: {
+        color: '#ff375b',
+        marginBottom: 8
+    }
 
 })

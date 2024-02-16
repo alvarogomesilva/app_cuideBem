@@ -2,6 +2,7 @@ import api from '../api'
 import { createContext, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native'
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 export const AuthContext = createContext({})
 
@@ -22,7 +23,7 @@ export default function AuthProvider({ children }) {
                         'Authorization': `Bearer ${storageUser}`
                     }
                 })
-                .catch(() => setUser(null)) 
+                    .catch(() => setUser(null))
                 api.defaults.headers['Authorization'] = `Bearer ${storageUser}`
                 setUser(response.data)
                 setLoadingUser(false)
@@ -34,18 +35,84 @@ export default function AuthProvider({ children }) {
         loadStorage()
     }, [])
 
-    // Função de autenticação
+    // Função de autenticação do Cuidador
     // =======================
-    async function signIn(email, password) {
+    async function signInCaregiver(email, password) {
         setLoadingAuth(true)
         try {
-            
+
             const response = await api.post('/login', { email, password })
-            const { token } = response.data
-            setUser(response.data)
-            await AsyncStorage.setItem('@token', token)
-            api.defaults.headers['Authorization'] = `Bearer ${token}`
-            
+            const { token, role_id } = response.data
+            if (role_id !== 3) {
+                Toast.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Mensagem',
+                    textBody: 'Usuario inválido!',
+                    autoClose: 2000,
+                });
+            } else {
+                setUser(response.data)
+                await AsyncStorage.setItem('@token', token)
+                api.defaults.headers['Authorization'] = `Bearer ${token}`
+            }
+
+
+        } catch (error) {
+            Alert.alert('Email/senha incorretos!')
+        }
+        finally {
+            setLoadingAuth(false)
+        }
+    }
+
+    async function signInGuardian(email, password) {
+        setLoadingAuth(true)
+        try {
+
+            const response = await api.post('/login', { email, password })
+            const { token, role_id } = response.data
+            if (role_id !== 2) {
+                Toast.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Mensagem',
+                    textBody: 'Usuario inválido!',
+                    autoClose: 2000,
+                });
+            } else {
+                setUser(response.data)
+                await AsyncStorage.setItem('@token', token)
+                api.defaults.headers['Authorization'] = `Bearer ${token}`
+            }
+
+
+        } catch (error) {
+            Alert.alert('Email/senha incorretos!')
+        }
+        finally {
+            setLoadingAuth(false)
+        }
+    }
+
+    async function signInDoctor(email, password) {
+        setLoadingAuth(true)
+        try {
+
+            const response = await api.post('/login', { email, password })
+            const { token, role_id } = response.data
+            if (role_id !== 1) {
+                Toast.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Mensagem',
+                    textBody: 'Usuario inválido!',
+                    autoClose: 2000,
+                });
+            } else {
+                setUser(response.data)
+                await AsyncStorage.setItem('@token', token)
+                api.defaults.headers['Authorization'] = `Bearer ${token}`
+            }
+
+
         } catch (error) {
             Alert.alert('Email/senha incorretos!')
         }
@@ -64,7 +131,9 @@ export default function AuthProvider({ children }) {
         user,
         loadingAuth,
         loadingUser,
-        signIn,
+        signInCaregiver,
+        signInGuardian,
+        signInDoctor,
         signOut
     }
 
