@@ -49,8 +49,6 @@ CREATE TABLE `prescriptions` (
 CREATE TABLE `records` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
-    `initial_date` VARCHAR(191) NOT NULL,
-    `final_date` VARCHAR(191) NOT NULL,
     `description` TEXT NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
     `doctor_id` VARCHAR(191) NOT NULL,
@@ -76,9 +74,10 @@ CREATE TABLE `events` (
     `id` VARCHAR(191) NOT NULL,
     `description` TEXT NOT NULL,
     `date` VARCHAR(191) NOT NULL,
-    `hour` VARCHAR(191) NOT NULL,
+    `hour` DATETIME(3) NOT NULL,
     `color` VARCHAR(191) NOT NULL,
     `patient_id` VARCHAR(191) NOT NULL,
+    `notification` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

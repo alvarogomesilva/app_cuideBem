@@ -5,6 +5,7 @@ import api from '../../api';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { useState } from "react";
 import { ALERT_TYPE, Toast } from "react-native-alert-notification";
+import * as Notifications from 'expo-notifications';
 
 const Events = ({ item, onLoad }) => {
   const [alertVisible, setAlertVisible] = useState(false);
@@ -13,7 +14,7 @@ const Events = ({ item, onLoad }) => {
   const deleteEvent = async () => {
     try {
       await api.delete(`/events/${item.id}`);
-      console.log('Evento excluído');
+      await Notifications.cancelScheduledNotificationAsync(item.notification)
       onLoad()
     } catch (error) {
       console.log(error);

@@ -79,8 +79,6 @@ model Prescription {
 model Record {
   id           String @id @default(uuid())
   title        String
-  initial_date String
-  final_date   String
   description  String @db.Text
   patient_id   String
   doctor_id    String
@@ -94,14 +92,14 @@ model Record {
 // Tabela de Rotina Diária
 // ========================
 model Daily {
-  id           String   @id @default(uuid())
-  title        String
-  description  String   @db.Text
-  hour         DateTime
-  date         String
-  done         Boolean
-  patient_id   String
-  patient      Patient  @relation(fields: [patient_id], references: [id])
+  id          String   @id @default(uuid())
+  title       String
+  description String   @db.Text
+  hour        DateTime
+  date        String
+  done        Boolean
+  patient_id  String
+  patient     Patient  @relation(fields: [patient_id], references: [id])
 
   @@map("dailys")
 }
@@ -109,14 +107,14 @@ model Daily {
 // Tabela de Eventos
 // ==================
 model Event {
-  id          String  @id @default(uuid())
-  description String  @db.Text
-  date        String
-  hour        DateTime
-  
-  color       String
-  patient_id  String
-  patient     Patient @relation(fields: [patient_id], references: [id])
+  id           String   @id @default(uuid())
+  description  String   @db.Text
+  date         String
+  hour         DateTime
+  color        String
+  patient_id   String
+  notification String
+  patient      Patient  @relation(fields: [patient_id], references: [id])
 
   @@map("events")
 }

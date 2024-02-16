@@ -36,6 +36,25 @@ export const styles = StyleSheet.create({
         marginTop: 15
     },
 
+    boxDate: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    inputDate: {
+        marginHorizontal: 5,
+        alignSelf: 'center',
+        width: wp('30%'),
+        fontSize: hp(2.6),
+        backgroundColor: Colors.white,
+        borderWidth: 3,
+        borderRadius: 10,
+        borderColor: '#e0e0e0',
+        textAlignVertical: 'top',
+        padding: 15,
+        marginBottom: 10
+    },
+
     input: {
         alignSelf: 'center',
         width: wp('90%'),

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
@@ -15,6 +15,28 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { usePatients } from '../../../hooks/usePatients';
 import { format } from 'date-fns';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
+async function requestPermissionsAsync() {
+  return await Notifications.requestPermissionsAsync({
+    ios: {
+      allowAlert: true,
+      allowBadge: true,
+      allowSound: true,
+      allowAnnouncements: true,
+    },
+  });
+}
+
+
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
@@ -30,18 +52,39 @@ export default function NewEventPatientGuardian({ route }) {
   const { newEvent, loading } = useNewEvent();
   const patient_id = route.params?.patient.id;
   const { listPatients } = usePatients()
-
+  const [selectedCheckbox, setSelectedCheckbox] = useState(0);
   const [inputs, setInputs] = useState({
     patient_id,
     description: "",
     date: new Date(),
     hour: new Date(),
-    color: "#81d4fa"
+    color: "#81d4fa",
+    dateNotification: new Date(),
+    notification: null
   });
+  async function schedulePushNotification(dateTime, message) {
+    try {
+      const trigger = new Date(dateTime);
+      const idNotification = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Mensagem!',
+          body: message,
+          sound: ''
+        },
+        trigger,
+      });
+      return idNotification;
+    } catch (error) {
+      console.error("Erro ao agendar notificação:", error);
+      return null;
+    }
+  }
 
-  const [selectedCheckbox, setSelectedCheckbox] = useState(0);
+
 
   const handleEvent = async () => {
+     inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
+   
     await newEvent(inputs);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
@@ -54,7 +97,9 @@ export default function NewEventPatientGuardian({ route }) {
       description: "",
       date: new Date(),
       hour: new Date(),
-      color: selectedCheckbox
+      color: selectedCheckbox,
+      dateNotification: new Date(),
+      notification: null
     });
   }
 
@@ -66,6 +111,10 @@ export default function NewEventPatientGuardian({ route }) {
   const showDate2 = () => setDatePickerVisible2(true);
   const hideDatePicker2 = () => setDatePickerVisible2(false);
 
+  const [datePickerVisible3, setDatePickerVisible3] = useState(false);
+  const showDate3 = () => setDatePickerVisible3(true);
+  const hideDatePicker3 = () => setDatePickerVisible3(false);
+
   const handleConfirmDate2 = (date) => {
     setInputs({ ...inputs, hour: date });
     hideDatePicker2();
@@ -74,6 +123,10 @@ export default function NewEventPatientGuardian({ route }) {
   const handleConfirmDate1 = (date) => {
     setInputs({ ...inputs, date: date });
     hideDatePicker1();
+  };
+  const handleConfirmDate3 = (date) => {
+    setInputs({ ...inputs, dateNotification: date });
+    hideDatePicker3();
   };
 
   const handleCheckboxChange = (id) => {
@@ -85,6 +138,11 @@ export default function NewEventPatientGuardian({ route }) {
       color: selectedColor ? selectedColor.color : "#81d4fa"
     }));
   }
+
+  useEffect(() => {
+    requestPermissionsAsync()
+
+  }, [])
 
   return (
     <View style={styles.container} >
@@ -99,7 +157,7 @@ export default function NewEventPatientGuardian({ route }) {
 
       <View style={styles.content}>
 
-      <SelectList
+        <SelectList
           boxStyles={styles.input}
           setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
           data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
@@ -111,27 +169,33 @@ export default function NewEventPatientGuardian({ route }) {
           style={styles.input}
           placeholder='Evento'
           value={inputs.description}
-          onChangeText={(text) => setInputs({...inputs, description: text})}
+          onChangeText={(text) => setInputs({ ...inputs, description: text })}
         />
 
-        <TouchableOpacity onPress={showDate1} style={styles.input}>
-          <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
-        </TouchableOpacity>
+        <View style={styles.boxDate}>
+          <TouchableOpacity onPress={showDate1} style={styles.inputDate}>
+            <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={showDate2} style={styles.input}>
-        <Text>{format(inputs.hour, 'HH:mm')}</Text>
+          <TouchableOpacity onPress={showDate2} style={styles.inputDate}>
+            <Text>{format(inputs.hour, 'HH:mm')}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity onPress={showDate3} style={styles.input}>
+          <Text>{format(inputs.dateNotification, 'HH:mm dd/MM/yyyy')}</Text>
         </TouchableOpacity>
 
         <View style={styles.boxCheckbox}>
           {colors.map(color => (
             <Checkbox
               key={color.id}
-              style={{ 
-                backgroundColor: color.color, 
-                borderColor: color.color, 
-                borderRadius: 50, 
-                width: 30, 
-                height: 30 
+              style={{
+                backgroundColor: color.color,
+                borderColor: color.color,
+                borderRadius: 50,
+                width: 30,
+                height: 30
               }}
               value={selectedCheckbox === color.id}
               onValueChange={() => handleCheckboxChange(color.id)}
@@ -168,6 +232,16 @@ export default function NewEventPatientGuardian({ route }) {
           onConfirm={handleConfirmDate2}
           onCancel={hideDatePicker2}
         />
+        <DateTimePickerModal
+          date={inputs.dateNotification}
+          isVisible={datePickerVisible3}
+          mode="datetime"
+          display='inline'
+          locale='pt'
+          onConfirm={handleConfirmDate3}
+          onCancel={hideDatePicker3}
+        />
+
       </View>
     </View>
   );

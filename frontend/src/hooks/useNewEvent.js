@@ -6,7 +6,7 @@ export const useNewEvent = () => {
 
     const newEvent = async (inputs) => {
         setLoading(true)
-        const { color, description, patient_id, hour, date } = inputs;
+        const { color, description, patient_id, hour, date, notification } = inputs;
         const newDate = format(addDays(date, 1), 'yyyy-MM-dd')
         try {
             const response = await api.post('/events', {
@@ -14,7 +14,8 @@ export const useNewEvent = () => {
                 description, 
                 patient_id, 
                 hour, 
-                date: newDate
+                date: newDate,
+                notification
             })
         } catch (error) {
             console.log(error)
