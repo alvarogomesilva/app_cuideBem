@@ -33,6 +33,7 @@ export default function HomeGuardian() {
                     <View>
                         <Animatable.Image 
                             animation='fadeIn'
+                            duration={2000}
                             source={require('../../../../assets/guardians.png')}
                             style={{ width: 130, height: 130 }}
                         

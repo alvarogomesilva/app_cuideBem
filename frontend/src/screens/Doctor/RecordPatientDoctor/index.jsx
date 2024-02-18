@@ -1,29 +1,33 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Animated, Image, Keyboard, Pressable, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, Animated, Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { useRecord } from "../../../hooks/doctors/useRecord";
 import api from "../../../api";
 import { LinearGradient } from "expo-linear-gradient";
 import { format } from 'date-fns'
 import { Toast, ALERT_TYPE } from "react-native-alert-notification";
-import { MaterialIcons } from '@expo/vector-icons';
 import { pt } from 'date-fns/locale'
 import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from "@hookform/resolvers/yup"
+import { schema } from "../../../validations/recordValidation"
 
 export default function RecordPatientDoctor({ route }) {
+    const [patient, setPatient] = useState(route.params.patient.id);
+
+    const { control, handleSubmit, formState: { errors }, setValue } = useForm((
+        {
+            resolver: yupResolver(schema), defaultValues: {
+                title: '',
+                description: '',
+                patient_id: patient
+            }
+        }))
+
     const navigation = useNavigation()
     const { handleRecord, handleUpdateRecord, loading } = useRecord();
-    const [patient, setPatient] = useState(route.params.patient.id);
     const [photo, setPhoto] = useState(route.params.patient.photo)
     const [id, setId] = useState('');
-    const [inputs, setInputs] = useState({
-        title: '',
-        initial_date: '',
-        final_date: '',
-        description: '',
-        patient_id: patient
-    });
-
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
     const fadeAnim = useRef(new Animated.Value(1)).current; // Initial opacity value
@@ -64,10 +68,10 @@ export default function RecordPatientDoctor({ route }) {
         };
     }, []);
 
-    const handleAddOrUpdateRecord = async () => {
+    const handleAddOrUpdateRecord = async (data) => {
         try {
             if (id) {
-                await handleUpdateRecord(inputs, id);
+                await handleUpdateRecord(data, id);
                 Toast.show({
                     type: ALERT_TYPE.SUCCESS,
                     title: 'Mensagem',
@@ -76,7 +80,7 @@ export default function RecordPatientDoctor({ route }) {
 
                 })
             } else {
-                await handleRecord(inputs);
+                await handleRecord(data);
                 Toast.show({
                     type: ALERT_TYPE.SUCCESS,
                     title: 'Mensagem',
@@ -101,7 +105,8 @@ export default function RecordPatientDoctor({ route }) {
             try {
                 const record = await api.get(`/records/${patient}`);
                 const { title, description } = record.data
-                setInputs({ title, description });
+                setValue("title", title)
+                setValue("description", description)
                 setId(record.data.id);
             } catch (error) {
                 console.log(error);
@@ -118,15 +123,6 @@ export default function RecordPatientDoctor({ route }) {
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
-                    <SafeAreaView>
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <MaterialIcons
-                                name="arrow-back-ios"
-                                style={styles.back} />
-                        </Pressable>
-
-                    </SafeAreaView>
-
                 </LinearGradient>
             </View>
 
@@ -140,21 +136,53 @@ export default function RecordPatientDoctor({ route }) {
                 <Text style={styles.name}>{route.params.patient.name}</Text>
                 <Text style={styles.patient}>Paciente</Text>
 
-                <ScrollView>
-                    <TextInput
-                        value={inputs.title}
-                        placeholder='Descreva o titulo'
-                        style={styles.input}
-                        onChangeText={(text) => setInputs({ ...inputs, title: text })}
+                <ScrollView >
+
+                    <Controller
+                        control={control}
+                        rules={{
+                            minLength: 3,
+                            maxLength: 120,
+                          }}
+                  
+                        name='title'
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                placeholder='Descreva um titulo'
+                                style={styles.input}
+                                onChangeText={onChange}
+                            />
+                        )}
                     />
-                    <TextInput
-                        style={styles.textarea}
-                        placeholder='Descreva a receita'
-                        multiline={true}
-                        onKeyPress={handleKeyPress}
-                        value={inputs.description}
-                        onChangeText={(text) => setInputs({ ...inputs, description: text })}
+                    {errors.title && Toast.show({
+                        type: ALERT_TYPE.DANGER,
+                        title: 'Mensagem',
+                        textBody: 'Titulo é necessário',
+
+                    })}
+
+                    <Controller
+                        control={control}
+                        name="description"
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                style={styles.textarea}
+                                placeholder='Descreva o prontuário'
+                                multiline={true}
+                                onKeyPress={handleKeyPress}
+                                value={value}
+                                onChangeText={onChange}
+                            />
+                        )}
                     />
+                     {errors.description && Toast.show({
+                        type: ALERT_TYPE.DANGER,
+                        title: 'Mensagem',
+                        textBody: 'Descrição é necessário',
+
+                    })}
+
                     <Text
                         style={styles.day}>
                         {format(new Date(), 'dd MMM, yyyy', { locale: pt })}
@@ -165,10 +193,10 @@ export default function RecordPatientDoctor({ route }) {
                     <TouchableOpacity
                         style={styles.button}
                         activeOpacity={0.9}
-                        onPress={handleAddOrUpdateRecord}
+                        onPress={handleSubmit(handleAddOrUpdateRecord)}
                     >
                         {loading ? (
-                            <ActivityIndicator size="large" color="#FFF" />
+                            <ActivityIndicator size="small" color="#FFF" />
                         ) : (
                             <Text style={styles.buttonText}>{id ? 'Atualizar' : 'Adicionar'}</Text>
                         )}

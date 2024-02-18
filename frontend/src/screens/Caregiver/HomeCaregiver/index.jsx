@@ -35,6 +35,7 @@ export default function HomeCaregiver() {
                     <View>
                         <Animatable.Image 
                             animation='fadeIn'
+                            duration={2000}
                             source={require('../../../../assets/caregivers.png')}
                             style={{ width: 130, height: 130 }}
                         

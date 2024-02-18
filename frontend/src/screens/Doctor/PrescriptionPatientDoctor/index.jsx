@@ -72,16 +72,6 @@ export default function PrescriptionPatientDoctor({ route }) {
                 <LinearGradient
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
-
-                    <SafeAreaView>
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <MaterialIcons
-                                name="arrow-back-ios"
-                                style={styles.back} />
-                        </Pressable>
-
-                    </SafeAreaView>
-
                 </LinearGradient>
             </View>
 

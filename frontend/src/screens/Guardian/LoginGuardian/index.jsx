@@ -26,7 +26,7 @@ export default function LoginGuardian() {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios'? 'padding': null}>
             <LinearGradient
                 colors={['#ADCAE8', '#B8D5F3', '#C4E1FF', '#FFFFFF']}
                 style={styles.gradient}>
@@ -59,6 +59,7 @@ export default function LoginGuardian() {
                                         ]}
                                         placeholder='Digite seu email'
                                         onChangeText={onChange}
+                                        autoCapitalize='none'
                                     />
                                     <Feather name="mail" style={[styles.icon, { color: errors.email ? '#ff375b' : '#e0e0e0' }]} />
                                 </View>
@@ -90,12 +91,12 @@ export default function LoginGuardian() {
 
                         <TouchableOpacity style={styles.submit} activeOpacity={0.9} onPress={handleSubmit(handleSignIn)}>
                             {
-                                loadingAuth ? (<ActivityIndicator color="#fff" size="large" />) : (<Text style={styles.submitText}>Entrar</Text>)
+                                loadingAuth ? (<ActivityIndicator color="#fff" size="small" />) : (<Text style={styles.submitText}>Entrar</Text>)
                             }
                         </TouchableOpacity>
                     </View>
                 </Animatable.View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
