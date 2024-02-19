@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, TouchableOpacity, View, FlatList, Image } from 'react-native';
 import { addMinutes, compareAsc, differenceInMinutes, format, parse } from 'date-fns';
 import api from '../../api'
 import { styles } from './styles'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { AuthContext } from '../../contexts/AuthContext'
 
 const DailyRoutine = ({ data, patient, onUpdate }) => {
   const [alertVisible, setAlertVisible] = useState(false);
@@ -13,6 +14,7 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
   const [cancelText, setCancelText] = useState('')
   const [confirmText, setConfirmText] = useState('')
   const [selectedDaily, setSelectedDaily] = useState(null);
+  const { user } = useContext(AuthContext)
 
   const showAlert = (message, daily) => {
     setAlertVisible(true);
@@ -72,7 +74,7 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
   const NoRoutineMessage = () => {
     if (data.length === 0) {
       return (
-        <Text style={styles.noDaily}>Não há rotina disponível.</Text>
+        <Text style={styles.noDaily}>Não há rotina para hoje!</Text>
       );
     }
     return null;
@@ -80,27 +82,49 @@ const DailyRoutine = ({ data, patient, onUpdate }) => {
 
   const DailyItem = ({ item }) => {
     const backgroundColor = item.done ? '#69f0ae' : '#ffcdd2';
-    return (
-      <TouchableOpacity
-        style={[styles.classItem]}
-        onPress={() => handleCheckboxChange(item)}
-      >
-        <View style={styles.timelineContainer}>
-        </View>
-        <View style={styles.classContent}>
-          <View style={styles.classHours}>
-            <Text style={styles.startTime}>{format(item.hour, 'HH:mm')}</Text>
-            <Text style={styles.endTime}>{format(addMinutes(item.hour, 15), 'HH:mm')}</Text>
+    if (user.role_id === 2) {
+      return (
+        <View style={styles.classItem}>
+          <View style={styles.timelineContainer}>
           </View>
-          <View style={[styles.card, { backgroundColor }]}>
-            <View>
-              <Text style={styles.cardTitle}>{item.title}</Text>
-              <Text style={styles.cardDate}>{item.description}</Text>
+          <View style={styles.classContent}>
+            <View style={styles.classHours}>
+              <Text style={styles.startTime}>{format(item.hour, 'HH:mm')}</Text>
+              <Text style={styles.endTime}>{format(addMinutes(item.hour, 15), 'HH:mm')}</Text>
+            </View>
+            <View style={[styles.card, { backgroundColor }]}>
+              <View>
+                <Text style={styles.cardTitle}>{item.title}</Text>
+                <Text style={styles.cardDate}>{item.description}</Text>
+              </View>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
-    );
+      )
+    } else {
+      return (
+        <TouchableOpacity
+          style={[styles.classItem]}
+          onPress={() => handleCheckboxChange(item)}
+        >
+          <View style={styles.timelineContainer}>
+          </View>
+          <View style={styles.classContent}>
+            <View style={styles.classHours}>
+              <Text style={styles.startTime}>{format(item.hour, 'HH:mm')}</Text>
+              <Text style={styles.endTime}>{format(addMinutes(item.hour, 15), 'HH:mm')}</Text>
+            </View>
+            <View style={[styles.card, { backgroundColor }]}>
+              <View>
+                <Text style={styles.cardTitle}>{item.title}</Text>
+                <Text style={styles.cardDate}>{item.description}</Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+
   };
 
   return (

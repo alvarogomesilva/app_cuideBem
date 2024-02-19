@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
 
     noDaily: {
       textAlign: 'center',
-      color: neutral,
+      color: Colors.septenary,
       fontSize: 20
     }
   });

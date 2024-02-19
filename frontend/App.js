@@ -4,8 +4,8 @@ import Routes from './src/routes';
 import { useFonts } from 'expo-font';
 import AuthProvider from './src/contexts/AuthContext';
 import { preventAutoHideAsync } from 'expo-splash-screen'
-import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
-import { StatusBar } from 'react-native';
+import {  AlertNotificationRoot } from 'react-native-alert-notification';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,7 +29,7 @@ export default function App() {
           <Routes />
         </NavigationContainer>
       </AuthProvider>
-    <StatusBar barStyle='light-content'/>
+      <StatusBar style="inverted" />
     </AlertNotificationRoot>
 
   );

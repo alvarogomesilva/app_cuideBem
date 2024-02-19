@@ -15,22 +15,21 @@ import { schema } from "../../../validations/prescriptionValidation"
 export default function PrescriptionPatientDoctor({ route }) {
     const [patient, setPatient] = useState(route.params.patient.id);
     const [id, setId] = useState('');
-    const { control, handleSubmit, formState: { errors }, setValue } = useForm((
-        {
-            resolver: yupResolver(schema), defaultValues: {
-                description: ''
-            }
-        }))
-
-    const [photo, setPhoto] = useState(route.params.patient.photo)
+    const { control, handleSubmit, formState: { errors }, setValue } = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: {
+            description: ''
+        }
+    });
+    const [photo, setPhoto] = useState(route.params.patient.photo);
     const { handlePrescription, handleUpdatePrescription, loading } = usePrescription();
 
     useEffect(() => {
         async function loadPrescription() {
             try {
                 const prescription = await api.get(`/prescriptions/${patient}`);
-                setValue('description', prescription.data.recipe)
-                setId(prescription.data.id);
+                setValue('description', prescription.data?.recipe);
+                setId(prescription.data?.id);
             } catch (error) {
                 console.log(error);
             }
@@ -40,28 +39,22 @@ export default function PrescriptionPatientDoctor({ route }) {
     }, [patient]);
 
     const handleAddOrUpdatePrescription = async (data) => {
+        let successMessage = '';
         if (id) {
             Keyboard.dismiss();
             await handleUpdatePrescription(data.description, patient, id);
-            Toast.show({
-                type: ALERT_TYPE.SUCCESS,
-                title: 'Mensagem',
-                textBody: 'Atualizado com sucesso!',
-                autoClose: 2000,
-
-            })
+            successMessage = 'Atualizado com sucesso!';
         } else {
             Keyboard.dismiss();
-            
             await handlePrescription(data.description, patient);
-            Toast.show({
-                type: ALERT_TYPE.SUCCESS,
-                title: 'Mensagem',
-                textBody: 'Adicionado com sucesso!',
-                autoClose: 2000
-            })
+            successMessage = 'Adicionado com sucesso!';
         }
-
+        Toast.show({
+            type: ALERT_TYPE.SUCCESS,
+            title: 'Mensagem',
+            textBody: successMessage,
+            autoClose: 2000
+        });
     };
 
     const handleKeyPress = ({ nativeEvent }) => {
@@ -71,7 +64,6 @@ export default function PrescriptionPatientDoctor({ route }) {
     };
 
     return (
-
         <View style={styles.container}>
             <View style={styles.top}>
                 <LinearGradient
@@ -83,7 +75,7 @@ export default function PrescriptionPatientDoctor({ route }) {
             <View style={styles.bottom}>
                 <View style={styles.rounded}>
                     <Image
-                        source={{ uri: `http://192.168.0.100:3000/files/${photo}` }}
+                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
                         style={styles.image}
                     />
                 </View>
@@ -115,25 +107,20 @@ export default function PrescriptionPatientDoctor({ route }) {
 
                     })}
 
-
-
-                <Text style={styles.day}>{format(new Date(), 'dd MMM, yyyy', { locale: pt })
-                }</Text>
+                <Text style={styles.day}>{format(new Date(), 'dd MMM, yyyy', { locale: pt })}</Text>
 
                 <View style={styles.areaButton}>
                     <TouchableOpacity
                         style={styles.button}
                         activeOpacity={0.9}
-                        onPress={handleSubmit(handleAddOrUpdatePrescription)}
+                        onPress={handleSubmit((data) => handleAddOrUpdatePrescription(data))}
                     >
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFF" />
                         ) : (
                             <Text style={styles.buttonText}>{id ? 'Atualizar' : 'Adicionar'}</Text>
                         )}
-
                     </TouchableOpacity>
-
                 </View>
             </View>
         </View>
