@@ -15,7 +15,7 @@ export default function ShowPrescriptionPatientCaregiver({ route }) {
         async function loadPrescription() {
             try {
                 const prescription = await api.get(`/patients/${id}/${doctor}`)
-                setPrescription(prescription.data.recipe)
+                setPrescription(prescription.data?.recipe)
             } catch (error) {
                 console.log(error)
             }
@@ -36,13 +36,13 @@ export default function ShowPrescriptionPatientCaregiver({ route }) {
                     </View>
                 </View>
                 <View style={styles.bottom}>
-                    <Text>Dr. {route.params.doctor.name}</Text>
-                    <Text>Médico</Text>
+                    <Text style={styles.doctor}>Dr. {route.params.doctor.name}</Text>
+                    <Text style={styles.profession}>Médico</Text>
 
                     <View style={styles.hr} />
-                    <Text>Receita</Text>
-                    <Text>
-                        {prescription ? (
+                    <Text style={styles.title}>Receita</Text>
+                    <Text style={styles.prescription}>
+                        - {prescription ? (
                             prescription
                         ): 'Não possui receita'}
                     </Text>

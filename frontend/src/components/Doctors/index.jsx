@@ -2,10 +2,9 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { neutral, primary } from "../../constants/colors";
+import Colors, { neutral, primary } from "../../constants/colors";
 import { useEffect, useState } from "react";
-
+import { Fontisto } from '@expo/vector-icons';
 const Doctors = ({ data, onPress, }) => {
 
   const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`);
@@ -26,13 +25,14 @@ const Doctors = ({ data, onPress, }) => {
             borderRadius={25}
           />
         ) : (
-          <FontAwesome5 name="user-alt" size={40} color={neutral} />
+          <Fontisto name="doctor" size={40} color='#e0e0e0' />
         )}
         <View style={styles.credentials}>
           <Text style={styles.name}>{data?.name}</Text>
-          <Text style={styles.birth}>{data?.birth}</Text>
         </View>
       </View>
+
+      <View style={{ width: 10, height: 10, backgroundColor: Colors.senary, borderRadius: 5, marginRight: 15 }}/>
 
     </TouchableOpacity>
   );

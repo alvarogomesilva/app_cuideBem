@@ -15,15 +15,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     justifyContent: 'flex-end'
   },
-
-  back: {
-    position: 'absolute',
-    top: 10,
-    left: 15,
-    color: Colors.white,
-    fontSize: hp(3.5)
-  },
-
+  
   title: {
     fontSize: hp(4.5),
     color: Colors.white,

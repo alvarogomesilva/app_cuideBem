@@ -8,14 +8,21 @@ export default function ShowRecordPatientCaregiver({ route }) {
 
     const [id, setId] = useState(route.params?.patient.id)
     const [doctor, setDoctor] = useState(route.params?.doctor.id)
-    const [prescription, setPrescription] = useState('')
+    const [prescription, setPrescription] = useState({
+        title: "",
+        description: ""
+    })
+
     const navigation = useNavigation()
 
     useEffect(() => {
         async function loadPrescription() {
             try {
                 const prescription = await api.get(`/records/${id}/${doctor}`)
-                setPrescription(prescription.data.recipe)
+                setPrescription({
+                    title: prescription.data?.title,
+                    description: prescription.data?.description
+                })
             } catch (error) {
                 console.log(error)
             }
@@ -36,15 +43,21 @@ export default function ShowRecordPatientCaregiver({ route }) {
                     </View>
                 </View>
                 <View style={styles.bottom}>
-                    <Text>Dr. {route.params.doctor.name}</Text>
-                    <Text>Médico</Text>
+                    <Text style={styles.doctor}>Dr. {route.params.doctor.name}</Text>
+                    <Text style={styles.profession}>Médico</Text>
 
                     <View style={styles.hr} />
-                    <Text>Prontuário</Text>
-                    <Text>
-                        {prescription ? (
-                            prescription
-                        ): 'Não possui Prontuário'}
+                    <View style={styles.boxPrescription}>
+                        <Text style={styles.title}>Prontuário</Text>
+
+                        {prescription?.title && <Text style={styles.titlePrescription}>"{prescription?.title}"</Text>}
+                        
+                    </View>
+
+                    <Text style={styles.prescription}>
+                        - {prescription.description ? (
+                            prescription.description
+                        ) : 'Não possui Prontuário'}
                     </Text>
 
                     <View style={styles.areaButtom}>

@@ -44,11 +44,6 @@ export default function ListPrescriptionsPatientsDoctor() {
                     colors={['#5E7B99', '#C4E1FF']}
                     style={styles.gradient}>
 
-                    <MaterialIcons 
-                        onPress={() => navigation.goBack()}
-                        name="arrow-back-ios" 
-                        style={styles.back}/>
-
                     <Text style={styles.title}>Encontre um paciente</Text>
                     <View style={styles.boxSearch}>
 

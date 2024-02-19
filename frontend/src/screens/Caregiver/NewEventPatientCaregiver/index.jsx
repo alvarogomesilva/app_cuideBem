@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -35,8 +35,6 @@ async function requestPermissionsAsync() {
     },
   });
 }
-
-
 
 const hourMask = [/\d/, /\d/, ":", [/\d/], [/\d/]];
 
@@ -83,8 +81,8 @@ export default function NewEventPatientCaregiver({ route }) {
 
 
   const handleEvent = async () => {
-     inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
-   
+    inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
+
     await newEvent(inputs);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
@@ -157,52 +155,62 @@ export default function NewEventPatientCaregiver({ route }) {
 
       <View style={styles.content}>
 
-        <SelectList
-          boxStyles={styles.input}
-          setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
-          data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
-          save='key'
-        />
+        <ScrollView>
+          <Text style={styles.titleInput}>Paciente</Text>
+          <SelectList
+            placeholder='Selecione um paciente'
+            searchPlaceholder='Pesquisar'
+            boxStyles={styles.input}
+            setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
+            data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
+            save='key'
+          />
 
 
-        <TextInput
-          style={styles.input}
-          placeholder='Evento'
-          value={inputs.description}
-          onChangeText={(text) => setInputs({ ...inputs, description: text })}
-        />
+          <Text style={styles.titleInput}>Titulo do evento</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='Evento'
+            value={inputs.description}
+            onChangeText={(text) => setInputs({ ...inputs, description: text })}
+          />
 
-        <View style={styles.boxDate}>
-          <TouchableOpacity onPress={showDate1} style={styles.inputDate}>
-            <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
+          <Text style={styles.titleInput}>Data e Hora</Text>
+          <View style={styles.boxDate}>
+            <TouchableOpacity onPress={showDate1} style={styles.inputDate}>
+              <Text>{format(inputs.date, 'dd/MM/yyyy')}</Text>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity onPress={showDate2} style={styles.inputDate}>
+              <Text>{format(inputs.hour, 'HH:mm')}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.titleInput}>Notificação</Text>
+          <TouchableOpacity onPress={showDate3} style={styles.input}>
+            <Text>{format(inputs.dateNotification, 'HH:mm dd/MM/yyyy')}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={showDate2} style={styles.inputDate}>
-            <Text>{format(inputs.hour, 'HH:mm')}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity onPress={showDate3} style={styles.input}>
-          <Text>{format(inputs.dateNotification, 'HH:mm dd/MM/yyyy')}</Text>
-        </TouchableOpacity>
-
-        <View style={styles.boxCheckbox}>
-          {colors.map(color => (
-            <Checkbox
-              key={color.id}
-              style={{
-                backgroundColor: color.color,
-                borderColor: color.color,
-                borderRadius: 50,
-                width: 30,
-                height: 30
-              }}
-              value={selectedCheckbox === color.id}
-              onValueChange={() => handleCheckboxChange(color.id)}
-              color={selectedCheckbox === color.id ? '#4630EB' : undefined}
-            />
-          ))}
-        </View>
+          <Text style={styles.titleInput}>Cor do evento</Text>
+          <View style={styles.boxCheckbox}>
+            {colors.map(color => (
+              <Checkbox
+                key={color.id}
+                style={{
+                  backgroundColor: color.color,
+                  borderColor: color.color,
+                  borderRadius: 50,
+                  width: 30,
+                  height: 30
+                }}
+                value={selectedCheckbox === color.id}
+                onValueChange={() => handleCheckboxChange(color.id)}
+                color={selectedCheckbox === color.id ? '#4630EB' : undefined}
+              />
+            ))}
+          </View>
+        </ScrollView>
 
         <View style={styles.areaButton}>
           <TouchableOpacity style={styles.button} onPress={handleEvent}>

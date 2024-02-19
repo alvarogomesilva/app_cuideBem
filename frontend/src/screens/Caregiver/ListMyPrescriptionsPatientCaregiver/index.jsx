@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import api from '../../../api';
 import { usePatients } from '../../../hooks/usePatients';
+import * as Animatable from 'react-native-animatable';
 
 const MemoizedPatients = memo(Patients);
 
@@ -27,6 +28,7 @@ export default function ListMyPrescriptionsPatientCaregiver({ route }) {
                 </LinearGradient>
             </View>
             <View style={styles.content}>
+            <Animatable.View animation='fadeInLeft' duration={1000}>
                 {listPatients.length > 0 ? (
                     <FlatList
                         style={styles.flatList}
@@ -40,6 +42,7 @@ export default function ListMyPrescriptionsPatientCaregiver({ route }) {
                 ) : (
                     <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
                 )}
+                </Animatable.View>
             </View>
         </View>
     );

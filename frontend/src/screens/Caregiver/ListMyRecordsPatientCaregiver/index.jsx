@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
 import { LinearGradient } from "expo-linear-gradient";
+import * as Animatable from 'react-native-animatable';
 
 const MemoizedPatients = memo(Patients);
 
@@ -25,16 +26,18 @@ export default function ListMyRecordsPatientCaregiver() {
             </View>
 
             <View style={styles.content}>
-                <FlatList
-                    style={styles.flatList}
-                    data={listPatients}
-                    renderItem={({ item }) => <MemoizedPatients
-                        data={item}
-                        onPress={() => navigation.navigate('ListMyDoctorsRecordCaregiver', { patient: item })}
-                    />}
+                <Animatable.View animation='fadeInLeft' duration={1000}>
+                    <FlatList
+                        style={styles.flatList}
+                        data={listPatients}
+                        renderItem={({ item }) => <MemoizedPatients
+                            data={item}
+                            onPress={() => navigation.navigate('ListMyDoctorsRecordCaregiver', { patient: item })}
+                        />}
 
-                    keyExtractor={(item) => item.id.toString()}
-                />
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                </Animatable.View>
             </View>
         </View>
 

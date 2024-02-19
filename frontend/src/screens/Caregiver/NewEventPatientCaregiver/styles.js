@@ -36,6 +36,13 @@ export const styles = StyleSheet.create({
         marginTop: 15
     },
 
+    titleInput: {
+        marginHorizontal: 10,
+        fontSize: hp(2),
+        marginBottom: 5,
+        color: '#AAA'
+    },
+
     boxDate: {
         flexDirection: 'row',
         justifyContent: 'space-between'

@@ -21,6 +21,13 @@ export const styles = StyleSheet.create({
   content: {
     marginTop: 15,
     marginHorizontal: 15
+  },
+
+  noEventsText: {
+    textAlign: 'center',
+    color: Colors.octonary,
+    fontSize: hp(3),
+    fontStyle: 'italic'
   }
 
 });

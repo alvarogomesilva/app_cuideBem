@@ -37,7 +37,7 @@ const Patients = ({ data, onPress, newPatient }) => {
       {newPatient ? (
         <Feather name="edit" size={20} color={neutral} />
       ) : (
-        <View style={{ width: 10, height: 10, backgroundColor: Colors.septenary, borderRadius: 5, marginRight: 15 }}/>
+        <View style={{ width: 10, height: 10, backgroundColor: Colors.senary, borderRadius: 5, marginRight: 15 }}/>
       )}
     </TouchableOpacity>
   );

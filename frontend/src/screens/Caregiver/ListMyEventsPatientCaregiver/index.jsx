@@ -8,10 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import api from '../../../api';
 import { usePatients } from '../../../hooks/usePatients';
+import * as Animatable from 'react-native-animatable';
 
 const MemoizedPatients = memo(Patients);
 
-export default function ListMyEventsPatientCaregiver({ route }) {
+export default function ListMyEventsPatientCaregiver() {
     const navigation = useNavigation();
     const { listPatients } = usePatients()
 
@@ -26,7 +27,7 @@ export default function ListMyEventsPatientCaregiver({ route }) {
 
                 </LinearGradient>
             </View>
-            <View style={styles.content}>
+            <Animatable.View style={styles.content} animation='fadeInLeft' duration={1000}>
                 {listPatients.length > 0 ? (
                     <FlatList
                         style={styles.flatList}
@@ -39,7 +40,7 @@ export default function ListMyEventsPatientCaregiver({ route }) {
                 ) : (
                     <Text style={styles.noPatients}>Você não tem nenhum paciente!</Text>
                 )}
-            </View>
+            </Animatable.View>
 
             <View style={styles.areaButton}>
                 <TouchableOpacity 
