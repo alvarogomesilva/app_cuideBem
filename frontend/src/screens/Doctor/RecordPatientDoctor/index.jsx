@@ -107,10 +107,10 @@ export default function RecordPatientDoctor({ route }) {
         async function loadPrescription() {
             try {
                 const record = await api.get(`/records/${patient}`);
-                const { title, description } = record.data
-                setValue("title", title)
-                setValue("description", description)
-                setId(record.data.id);
+                
+                setValue("title", record.data?.title)
+                setValue("description", record.data?.description)
+                setId(record.data?.id);
             } catch (error) {
                 console.log(error);
             }
