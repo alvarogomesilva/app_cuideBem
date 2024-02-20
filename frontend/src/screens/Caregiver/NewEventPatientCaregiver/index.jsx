@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ScrollView, Switch } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 import { styles } from './styles';
-import Input from '../../../components/Input';
-import { Masks } from 'react-native-mask-input';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import Colors, { white } from '../../../constants/colors';
 import { LinearGradient } from "expo-linear-gradient";

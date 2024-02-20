@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
 import { LinearGradient } from "expo-linear-gradient";
-import ButtonBottom from '../../../components/ButtonBottom'
+import { Entypo } from '@expo/vector-icons';
+
 const MemoizedPatients = memo(Patients);
 export default function ListMyEventsPatientGuardian() {
     
@@ -39,8 +40,15 @@ export default function ListMyEventsPatientGuardian() {
                 )}
             </View>
 
-             <ButtonBottom onPress={() => navigation.navigate('NewEventPatientGuardian')} />
-
+             <View style={styles.areaButton}>
+                <TouchableOpacity 
+                    activeOpacity={0.8}
+                    style={styles.button}
+                    onPress={() => navigation.navigate('NewEventPatientGuardian')}
+                    >
+                    <Entypo name="plus" style={styles.buttonText} />
+                </TouchableOpacity>
+            </View>
 
         </View> 
     );

@@ -1,12 +1,10 @@
-import { useEffect, useState, useCallback, memo } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { memo } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 
 import { styles } from './styles';
-import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
-import api from '../../../api';
 import { usePatients } from '../../../hooks/usePatients';
 import * as Animatable from 'react-native-animatable';
 
@@ -28,20 +26,20 @@ export default function ListMyPrescriptionsPatientCaregiver({ route }) {
                 </LinearGradient>
             </View>
             <View style={styles.content}>
-            <Animatable.View animation='fadeInLeft' duration={1000}>
-                {listPatients.length > 0 ? (
-                    <FlatList
-                        style={styles.flatList}
-                        data={listPatients}
-                        renderItem={({ item }) => <MemoizedPatients
-                            data={item}
-                            onPress={() => navigation.navigate('ListMyDoctorsPrescriptionCaregiver', { patient: item })}
-                        />}
-                        keyExtractor={(item) => item.id.toString()}
-                    />
-                ) : (
-                    <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
-                )}
+                <Animatable.View animation='fadeInLeft' duration={1000}>
+                    {listPatients.length > 0 ? (
+                        <FlatList
+                            style={styles.flatList}
+                            data={listPatients}
+                            renderItem={({ item }) => <MemoizedPatients
+                                data={item}
+                                onPress={() => navigation.navigate('ListMyDoctorsPrescriptionCaregiver', { patient: item })}
+                            />}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    ) : (
+                        <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
+                    )}
                 </Animatable.View>
             </View>
         </View>

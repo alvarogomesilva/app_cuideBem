@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import Colors from '../../../constants/colors'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -36,9 +37,33 @@ export const styles = StyleSheet.create({
 
     hr: {
         backgroundColor: Colors.nonary,
-        height: 5,
+        height: 2,
         borderRadius: 10,
         marginVertical: 15
+    },
+
+    doctor: {
+        fontSize: hp(3.5),
+        color: Colors.septenary,
+        fontWeight: 'bold'
+    },
+
+    profession: {
+        fontSize: hp(2),
+        color: Colors.senary
+    },
+
+    title: {
+        fontSize: hp(3),
+        color: Colors.senary,
+        fontWeight: "bold"
+    },
+
+    prescription: {
+        marginTop: 5,
+        fontSize: hp(2.5),
+        color: Colors.nonary,
+        fontStyle: 'italic'
     },
 
     areaButtom: {

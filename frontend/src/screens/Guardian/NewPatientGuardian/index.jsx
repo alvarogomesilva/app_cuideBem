@@ -1,9 +1,7 @@
-import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import Colors, { neutral, white } from '../../../constants/colors';
-import Input from '../../../components/Input'
+import Colors from '../../../constants/colors';
 import * as ImagePicker from 'expo-image-picker';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext'

@@ -12,7 +12,7 @@ export default function ShowRecordPatientGuardian({ route }) {
         title: "",
         description: ""
     })
-    
+
     const navigation = useNavigation()
 
     useEffect(() => {
@@ -20,8 +20,8 @@ export default function ShowRecordPatientGuardian({ route }) {
             try {
                 const record = await api.get(`/records/${id}/${doctor}`)
                 setRecord({
-                    title: record.data.title,
-                    description: record.data.description
+                    title: record.data?.title,
+                    description: record.data?.description
                 })
             } catch (error) {
                 console.log(error)
@@ -43,15 +43,20 @@ export default function ShowRecordPatientGuardian({ route }) {
                     </View>
                 </View>
                 <View style={styles.bottom}>
-                    <Text>Dr. {route.params.doctor.name}</Text>
-                    <Text>Médico</Text>
+                    <Text style={styles.doctor}>Dr. {route.params.doctor.name}</Text>
+                    <Text style={styles.profession}>Médico</Text>
 
                     <View style={styles.hr} />
-                    <Text>Prontuário</Text>
-                    <Text>
-                        {record.description ? (
+                    <View style={styles.boxPrescription}>
+                        <Text style={styles.title}>Prontuário</Text>
+
+                        {record.title && <Text style={styles.titlePrescription}>{record?.title}</Text>}
+
+                    </View>
+                    <Text style={styles.prescription}>
+                        - {record.description ? (
                             record.description
-                        ): 'Não possui prontuário'}
+                        ) : 'Não possui prontuário'}
                     </Text>
 
                     <View style={styles.areaButtom}>

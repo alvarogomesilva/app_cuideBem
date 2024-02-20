@@ -11,7 +11,6 @@ import { Masks } from 'react-native-mask-input';
 import { AuthContext } from "../../../contexts/AuthContext";
 import api, { URL } from "../../../api";
 
-
 export default function UpdatePatientGuardian({ route }) {
   const { id, name, birth, photo, title, inital_date, final_date, description, recipe } = route.params.patient;
   const [image, setImage] = useState(photo)
@@ -31,9 +30,6 @@ export default function UpdatePatientGuardian({ route }) {
     recipe,
   });
   const { user } = useContext(AuthContext)
-
-
-  // ============================================================
 
   const pickImage = async () => {
 

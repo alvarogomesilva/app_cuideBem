@@ -1,11 +1,10 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
-import ButtonBottom from '../../../components/ButtonBottom';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import api from '../../../api';
-import Colors, { white } from '../../../constants/colors';
-import { Agenda, Calendar } from 'react-native-calendars';
+import Colors from '../../../constants/colors';
+import { Calendar } from 'react-native-calendars';
 import { styles } from './styles';
 import { LinearGradient } from "expo-linear-gradient";
 import Events from '../../../components/Events';

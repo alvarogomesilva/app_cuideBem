@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { neutral, primary, white } from '../../../constants/colors'
 import Colors from "../../../constants/colors";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -21,6 +20,12 @@ export const styles = StyleSheet.create({
   content: {
     marginTop: 15,
     marginHorizontal: 15
+  },
+
+  noEventsText: {
+    textAlign: 'center',
+    color: Colors.quinary,
+    fontSize: hp(2.5)
   }
 
 });

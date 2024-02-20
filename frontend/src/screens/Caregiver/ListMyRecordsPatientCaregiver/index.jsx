@@ -1,5 +1,5 @@
-import { useEffect, memo } from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { memo } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';

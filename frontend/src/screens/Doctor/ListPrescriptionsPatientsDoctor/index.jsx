@@ -6,7 +6,8 @@ import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+
+
 const MemoizedPatients = memo(Patients);
 
 export default function ListPrescriptionsPatientsDoctor() {

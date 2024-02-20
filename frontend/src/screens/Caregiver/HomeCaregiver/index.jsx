@@ -4,11 +4,9 @@ import SignOut from '../../../components/SignOut'
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Entypo } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 import { styles } from './styles'
 import * as Animatable from 'react-native-animatable';
 

@@ -1,8 +1,7 @@
 import { styles } from './styles';
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import SignOut from '../../../components/SignOut'
-import { FontAwesome5 } from '@expo/vector-icons';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';

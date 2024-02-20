@@ -1,16 +1,14 @@
 import { styles } from './styles'
 
-import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, Platform, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
-
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import * as Animatable from 'react-native-animatable';
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-
 
 const schema = yup.object({
     email: yup.string().email('Email inválido').required('Informe o email'),

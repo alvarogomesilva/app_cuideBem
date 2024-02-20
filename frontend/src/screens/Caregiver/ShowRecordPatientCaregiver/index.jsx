@@ -50,7 +50,7 @@ export default function ShowRecordPatientCaregiver({ route }) {
                     <View style={styles.boxPrescription}>
                         <Text style={styles.title}>Prontuário</Text>
 
-                        {prescription?.title && <Text style={styles.titlePrescription}>"{prescription?.title}"</Text>}
+                        {prescription?.title && <Text style={styles.titlePrescription}>{prescription?.title}</Text>}
                         
                     </View>
 

@@ -1,9 +1,6 @@
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from './styles';
-import { Entypo } from '@expo/vector-icons';
-import Card from "../../../components/Card";
 import { useNavigation } from '@react-navigation/native'
-import { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';

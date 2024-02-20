@@ -1,12 +1,10 @@
-import { useEffect, useState, useCallback, memo } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { memo } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
-
 import { styles } from './styles';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
-import api from '../../../api';
 import { usePatients } from '../../../hooks/usePatients';
 
 const MemoizedPatients = memo(Patients);
@@ -42,11 +40,11 @@ const ListMyPatientsGuardian = ({ route }) => {
             </View>
 
             <View style={styles.areaButton}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.button}
                     onPress={() => navigation.navigate('NewPatientGuardian')}
-                    >
+                >
                     <Entypo name="plus" style={styles.buttonText} />
                 </TouchableOpacity>
             </View>

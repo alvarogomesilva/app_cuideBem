@@ -1,12 +1,9 @@
-import { useEffect, useState, useCallback, memo } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { memo } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
-
 import { styles } from './styles';
-import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
-import api from '../../../api';
 import { usePatients } from '../../../hooks/usePatients';
 
 const MemoizedPatients = memo(Patients);
@@ -32,7 +29,7 @@ export default function ListMyDailyRoutinePatientCaregiver() {
                         style={styles.flatList}
                         data={listPatients}
                         renderItem={({ item }) => <MemoizedPatients data={item}
-                        onPress={() => navigation.navigate('DailyRoutinePatientCaregiver', { patient: item })}
+                            onPress={() => navigation.navigate('DailyRoutinePatientCaregiver', { patient: item })}
                         />}
                         keyExtractor={(item) => item.id.toString()}
                     />
