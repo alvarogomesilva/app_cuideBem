@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Animated, Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { useRecord } from "../../../hooks/doctors/useRecord";
-import api from "../../../api";
+import api, { URL } from "../../../api";
 import { LinearGradient } from "expo-linear-gradient";
 import { format } from 'date-fns'
 import { Toast, ALERT_TYPE } from "react-native-alert-notification";
@@ -132,7 +132,7 @@ export default function RecordPatientDoctor({ route }) {
             <View style={styles.bottom}>
                 <View style={styles.rounded}>
                     <Image
-                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
+                        source={{ uri: `${URL}/files/${photo}` }}
                         style={styles.image}
                     />
                 </View>

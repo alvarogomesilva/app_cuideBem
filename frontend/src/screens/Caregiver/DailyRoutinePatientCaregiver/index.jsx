@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { useFocusEffect } from '@react-navigation/native';
 import DailyRoutine from '../../../components/DailyRoutine';
 import { AuthContext } from '../../../contexts/AuthContext';
-import api from '../../../api';
+import api, { URL } from '../../../api';
 import { styles } from './styles';
 import { LinearGradient } from "expo-linear-gradient";
 export default function DailyRoutinePatientCaregiver({ route }) {
@@ -48,7 +48,7 @@ export default function DailyRoutinePatientCaregiver({ route }) {
 
           <View style={styles.areaImage}>
             <Image
-              source={{ uri: `http://10.3.18.71:3000/files/${patient.photo}` }}
+              source={{ uri: `${URL}/files/${patient.photo}` }}
               style={styles.image}
             />
 

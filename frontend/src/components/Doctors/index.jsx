@@ -5,12 +5,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Colors, { neutral, primary } from "../../constants/colors";
 import { useEffect, useState } from "react";
 import { Fontisto } from '@expo/vector-icons';
+import { URL } from "../../api";
+
 const Doctors = ({ data, onPress, }) => {
 
-  const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`);
+  const [avatar, setAvatar] = useState(`${URL}/files/${data?.photo}`);
 
   useEffect(() => {
-    setAvatar(`http://192.168.0.100:3000/files/${data?.photo}`);
+    setAvatar(`${URL}/files/${data?.photo}`);
   }, [data?.photo]);
 
   return (

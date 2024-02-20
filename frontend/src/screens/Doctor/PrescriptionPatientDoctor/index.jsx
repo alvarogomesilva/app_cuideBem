@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Keyboard, TextInput, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { usePrescription } from '../../../hooks/doctors/usePrescription';
-import api from '../../../api';
+import api, { URL } from '../../../api';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -75,7 +75,7 @@ export default function PrescriptionPatientDoctor({ route }) {
             <View style={styles.bottom}>
                 <View style={styles.rounded}>
                     <Image
-                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
+                        source={{ uri: `${URL}/files/${photo}` }}
                         style={styles.image}
                     />
                 </View>

@@ -11,7 +11,7 @@ import { usePatients } from '../../../hooks/usePatients';
 
 const MemoizedPatients = memo(Patients);
 
-export default function ListMyDailyRoutinePatientCaregiver({ route }) {
+export default function ListMyDailyRoutinePatientCaregiver() {
     const navigation = useNavigation();
     const { listPatients } = usePatients()
 
