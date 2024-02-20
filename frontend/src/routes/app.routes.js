@@ -239,8 +239,7 @@ export default function AppRoutes({ role_id }) {
                     component={ConditionalCardsCaregiver}
                     options={{ headerShown: false }}
                 />
-
-
+                
                 <Stack.Screen
                     name='ListMyRecordsPatientCaregiver'
                     component={ListMyRecordsPatientCaregiver}

@@ -132,7 +132,7 @@ export default function RecordPatientDoctor({ route }) {
             <View style={styles.bottom}>
                 <View style={styles.rounded}>
                     <Image
-                        source={{ uri: `http://192.168.0.100:3000/files/${photo}` }}
+                        source={{ uri: `http://10.3.18.71:3000/files/${photo}` }}
                         style={styles.image}
                     />
                 </View>
