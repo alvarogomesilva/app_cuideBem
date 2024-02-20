@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 import { Fontisto } from '@expo/vector-icons';
 const Doctors = ({ data, onPress, }) => {
 
-  const [avatar, setAvatar] = useState(`http://10.3.18.71:3000/files/${data?.photo}`);
+  const [avatar, setAvatar] = useState(`http://192.168.0.100:3000/files/${data?.photo}`);
 
   useEffect(() => {
-    setAvatar(`http://10.3.18.71:3000/files/${data?.photo}`);
+    setAvatar(`http://192.168.0.100:3000/files/${data?.photo}`);
   }, [data?.photo]);
 
   return (

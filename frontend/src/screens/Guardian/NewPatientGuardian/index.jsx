@@ -154,6 +154,8 @@ export default function NewPatientGuardian() {
                         keyboardType="numeric"
                     />
                     <SelectList
+                        placeholder='Selecione um cuidador'
+                        searchPlaceholder='Pesquisar'
                         boxStyles={styles.input}
                         setSelected={(val) => setSelectedCaregiver(val)}
                         data={data}

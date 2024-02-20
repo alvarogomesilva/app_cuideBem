@@ -7,7 +7,6 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import api from '../../../api';
 import { styles } from './styles';
 import { LinearGradient } from "expo-linear-gradient";
-
 export default function DailyRoutinePatientCaregiver({ route }) {
 
   const [patient, setPatient] = useState(route.params.patient);
