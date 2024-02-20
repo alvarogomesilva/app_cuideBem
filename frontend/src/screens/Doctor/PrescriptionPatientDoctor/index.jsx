@@ -108,12 +108,10 @@ export default function PrescriptionPatientDoctor({ route }) {
                         />
                     )}
                 />
-                 {errors.description && Toast.show({
-                        type: ALERT_TYPE.DANGER,
-                        title: 'Mensagem',
-                        textBody: 'Descrição é necessário',
+                 {errors.description && (
+                        <Text style={styles.labelError}>Descrição é necessário</Text>
+                    )}
 
-                    })}
 
 
 

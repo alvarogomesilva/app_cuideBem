@@ -23,6 +23,12 @@ export const styles = StyleSheet.create({
   
   },
 
+  noPatients: {
+    textAlign: 'center',
+    color: Colors.quinary,
+    fontSize: hp(2.5)
+  },
+
   boxSearch: {
     position: 'relative'
   },

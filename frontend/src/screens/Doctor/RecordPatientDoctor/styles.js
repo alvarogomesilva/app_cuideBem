@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#e0e0e0',
         textAlignVertical: 'top',
-        marginVertical: 10,
+        marginBottom: 5,
         padding: 15
     },
 
@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
         height: hp(15),
         fontSize: hp(2.6),
         backgroundColor: Colors.white,
+        marginVertical: 5,
         borderWidth: 3,
         borderRadius: 10,
         borderColor: '#e0e0e0',
@@ -106,4 +107,9 @@ export const styles = StyleSheet.create({
         color: Colors.white,
         fontSize: hp(2.5)
     },
+
+    labelError: {
+        color: 'red',
+        marginHorizontal: 20
+    }
 })

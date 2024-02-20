@@ -33,7 +33,6 @@ import ListMyDoctorsRecordGuardian from '../screens/Guardian/ListMyDoctorsRecord
 // Telas do cuidador
 // ==================
 import HomeCaregiver from '../screens/Caregiver/HomeCaregiver'
-import RecordCaregiver from '../screens/Caregiver/RecordCaregiver'
 import ConditionalCardsCaregiver from '../screens/Caregiver/ConditionalCardsCaregiver'
 import ListMyRecordsPatientCaregiver from '../screens/Caregiver/ListMyRecordsPatientCaregiver'
 import ListMyPrescriptionsPatientCaregiver from '../screens/Caregiver/ListMyPrescriptionsPatientCaregiver'
@@ -241,13 +240,6 @@ export default function AppRoutes({ role_id }) {
                     options={{ headerShown: false }}
                 />
 
-                <Stack.Screen
-                    name='RecordCaregiver'
-                    component={RecordCaregiver}
-                    options={{
-                        headerShown: false
-                    }}
-                />
 
                 <Stack.Screen
                     name='ListMyRecordsPatientCaregiver'

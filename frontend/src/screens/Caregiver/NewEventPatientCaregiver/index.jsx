@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ScrollView, Switch } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -13,7 +13,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Checkbox from 'expo-checkbox';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { usePatients } from '../../../hooks/usePatients';
-import { format } from 'date-fns';
+import { compareAsc, format } from 'date-fns';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import * as Notifications from 'expo-notifications';
 
@@ -51,6 +51,8 @@ export default function NewEventPatientCaregiver({ route }) {
   const patient_id = route.params?.patient.id;
   const { listPatients } = usePatients()
   const [selectedCheckbox, setSelectedCheckbox] = useState(0);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const [inputs, setInputs] = useState({
     patient_id,
     description: "",
@@ -60,6 +62,7 @@ export default function NewEventPatientCaregiver({ route }) {
     dateNotification: new Date(),
     notification: null
   });
+
   async function schedulePushNotification(dateTime, message) {
     try {
       const trigger = new Date(dateTime);
@@ -81,9 +84,40 @@ export default function NewEventPatientCaregiver({ route }) {
 
 
   const handleEvent = async () => {
-    inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
+    if (inputs.patient_id === undefined) {
+      return Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Mensagem',
+        textBody: 'Selecione um paciente!',
+        autoClose: 2000,
+      });
+    }
 
+    if (inputs.description.trim() === '') {
+      return Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Mensagem',
+        textBody: 'Descreva o evento!',
+        autoClose: 2000,
+      });
+    }
+
+    if (isEnabled) {
+      if (compareAsc(inputs.dateNotification, inputs.date) !== 1) {
+        inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
+      } else {
+        Toast.show({
+          type: ALERT_TYPE.DANGER,
+          title: 'Mensagem',
+          textBody: 'A data da notificção precisa ser diferente da atual!',
+          autoClose: 2000,
+        });
+      }
+    } else {
+      inputs.notification = "";
+    }
     await newEvent(inputs);
+
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
       title: 'Mensagem',
@@ -91,7 +125,7 @@ export default function NewEventPatientCaregiver({ route }) {
       autoClose: 2000,
     });
     setInputs({
-      patient_id,
+      patient_id: undefined,
       description: "",
       date: new Date(),
       hour: new Date(),
@@ -187,7 +221,17 @@ export default function NewEventPatientCaregiver({ route }) {
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.titleInput}>Notificação</Text>
+          <View style={styles.boxNotification}>
+            <Text style={styles.titleInput}>Notificação</Text>
+            <Switch
+              trackColor={{ false: '#767577', true: '#81b0ff' }}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+
+            />
+          </View>
           <TouchableOpacity onPress={showDate3} style={styles.input}>
             <Text>{format(inputs.dateNotification, 'HH:mm dd/MM/yyyy')}</Text>
           </TouchableOpacity>
@@ -210,17 +254,18 @@ export default function NewEventPatientCaregiver({ route }) {
               />
             ))}
           </View>
-        </ScrollView>
 
-        <View style={styles.areaButton}>
-          <TouchableOpacity style={styles.button} onPress={handleEvent}>
-            {loading ? (
-              <ActivityIndicator size={25} color={Colors.white} />
-            ) : (
-              <Text style={styles.buttonText}>Cadastrar</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+
+          <View style={styles.areaButton}>
+            <TouchableOpacity style={styles.button} onPress={handleEvent}>
+              {loading ? (
+                <ActivityIndicator size={25} color={Colors.white} />
+              ) : (
+                <Text style={styles.buttonText}>Cadastrar</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
 
         <DateTimePickerModal
           date={inputs.date}

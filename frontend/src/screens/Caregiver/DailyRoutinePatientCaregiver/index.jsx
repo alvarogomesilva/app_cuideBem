@@ -15,7 +15,7 @@ export default function DailyRoutinePatientCaregiver({ route }) {
   const [routineDailys, setRoutineDailys] = useState([]);
   const [updateCounter, setUpdateCounter] = useState(0);
   const { user } = useContext(AuthContext);
-  console.log(patient)
+
   const loadRoutine = async () => {
     try {
       const routines = await api.get(`/dailys/${patient.id}/${date}`);

@@ -81,10 +81,16 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
 
+    boxNotification: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+
     areaButton: {
-        flex: 1,
+        marginVertical: 20,
         justifyContent: 'flex-end',
-        marginBottom: 15
+        
     },
 
     button: {

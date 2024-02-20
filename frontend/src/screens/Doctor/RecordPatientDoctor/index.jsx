@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Animated, Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { useRecord } from "../../../hooks/doctors/useRecord";
@@ -29,6 +29,7 @@ export default function RecordPatientDoctor({ route }) {
     const [photo, setPhoto] = useState(route.params.patient.photo)
     const [id, setId] = useState('');
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    const [showError, setShowError] = useState(false);
 
     const fadeAnim = useRef(new Animated.Value(1)).current; // Initial opacity value
 
@@ -72,25 +73,27 @@ export default function RecordPatientDoctor({ route }) {
         try {
             if (id) {
                 await handleUpdateRecord(data, id);
+                setShowError(false);
                 Toast.show({
                     type: ALERT_TYPE.SUCCESS,
                     title: 'Mensagem',
                     textBody: 'Atualizado com sucesso!',
                     autoClose: 2000,
-
-                })
+                });
             } else {
                 await handleRecord(data);
+                setShowError(false);
                 Toast.show({
                     type: ALERT_TYPE.SUCCESS,
                     title: 'Mensagem',
                     textBody: 'Adicionado com sucesso!',
                     autoClose: 2000
-                })
+                });
             }
 
         } catch (error) {
             console.log(error);
+            setShowError(true);
         }
     };
 
@@ -155,12 +158,9 @@ export default function RecordPatientDoctor({ route }) {
                             />
                         )}
                     />
-                    {errors.title && Toast.show({
-                        type: ALERT_TYPE.DANGER,
-                        title: 'Mensagem',
-                        textBody: 'Titulo é necessário',
-
-                    })}
+                    {errors.title && (
+                        <Text style={styles.labelError}>Titulo é necessário</Text>
+                    )}
 
                     <Controller
                         control={control}
@@ -176,12 +176,9 @@ export default function RecordPatientDoctor({ route }) {
                             />
                         )}
                     />
-                     {errors.description && Toast.show({
-                        type: ALERT_TYPE.DANGER,
-                        title: 'Mensagem',
-                        textBody: 'Descrição é necessário',
-
-                    })}
+                     {errors.description && (
+                        <Text style={styles.labelError}>Descrição é necessário</Text>
+                    )}
 
                     <Text
                         style={styles.day}>

@@ -100,6 +100,10 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontSize: hp(2.5)
+    },
+    labelError: {
+        color: 'red',
+        marginHorizontal: 20
     }
 
 })
