@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
+import * as Animatable from 'react-native-animatable';
 
 const MemoizedPatients = memo(Patients);
 
@@ -27,29 +28,34 @@ export default function ListMyDailyRoutinePatientGuardian() {
             </View>
             <View style={styles.content}>
                 {listPatients.length > 0 ? (
-                    <FlatList
-                        style={styles.flatList}
-                        data={listPatients}
-                        renderItem={({ item }) => <MemoizedPatients
-                            data={item}
-                            onPress={() => navigation.navigate('DailyRoutinePatientGuardian', { patient: item })}
-                        />}
-                        keyExtractor={(item) => item.id.toString()}
-                    />
+                    <Animatable.View animation='fadeInLeft' duration={1000}>
+                        <FlatList
+                            style={styles.flatList}
+                            data={listPatients}
+                            renderItem={({ item }) => <MemoizedPatients
+                                data={item}
+                                onPress={() => navigation.navigate('DailyRoutinePatientGuardian', { patient: item })}
+                            />}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    </Animatable.View>
                 ) : (
                     <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
                 )}
             </View>
 
-            <View style={styles.areaButton}>
-                <TouchableOpacity
-                    style={styles.button}
-                    activeOpacity={0.7}
-                    onPress={() => navigation.navigate('NewDailyRoutineGuardian')}
-                >
-                    <Entypo name="plus" size={30} color="#FFF" />
-                </TouchableOpacity>
-            </View>
+            {listPatients.length > 0 && (
+                <View style={styles.areaButton}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('NewDailyRoutineGuardian')}
+                    >
+                        <Entypo name="plus" size={30} color="#FFF" />
+                    </TouchableOpacity>
+                </View>
+            )}
+
         </View>
     );
 };

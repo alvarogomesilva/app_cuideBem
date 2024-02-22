@@ -26,8 +26,8 @@ export default function ListMyPrescriptionsPatientCaregiver({ route }) {
                 </LinearGradient>
             </View>
             <View style={styles.content}>
-                <Animatable.View animation='fadeInLeft' duration={1000}>
-                    {listPatients.length > 0 ? (
+                {listPatients.length > 0 ? (
+                    <Animatable.View animation='fadeInLeft' duration={1000}>
                         <FlatList
                             style={styles.flatList}
                             data={listPatients}
@@ -37,10 +37,10 @@ export default function ListMyPrescriptionsPatientCaregiver({ route }) {
                             />}
                             keyExtractor={(item) => item.id.toString()}
                         />
-                    ) : (
-                        <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
-                    )}
-                </Animatable.View>
+                    </Animatable.View>
+                ) : (
+                    <Text style={styles.noPatients}>Você não tem nenhum paciente!</Text>
+                )}
             </View>
         </View>
     );

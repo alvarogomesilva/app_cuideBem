@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Patients from '../../../components/Patients';
 import { usePatients } from '../../../hooks/usePatients';
 import { LinearGradient } from "expo-linear-gradient";
+import * as Animatable from 'react-native-animatable';
 
 const MemoizedPatients = memo(Patients);
 
@@ -23,20 +24,25 @@ export default function ListMyRecordsPatientGuardian() {
 
                 </LinearGradient>
             </View>
-
             <View style={styles.content}>
-
-                <FlatList
-                    style={styles.flatList}
-                    data={listPatients}
-                    renderItem={({ item }) => <MemoizedPatients
-                        data={item}
-                        onPress={() => navigation.navigate('ListMyDoctorsRecordGuardian', { patient: item })}
-                    />}
-
-                    keyExtractor={(item) => item.id.toString()}
-                />
+                {listPatients.length > 0 ? (
+                    <Animatable.View animation='fadeInLeft' duration={1000}>
+                        <FlatList
+                            style={styles.flatList}
+                            data={listPatients}
+                            renderItem={({ item }) => <MemoizedPatients
+                                data={item}
+                                onPress={() => navigation.navigate('ListMyDoctorsRecordGuardian', { patient: item })}
+                            />}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    </Animatable.View>
+                ) : (
+                    <Text style={styles.noPatients}>Nenhum paciente cadastrado!</Text>
+                )}
             </View>
+
         </View>
     );
 };
+

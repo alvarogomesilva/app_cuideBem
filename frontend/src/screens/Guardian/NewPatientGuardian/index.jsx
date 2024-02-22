@@ -13,8 +13,7 @@ import { Toast, ALERT_TYPE } from "react-native-alert-notification";
 
 export default function NewPatientGuardian() {
     const { user } = useContext(AuthContext)
-    const [caregivers, setCaregivers] = useState([]);
-    const [selectedCaregiver, setSelectedCaregiver] = useState('')
+    const [selectedCaregiver, setSelectedCaregiver] = useState(undefined)
     const [data, setData] = useState([])
     const [image, setImage] = useState(null);
     const [uri, setUri] = useState(null)
@@ -42,7 +41,7 @@ export default function NewPatientGuardian() {
             });
 
             if (canceled) {
-                Alert.alert('Operação cancelada');
+                return null
             } else {
 
                 const filename = assets[0].uri.substring(assets[0].uri.lastIndexOf('/') + 1, assets[0].uri.length)
@@ -53,6 +52,25 @@ export default function NewPatientGuardian() {
     };
 
     const handlePatient = async () => {
+        if (inputs.name.trim() === '') {
+            return Toast.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Mensagem',
+                textBody: 'Digite um nome!',
+                autoClose: 2000,
+
+            })
+        }
+
+        if (inputs.caregiver_id === undefined) {
+            return Toast.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Mensagem',
+                textBody: 'Selecione um cuidador!',
+                autoClose: 2000,
+            })
+        }
+
         setLoading(true)
         try {
             const formData = new FormData()

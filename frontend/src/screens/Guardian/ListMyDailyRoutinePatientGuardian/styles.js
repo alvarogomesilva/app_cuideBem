@@ -75,5 +75,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  noPatients: {
+    textAlign: 'center',
+    color: Colors.quinary,
+    fontSize: hp(2.5)
+  },
+
+
 });
 

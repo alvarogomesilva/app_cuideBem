@@ -97,14 +97,14 @@ export default function NewEventPatientGuardian({ route }) {
 
     if (isEnabled) {
       if (compareAsc(inputs.dateNotification, inputs.date) !== 1) {
-        inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
-      } else {
-        Toast.show({
+        return Toast.show({
           type: ALERT_TYPE.DANGER,
           title: 'Mensagem',
           textBody: 'A data da notificção precisa ser diferente da atual!',
           autoClose: 2000,
         });
+      } else {
+        inputs.notification = await schedulePushNotification(inputs.dateNotification, inputs.description);
       }
     } else {
       inputs.notification = "";

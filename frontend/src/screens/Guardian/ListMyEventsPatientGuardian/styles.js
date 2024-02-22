@@ -78,7 +78,13 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: hp(3.5),
     color: Colors.white
-  }
+  },
+
+  noPatients: {
+    textAlign: 'center',
+    color: Colors.quinary,
+    fontSize: hp(2.5)
+  },
 
 });
 

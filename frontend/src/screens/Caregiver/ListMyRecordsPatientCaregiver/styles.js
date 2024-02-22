@@ -33,6 +33,12 @@ export const styles = StyleSheet.create({
   content: {
     marginHorizontal: 15,
     marginTop: 15
+  },
+
+  noPatients: {
+    textAlign: 'center',
+    fontSize: hp(2.5),
+    color: Colors.quinary
   }
 
 });

@@ -24,21 +24,24 @@ export default function ListMyRecordsPatientCaregiver() {
 
                 </LinearGradient>
             </View>
-
             <View style={styles.content}>
-                <Animatable.View animation='fadeInLeft' duration={1000}>
-                    <FlatList
-                        style={styles.flatList}
-                        data={listPatients}
-                        renderItem={({ item }) => <MemoizedPatients
-                            data={item}
-                            onPress={() => navigation.navigate('ListMyDoctorsRecordCaregiver', { patient: item })}
-                        />}
-
-                        keyExtractor={(item) => item.id.toString()}
-                    />
-                </Animatable.View>
+                {listPatients.length > 0 ? (
+                    <Animatable.View animation='fadeInLeft' duration={1000}>
+                        <FlatList
+                            style={styles.flatList}
+                            data={listPatients}
+                            renderItem={({ item }) => <MemoizedPatients data={item}
+                                onPress={() => navigation.navigate('ListMyDoctorsRecordCaregiver', { patient: item })}
+                            />}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    </Animatable.View>
+                ) : (
+                    <Text style={styles.noPatients}>Você não tem nenhum paciente!</Text>
+                )}
             </View>
+
+            
         </View>
 
     );
