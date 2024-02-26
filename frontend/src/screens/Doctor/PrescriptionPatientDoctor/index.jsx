@@ -91,7 +91,7 @@ export default function PrescriptionPatientDoctor({ route }) {
                     }}
                     render={({ field: { onChange, value } }) => (
                         <TextInput
-                            style={styles.textarea}
+                            style={[styles.textarea, { borderWidth: errors.description ? 2 : 2, borderColor: errors.description ? '#ff375b' : '#e0e0e0' }]}
                             placeholder='Descreva a receita'
                             multiline={true}
                             onKeyPress={handleKeyPress}

@@ -51,6 +51,37 @@ export default function NewDailyRoutineGuardian() {
   };
 
   const handleDailyRoutine = async () => {
+    if (inputs.patient_id === "") {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Mensagem',
+        textBody: 'Selecione um paciente!',
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (inputs.title.trim() === "") {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Mensagem',
+        textBody: 'Descreva um titulo!',
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (inputs.description.trim() === "") {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Mensagem',
+        textBody: 'Descreva a rotina!',
+        autoClose: 2000,
+      });
+      return;
+    }
+
+
     setLoading(true);
     try {
       const response = await api.post('/dailys', inputs);

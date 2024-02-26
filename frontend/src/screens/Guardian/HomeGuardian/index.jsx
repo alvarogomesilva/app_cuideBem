@@ -53,7 +53,7 @@ export default function HomeGuardian() {
                     >
                         <FontAwesome5 name="user-friends" style={styles.icon} />
                         <Text style={styles.text}>Pacientes</Text>
-                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                        <FontAwesome5 name="shield-alt" style={styles.pulse} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -63,7 +63,7 @@ export default function HomeGuardian() {
                     >
                         <Fontisto name="prescription" style={styles.icon} />
                         <Text style={styles.text}>Rotina Diária</Text>
-                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                        <FontAwesome5 name="shield-alt" style={styles.pulse} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -73,7 +73,7 @@ export default function HomeGuardian() {
                     >
                         <FontAwesome5 name="user-md" style={styles.icon} />
                         <Text style={styles.text}>Prontuário/Receita</Text>
-                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                        <FontAwesome5 name="shield-alt" style={styles.pulse} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.card}
@@ -82,7 +82,7 @@ export default function HomeGuardian() {
                     >
                         <FontAwesome5 name="calendar-alt" style={styles.icon} />
                         <Text style={styles.text}>Agenda/Consulta</Text>
-                        <FontAwesome5 name="heartbeat" style={styles.pulse} />
+                        <FontAwesome5 name="shield-alt" style={styles.pulse} />
                     </TouchableOpacity>
                 </View>
 

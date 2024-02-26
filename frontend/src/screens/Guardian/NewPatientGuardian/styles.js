@@ -61,6 +61,13 @@ export const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
 
+    titleInput: {
+        marginHorizontal: 10,
+        fontSize: hp(2),
+        marginBottom: 5,
+        color: '#AAA'
+    },
+
     input: {
         alignSelf: 'center',
         width: wp('90%'),
@@ -70,7 +77,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#e0e0e0',
         textAlignVertical: 'top',
-        padding: 15,
+        padding: 10,
         marginBottom: 10
     },
 

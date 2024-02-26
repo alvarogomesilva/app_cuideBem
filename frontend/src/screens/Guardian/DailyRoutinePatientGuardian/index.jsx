@@ -7,6 +7,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import api, { URL } from '../../../api';
 import { styles } from './styles';
 import { LinearGradient } from "expo-linear-gradient";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function DailyRoutinePatientGuardian({ route }) {
   const [patient, setPatient] = useState(route.params.patient);
@@ -14,7 +15,6 @@ export default function DailyRoutinePatientGuardian({ route }) {
   const [routineDailys, setRoutineDailys] = useState([]);
   const [updateCounter, setUpdateCounter] = useState(0);
   const { user } = useContext(AuthContext);
-  console.log(patient)
   const loadRoutine = async () => {
     try {
       const routines = await api.get(`/dailys/${patient.id}/${date}`);
@@ -47,10 +47,16 @@ export default function DailyRoutinePatientGuardian({ route }) {
           style={styles.gradient}>
 
           <View style={styles.areaImage}>
-            <Image
+            {patient.photo ? (
+              <Image
               source={{ uri: `${URL}/files/${patient.photo}` }}
               style={styles.image}
             />
+            ) : (
+              <FontAwesome5 name="user-alt" size={60} color="#e0e0e0" />
+
+            )} 
+
 
             <View>
               <Text style={styles.name}>{patient.name}</Text>

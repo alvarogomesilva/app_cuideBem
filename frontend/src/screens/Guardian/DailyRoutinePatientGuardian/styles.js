@@ -29,6 +29,8 @@ export const styles = StyleSheet.create({
     borderRadius: 100
   },
 
+ 
+
   name: {
     fontSize: hp(3),
     color: Colors.white

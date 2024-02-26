@@ -153,7 +153,9 @@ export default function RecordPatientDoctor({ route }) {
                             <TextInput
                                 value={value}
                                 placeholder='Descreva um titulo'
-                                style={styles.input}
+                                style={[styles.input,
+                                    { borderWidth: errors.title ? 2 : 2, borderColor: errors.title ? '#ff375b' : '#e0e0e0' }
+                                    ]}
                                 onChangeText={onChange}
                             />
                         )}
@@ -167,7 +169,7 @@ export default function RecordPatientDoctor({ route }) {
                         name="description"
                         render={({ field: { onChange, value } }) => (
                             <TextInput
-                                style={styles.textarea}
+                                style={[styles.textarea,  { borderWidth: errors.description ? 2 : 2, borderColor: errors.description ? '#ff375b' : '#e0e0e0' }]}
                                 placeholder='Descreva o prontuário'
                                 multiline={true}
                                 onKeyPress={handleKeyPress}

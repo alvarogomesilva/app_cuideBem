@@ -1,3 +1,4 @@
+import Locale from './util'
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

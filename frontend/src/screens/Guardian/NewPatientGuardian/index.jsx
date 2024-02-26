@@ -10,6 +10,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { LinearGradient } from "expo-linear-gradient";
 import { Toast, ALERT_TYPE } from "react-native-alert-notification";
+import { isToday } from 'date-fns'
 
 export default function NewPatientGuardian() {
     const { user } = useContext(AuthContext)
@@ -62,7 +63,16 @@ export default function NewPatientGuardian() {
             })
         }
 
-        if (inputs.caregiver_id === undefined) {
+        if (inputs.birth === '' || isToday(inputs.birth)) {
+            return Toast.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Mensagem',
+                textBody: 'Data de nascimento inválida!',
+                autoClose: 2000,
+            })
+        }
+
+        if (inputs.caregiver_id === '') {
             return Toast.show({
                 type: ALERT_TYPE.DANGER,
                 title: 'Mensagem',
@@ -148,19 +158,23 @@ export default function NewPatientGuardian() {
                 </TouchableOpacity>
 
                 <ScrollView>
+                    <Text style={styles.titleInput}>Guardião</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='Descreva a receita'
                         editable={false}
                         value={user.name}
-
                     />
+
+                    <Text style={styles.titleInput}>Paciente</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='Nome do paciente'
                         value={inputs.name}
                         onChangeText={(text) => setInputs({ ...inputs, name: text })}
                     />
+
+                    <Text style={styles.titleInput}>Nascimento</Text>
                     <MaskInput
                         style={styles.input}
                         placeholder='Data de nascimento'
@@ -169,6 +183,8 @@ export default function NewPatientGuardian() {
                         onChangeText={(text) => setInputs({ ...inputs, birth: text })}
                         keyboardType="numeric"
                     />
+
+                    <Text style={styles.titleInput}>Cuidador</Text>
                     <SelectList
                         placeholder='Selecione um cuidador'
                         searchPlaceholder='Pesquisar'
@@ -177,17 +193,17 @@ export default function NewPatientGuardian() {
                         data={data}
                         save="key"
                     />
-                </ScrollView>
 
-                <View style={styles.areaButton}>
-                    <TouchableOpacity style={styles.button} onPress={handlePatient}>
-                        {loading ? (
-                            <ActivityIndicator size={25} color={Colors.white} />
-                        ) : (
-                            <Text style={styles.buttonText}>Cadastrar</Text>
-                        )}
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.areaButton}>
+                        <TouchableOpacity style={styles.button} onPress={handlePatient}>
+                            {loading ? (
+                                <ActivityIndicator size={25} color={Colors.white} />
+                            ) : (
+                                <Text style={styles.buttonText}>Cadastrar</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View>
         </View>
     )
