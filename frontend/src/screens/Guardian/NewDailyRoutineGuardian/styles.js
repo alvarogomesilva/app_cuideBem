@@ -63,6 +63,13 @@ export const styles = StyleSheet.create({
         top: 18
     },
 
+    titleInput: {
+        marginHorizontal: 10,
+        fontSize: hp(2),
+        marginBottom: 5,
+        color: '#AAA'
+    },
+
     input: {
         alignSelf: 'center',
         width: wp('90%'),

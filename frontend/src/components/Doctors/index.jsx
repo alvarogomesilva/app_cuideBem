@@ -1,7 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import { Feather } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 import Colors, { neutral, primary } from "../../constants/colors";
 import { useEffect, useState } from "react";
 import { Fontisto } from '@expo/vector-icons';
@@ -20,7 +18,7 @@ const Doctors = ({ data, onPress, }) => {
       <View style={styles.box}>
         {avatar && data?.photo ? (
           <Image
-            key={data?.photo} // Adicionando uma chave única para garantir a re-renderização
+            key={data?.photo} 
             source={{ uri: avatar }}
             width={50}
             height={50}

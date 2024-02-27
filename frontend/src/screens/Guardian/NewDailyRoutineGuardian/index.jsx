@@ -117,12 +117,15 @@ export default function NewDailyRoutineGuardian() {
       </View>
 
       <View style={styles.content}>
+        <Text style={styles.titleInput}>Paciente</Text>
+
         <SelectList
           boxStyles={styles.input}
           setSelected={(patient) => setInputs({ ...inputs, patient_id: patient })}
           data={listPatients.map(patient => ({ value: patient.name, key: patient.id }))}
           save='key'
         />
+        <Text style={styles.titleInput}>Titulo</Text>
 
         <TextInput
           style={styles.input}
@@ -130,12 +133,17 @@ export default function NewDailyRoutineGuardian() {
           value={inputs.title}
           onChangeText={(text) => setInputs({ ...inputs, title: text })}
         />
+
+        <Text style={styles.titleInput}>Descrição</Text>
+
         <TextInput
           style={styles.input}
           placeholder='Descreva uma descrição'
           value={inputs.description}
           onChangeText={(text) => setInputs({ ...inputs, description: text })}
         />
+
+        <Text style={styles.titleInput}>Data e Hora</Text>
 
         <View style={styles.box}>
           <TouchableOpacity onPress={showDate1} activeOpacity={0.9} style={styles.date}>
