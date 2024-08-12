@@ -1,5 +1,5 @@
 <h1 align="center">
-  :trophy: App Cuide Bem
+  :trophy: Cuide Bem
 </h1>
 
 <p align="center">
