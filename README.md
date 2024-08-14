@@ -21,11 +21,15 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - JavaScript (Frontend)
 - TypeScript (Backend)
-- React Native
+- React Native (Expo)
 - MySql
 
 ## 💻 Projeto
-  Este projeto foi desenvolvido desde o backend, feito com TypeScript, JWT e Prisma. No frontend foi utilizado o axios para comunicação com a api desenvolvida. Esse projeto contém cadastro de usuário, autenticação e atualização de perfil, tudo controlado pelo usuário, ele permite você registrar um gasto ou uma despesa que você pode consultar pela mais recente e podendo exclui-la. Além disso o usuário pode filtrar por datas para ver o histórico de gastos anteriores.
+Este projeto foi desenvolvido com foco em proporcionar uma solução eficaz e organizada para cuidadores, facilitando sua interação com médicos e responsáveis. A arquitetura do projeto inclui um backend robusto, construído com TypeScript, JWT e Prisma, garantindo uma base sólida e segura. No frontend, foi utilizada a biblioteca Axios para uma comunicação eficiente com a API.
+
+O desenvolvimento foi realizado em equipe, composta por Ana, Leonardo, Alvaro, Kauã e Lucas, dentro do programa Entra21. O projeto foi apresentado para empresas do setor de tecnologia, em parceria com o programa, evidenciando sua relevância e inovação.
+
+O objetivo principal é otimizar o trabalho dos cuidadores, promovendo uma abordagem organizada e coerente em suas responsabilidades. Com essa ferramenta, é possível melhorar a coordenação entre cuidadores, médicos e responsáveis, assegurando uma gestão mais eficiente e integrada dos cuidados.
 
   ## 🖼️ Imagens
 
